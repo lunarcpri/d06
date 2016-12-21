@@ -11,7 +11,8 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 <h1><spring:message code="administrator.header"/></h1>
-<form:form method="GET" modelAttribute="spamTags" action="administrator/createTag.do">
+
+<form:form method="GET" modelAttribute="spamTags" action="administrator/spamTags/new.do">
 	<form:label path="name"><spring:message code="administrator.spamTag"/></form:label>
 	<form:input path="name" type="text"/>
 	<input type="submit" value="<spring:message code="administrator.add"/>" />

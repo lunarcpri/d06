@@ -1,0 +1,19 @@
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+
+	<definition name="spamTahs/list" extends="master.page">
+		<put-attribute name="title" value="List of Spam Tags"/>
+		<put-attribute name="body" value="/views/administrator/spamTags/list.jsp"/>
+	</definition>
+
+	<definition name="spamTags/createTag" extends="master.page">
+		<put-attribute name="title" value="Create Spam Tag" />
+		<put-attribute name="body" value="/views/administrator/spamTags/createTag.jsp" />
+	</definition>
+
+
+
+</tiles-definitions>

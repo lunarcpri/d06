@@ -13,6 +13,7 @@ import services.AdministratorService;
 import services.SpamTagsService;
 
 import javax.validation.Valid;
+import java.util.Collection;
 
 @Controller
 @RequestMapping("/administrator")
@@ -22,32 +23,4 @@ public class AdministratorController {
     @Autowired
     private AdministratorService administratorService;
 
-    @Autowired
-    private SpamTagsService spamTagsService;
-
-    @RequestMapping(value = "/spamtag/create")
-    public ModelAndView createSpamTag() {
-        ModelAndView result;
-        SpamTags spamTags = new SpamTags();
-        return createSpamTagView(spamTags);
-
-    }
-
-    @RequestMapping(value="/spamtag/create",method = RequestMethod.POST)
-    public ModelAndView create(@ModelAttribute("spamTags") @Valid SpamTags spamTags, BindingResult bindingResult){
-        ModelAndView result = new ModelAndView();
-
-        if(bindingResult.hasErrors()){
-            result = createSpamTagView(spamTags);
-        }
-            return result;
-    }
-
-     protected ModelAndView createSpamTagView(SpamTags spamTags) {
-        ModelAndView result;
-        result = new ModelAndView("/administrator/createTag");
-        result.addObject("createTag", spamTags);
-        return result;
-
-    }
 }
