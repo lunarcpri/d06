@@ -20,6 +20,7 @@
     <article class="col s9 message-list">
         <ul class="horizontal-list message-list-options">
             <li><a href="${contextPath}/message/new.do"><i class="fa fa-plus"></i> New Message</a></li>
+            <li><a href="${contextPath}/folder/list.do"><i class="fa fa-plus"></i> Manage Folders</a></li>
         </ul>
     <h1>${folder.name}</h1>
         <display:table pagesize="5" class="displaytag" keepStatus="true"
@@ -44,6 +45,20 @@
             <spring:message code="browse" var="browseHeader" />
             <display:column title="${browseHeader}">
                 <a href="http://localhost:8080/message/${row.id}.do">${browseHeader}</a>
+            </display:column>
+            <spring:message code="delete" var="deleteHeader" />
+            <display:column title="${deleteHeader}">
+                <a href="http://localhost:8080/message/delete.do?messageId=${row.id}">${deleteHeader}</a>
+            </display:column>
+            <spring:message code="move" var="moveHeader" />
+            <display:column title="${moveHeader}">
+                <select title="move" name="move" onchange="location = this.value;">
+               <jstl:forEach items="${folders}" var="current_folder">
+                   <option value="http://localhost:8080/message/move.do?messageId=${row.id}&folderId=${current_folder.id}">
+                           ${current_folder.name}
+                   </option>
+               </jstl:forEach>
+                </select>
             </display:column>
         </display:table>
     </article>

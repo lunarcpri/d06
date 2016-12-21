@@ -24,6 +24,9 @@ public class FolderService {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private MessageService messageService;
+
 
     public FolderService(){
         super();
@@ -50,13 +53,10 @@ public class FolderService {
     }
 
 
-    public void delete(int folderIt){
-        Folder folder;
+    public void delete(Folder folder){
 
-        folder = folderRepository.findOne(folderIt);
         Assert.notNull(folder);
-
-        folderRepository.delete(folder);
+       folderRepository.delete(folder);
     }
 
 
@@ -130,6 +130,7 @@ public class FolderService {
     public Folder findFolderByMessageAndActor(int actorid, int messageid){
         Folder result;
 
+
         result = folderRepository.findFolderByMessageAndActor(actorid,messageid);
         Assert.notNull(result);
 
@@ -165,7 +166,7 @@ public class FolderService {
 
     public Folder findTrashbox(int id){
         Folder result;
-
+        System.out.print(id);
         result = folderRepository.findTrashboxFolderByActorId(id);
         Assert.notNull(result);
 
@@ -188,6 +189,8 @@ public class FolderService {
         Assert.notNull(folder);
         try {
             copyMessage = (Message) message.clone();
+            copyMessage.setId(0);
+            copyMessage= messageService.save(copyMessage);
         } catch (CloneNotSupportedException e) {
             Assert.notNull(null);
         }
@@ -195,6 +198,11 @@ public class FolderService {
         Collection<Message> newMessages = folder.getMessages();
         folder.setMessages(newMessages);
         save(folder);
+    }
+
+    public void edit(Folder folder){
+        Assert.notNull(folder);
+        folderRepository.save(folder);
     }
 
     public void removeMessage(int id,Message message){

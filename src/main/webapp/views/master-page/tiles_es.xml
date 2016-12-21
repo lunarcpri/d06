@@ -21,6 +21,7 @@
 		<put-attribute name="header" value="/views/master-page/header.jsp" />
 		<put-attribute name="body" value="" />
 		<put-attribute name="footer" value="/views/master-page/footer.jsp" />
+		<put-attribute name="editNav" value="" />
 		<put-attribute name="login" value="/views/security/login.jsp" />
 	</definition>
 

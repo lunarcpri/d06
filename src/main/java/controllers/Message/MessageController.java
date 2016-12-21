@@ -15,6 +15,7 @@ import controllers.AbstractController;
 import domain.Actor;
 import domain.Folder;
 import domain.Message;
+import domain.SocialIdentity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
@@ -134,6 +135,37 @@ public class MessageController extends AbstractController {
     }
 
 
+    @RequestMapping(value = "/delete")
+    public ModelAndView editPost(@RequestParam(required=true) Message messageId) {
+        ModelAndView result;
+        Assert.notNull(messageId);
+        Actor principal = actorService.findActorByPrincipal();
+        Assert.isTrue(principal == messageId.getSender() || principal.getReceivedMessages().contains(messageId));
+        try{
+            messageService.deleteMessage(messageId);
+            return  new ModelAndView("redirect:/message/list.do");
+        }catch (Throwable oops){
+            System.out.println(oops.getMessage());
+            return  new ModelAndView("redirect:/message/list.do");
+        }
+    }
+
+    @RequestMapping(value = "/move")
+    public ModelAndView move(@RequestParam(required=true) Message messageId, @RequestParam(required=true) Folder folderId) {
+        ModelAndView result;
+        Assert.notNull(messageId);
+        Assert.notNull(folderId);
+        Actor principal = actorService.findActorByPrincipal();
+        Assert.isTrue(principal == messageId.getSender() || principal.getReceivedMessages().contains(messageId));
+        Assert.isTrue(folderId.getActor() == principal);
+        try{
+            messageService.moveMessage(messageId.getId(),folderId.getId());
+            return  new ModelAndView("redirect:/message/list.do");
+        }catch (Throwable oops){
+            System.out.println(oops.getMessage());
+            return  new ModelAndView("redirect:/message/list.do");
+        }
+    }
 
 
 }

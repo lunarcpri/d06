@@ -11,10 +11,11 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <section class="main">
     <article class="col s12 message-list">
+
+    <h1>Folder list</h1>
         <ul class="horizontal-list message-list-options">
             <li><a href="${contextPath}/folder/new.do"><i class="fa fa-plus"></i> New Folder</a></li>
         </ul>
-    <h1>Folder list</h1>
         <display:table pagesize="5" class="displaytag" keepStatus="true"
                        name="folderList" requestURI="${requestURI}" id="row">
 

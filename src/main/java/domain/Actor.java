@@ -86,7 +86,7 @@ public abstract class Actor extends DomainEntity {
 
 
 	@Valid
-    @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "sender", cascade = CascadeType.REMOVE, orphanRemoval = true)
 	public Collection<Message> getSendedMessages() {
 		return SendedMessages;
 	}
@@ -96,7 +96,7 @@ public abstract class Actor extends DomainEntity {
 	}
 
 	@Valid
-    @ManyToMany(mappedBy = "recipients", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "recipients", cascade = CascadeType.REMOVE)
 	public Collection<Message> getReceivedMessages() {
 		return ReceivedMessages;
 	}
@@ -137,7 +137,7 @@ public abstract class Actor extends DomainEntity {
         this.starses = starses;
     }
 
-    @OneToMany(mappedBy = "actor",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "actor",cascade = CascadeType.REMOVE,orphanRemoval = true)
     public Collection<Folder> getFolders() {
         return folders;
     }

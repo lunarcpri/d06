@@ -19,7 +19,7 @@ public interface FolderRepository extends JpaRepository<Folder, Integer> {
     @Query("select f from Folder f where f.actor.id = ?1 and f.folderType='OUTBOX'")
     Folder findOutboxFolderByActorId(int id);
 
-    @Query("select f from Folder f where f.actor.id = ?1 and f.folderType='TRASHBOX'")
+    @Query("select f from Folder f where f.actor.id = ?1 and f.folderType='THRASHBOX'")
     Folder findTrashboxFolderByActorId(int id);
 
     @Query("select f from Folder f where f.actor.id = ?1 and f.folderType='CUSTOM'")

@@ -65,11 +65,15 @@ public class MessageServiceTest extends AbstractTest{
     public void testDeleteMessage(){
         super.authenticate("user1");
         User u = userService.findByPrincipal();
-        int id = 153;
-        Folder folder1 = folderService.findFolderByMessageAndActor(153,u.getId());
+        int id = 32771;
+        Folder folder1 = folderService.findFolderByMessageAndActor(u.getId(),id);
         System.out.println("Carpeta donde estaba  el mensaje antes de borrar "+ folder1.getFolderType());
-        messageService.deleteById(id);
-        System.out.println("Carpeta donde está actualmente el mensaje: "+ folder1.getFolderType());
+        messageService.deleteMessage(messageService.findOne(id));
+        System.out.println("Carpeta donde está actualmente el mensaje: "
+                + folderService.findFolderByMessageAndActor(u.getId(),id).getFolderType());
+        messageService.deleteMessage(messageService.findOne(id));
+        System.out.println("Carpeta donde está actualmente el mensaje: "
+                + messageService.findOne(id));
     }
 
     @Test

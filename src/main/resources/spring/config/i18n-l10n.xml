@@ -32,6 +32,7 @@
 		<value>/views/cook/messages</value>
 		<value>/views/recipe/messages</value>
 		<value>/views/user/messages</value>
+		<value>/views/user/recipe/messages</value>
 		<value>/views/category/messages</value>
 		<value>/views/message/messages</value>
 		<value>/views/contest/messages</value>

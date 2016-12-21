@@ -43,39 +43,84 @@ public class FolderController extends AbstractController {
 
 
     @RequestMapping(value = "/edit")
-    public ModelAndView edit(@RequestParam(required=false) Folder folder) {
+    public ModelAndView edit(@RequestParam Folder folderId) {
+        System.out.print(folderId);
+        return createEditModelAndView(folderId,null);
+    }
 
-        return createEditModelAndView(folder,null);
+    @RequestMapping(value = "/new")
+    public ModelAndView newFolder() {
+        return createNewModelAndView(new Folder(),null);
+    }
+
+    @RequestMapping(value = "/new", method = RequestMethod.POST,params = "send")
+    public ModelAndView newFolderPost(@Valid @ModelAttribute("folder") Folder folder, BindingResult bindingResult) {
+        Assert.notNull(folder);
+        Actor principal = actorService.findActorByPrincipal();
+        folder.setActor(principal);
+        folder.setFolderType(Folder.FolderType.CUSTOM);
+        if (bindingResult.hasErrors()){
+            return createNewModelAndView(folder,"wrong");
+        }
+        try{
+            folderService.edit(folder);
+            return new ModelAndView("redirect:list.do");
+        }catch (Throwable throwable){
+            return createNewModelAndView(folder,"wrong");
+        }
+    }
+
+    @RequestMapping(value = "/delete")
+    public ModelAndView deleteFolder(@RequestParam Folder folderId) {
+        Assert.notNull(folderId);
+        Actor principal = actorService.findActorByPrincipal();
+        Assert.isTrue(principal.getFolders().contains(folderId));
+        try{
+            folderId.setActor(null);
+            folderService.delete(folderId);
+            return new ModelAndView("redirect:list.do");
+        }catch (Throwable throwable){
+            System.out.print(throwable.toString());
+            return new ModelAndView("redirect:list.do");
+        }
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public ModelAndView edit(@Valid @ModelAttribute("folder") Folder folder, BindingResult bindingResult) {
-        ModelAndView result;
         Assert.notNull(folder);
         Actor principal = actorService.findActorByPrincipal();
-
-        Assert.isTrue(principal.getFolders().contains(folder));
-
+        Assert.isTrue(principal == folder.getActor());
         if (bindingResult.hasErrors()){
             return createEditModelAndView(folder,"wrong");
         }
-        result = new ModelAndView("folder/edit");
-        result.addObject("folder",folder);
-
-        return result;
+        try{
+            folderService.edit(folder);
+            return new ModelAndView("redirect:list.do");
+        }catch (Throwable oops){
+            System.out.println(oops.getMessage());
+            return createEditModelAndView(folder,"wrong");
+        }
     }
 
     protected ModelAndView createEditModelAndView(Folder folder, String message){
         ModelAndView result;
         Assert.notNull(folder);
-        Actor principal = actorService.findActorByPrincipal();
-
-        Assert.isTrue(principal.getFolders().contains(folder));
-
 
         result = new ModelAndView("folder/edit");
         result.addObject("folder",folder);
-        result.addObject("folder",message);
+        result.addObject("message",message);
+
+        return  result;
+    }
+
+
+    protected ModelAndView createNewModelAndView(Folder folder, String message){
+        ModelAndView result;
+        Assert.notNull(folder);
+
+        result = new ModelAndView("folder/new");
+        result.addObject("folder",folder);
+        result.addObject("message",message);
 
         return  result;
     }

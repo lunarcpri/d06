@@ -33,7 +33,7 @@ public class Folder extends domain.DomainEntity {
     }
 
     @Valid
-    @ManyToMany
+    @ManyToMany(cascade ={CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     public Collection<Message> getMessages() {
         return messages;
     }

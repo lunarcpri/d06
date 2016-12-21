@@ -94,7 +94,7 @@ public class Message  extends domain.DomainEntity implements Cloneable{
         this.sender = sender;
     }
 
-    @ManyToMany
+    @ManyToMany(cascade ={CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     public Collection<Folder> getFolders() {
         return folders;
     }
@@ -106,5 +106,17 @@ public class Message  extends domain.DomainEntity implements Cloneable{
     @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
+    }
+
+    @PreRemove
+    private void removeFolder()
+    {
+        for(Folder f : folders){
+            f.getMessages().remove(this);
+        }
+        for(Actor a: recipients){
+            a.getReceivedMessages().remove(this);
+        }
+        sender.getSendedMessages().remove(this);
     }
 }

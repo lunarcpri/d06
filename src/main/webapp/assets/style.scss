@@ -265,3 +265,50 @@ table{
     }
   }
 }
+
+.folder-list{
+  border-radius:4px;
+  ul{
+    li{
+      a{
+        padding: 10px;
+        font-size:1.3em;
+        background-color: $blue-grey5;
+        display: list-item;
+        color:$black-1;
+        transition: all 0.2s ease-out;
+        &:hover{
+          background-color: $blue-grey3;
+        }
+      }
+    }
+  }
+}
+
+.message-list-options{
+  margin:10px;
+  li{
+    a{
+      padding: 5px;
+      background-color: $blue-grey2;
+      color:$white1;
+      transition: all 0.2s ease-out;
+      &:hover{
+        background-color: $blue-grey3;
+        color:$white1;
+      }
+    }
+  }
+}
+.messageView{
+  margin-left:15%;
+  margin-right:15%;
+  width:70%;
+  padding:15px;
+  background-color: $blue-grey5;
+  border-radius:4px;
+  p{
+    background: $white1;
+    padding:15px;
+  }
+}

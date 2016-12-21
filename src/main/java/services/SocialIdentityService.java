@@ -51,6 +51,11 @@ public class SocialIdentityService {
     }
 
 
+    public void delete(SocialIdentity socialIdentity){
+        Assert.notNull(socialIdentity);
+
+        socialIdentityRepository.delete(socialIdentity);
+    }
     public void save(SocialIdentity socialIdentity){
         Assert.notNull(socialIdentity);
 

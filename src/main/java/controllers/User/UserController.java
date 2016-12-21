@@ -63,7 +63,7 @@ public class UserController extends AbstractController {
 
         result.addObject("user", user);
         result.addObject("recipes",user.getRecipes());
-        result.addObject("requestURI","user/index.do");
+        result.addObject("requestURI","user/"+user.getId()+".do");
         return result;
     }
 

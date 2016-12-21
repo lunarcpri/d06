@@ -71,16 +71,20 @@ public class MessageService {
         messageRepository.delete(message.getId());
     }
 
-    public void deleteById(int messageId){
+    public void deleteMessage(Message message){
         Actor actor = userService.findByPrincipal();
-        Message message = findOne(messageId);
         Folder folder = null;
+        System.out.println("ey1");
         if (message.getSender() == actor || message.getRecipients().contains(actor)){
-            folder = folderService.findFolderByMessageAndActor(message.getId(),actor.getId());
+            System.out.println("ey2"+actor.getId()+" "+message.getId());
+            folder = folderService.findFolderByMessageAndActor(actor.getId(),message.getId());
             if (folder.getFolderType() != Folder.FolderType.THRASHBOX){
-                folder.setFolderType(Folder.FolderType.THRASHBOX);
+                System.out.println("ey3");
+                Folder folderTrash = folderService.findTrashbox(actor.getId());
+                moveMessage(message.getId(),folderTrash.getId());
             }else{
-
+                folder.getMessages().remove(message);
+                save(message);
                 delete(message);
             }
         }
@@ -104,7 +108,7 @@ public class MessageService {
 
 
 
-    private Message save(Message message){
+    public Message save(Message message){
         Assert.notNull(message);
 
         return messageRepository.save(message);

@@ -2464,7 +2464,6 @@ a:hover {
   padding-bottom: 4px;
   padding-left: 16px;
   padding-right: 16px;
-  display: block;
   border-radius: 2px;
   transition: all 0.3s ease;
   cursor: pointer; }
@@ -2761,7 +2760,6 @@ label {
 
 input {
   margin: 5px;
-  display: inline-block;
   padding: 10px;
   color: #607D8B;
   background-color: white;
@@ -2772,7 +2770,7 @@ input {
     width: 80% !important; }
   input[type=submit] {
     cursor: pointer; }
-  input[type=text]:focus, input [type=search]:focus, input [type=url]:focus, input [type=email]:focus, input [type=select]:focus, input textarea:focus {
+  input:focus {
     outline: none;
     border-color: #607D8B;
     background-color: #EEE; }
@@ -2792,7 +2790,7 @@ textarea {
 .form-group-2 {
   padding: 10px;
   display: inline-table;
-  width: 48%; }
+  width: 45% !important; }
 
 textarea {
   min-height: 300px;
@@ -3013,5 +3011,39 @@ table {
     background-color: #f4f7f9;
     border-bottom: 1px solid #BBB;
     display: list-item; }
+
+.folder-list {
+  border-radius: 4px; }
+  .folder-list ul li a {
+    padding: 10px;
+    font-size: 1.3em;
+    background-color: #f4f7f9;
+    display: list-item;
+    color: rgba(0, 0, 0, 0.87);
+    transition: all 0.2s ease-out; }
+    .folder-list ul li a:hover {
+      background-color: #B0BEC5; }
+
+.message-list-options {
+  margin: 10px; }
+  .message-list-options li a {
+    padding: 5px;
+    background-color: #607D8B;
+    color: white;
+    transition: all 0.2s ease-out; }
+    .message-list-options li a:hover {
+      background-color: #B0BEC5;
+      color: white; }
+
+.messageView {
+  margin-left: 15%;
+  margin-right: 15%;
+  width: 70%;
+  padding: 15px;
+  background-color: #f4f7f9;
+  border-radius: 4px; }
+  .messageView p {
+    background: white;
+    padding: 15px; }
 
 /*# sourceMappingURL=style.css.map */

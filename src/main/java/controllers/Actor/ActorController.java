@@ -22,6 +22,7 @@ import services.ActorService;
 import services.UserService;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Controller
@@ -52,19 +53,17 @@ public class ActorController extends AbstractController {
         Actor principal = actorService.findActorByPrincipal();
         ModelAndView result;
         result = index("personal");
+
         if (binding.hasErrors()){
             System.out.print("binding error");
         }else{
             try{
                 actor.setUserAccount(principal.getUserAccount());
-                for(SocialIdentity s: actor.getSocialIdentities()){
-                    if (s.getActor()== null){
-                        s.setActor(actor);
-                    }
-                }
+                actor.setFolders(principal.getFolders());
                 actorService.save(actor);
                 System.out.println("No error");
             }catch (Throwable oops){
+                System.out.print(oops.toString());
                 result.addObject("message","wrong");
             }
 

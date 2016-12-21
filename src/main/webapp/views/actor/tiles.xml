@@ -20,7 +20,8 @@
 
 	<definition name="actor/edit" extends="master.page">
 		<put-attribute name="title" value="Edit Personal Info" />
-		<put-attribute name="body" value="/views/actor/edit.jsp" />
+		<put-attribute name="body" value="/views/actor/edit.jsp"/>
 	</definition>
+
 
 </tiles-definitions>

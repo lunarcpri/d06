@@ -3,4 +3,4 @@
 .idea/
 .settings/
 Acme-Pad-Thai.iml
-pom.xml
+target/

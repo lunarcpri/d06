@@ -34,6 +34,7 @@
 	<article>
 		<ul>
 			<li><h3><i class="fa fa-user"></i> <spring:message code="user"/> </h3></li>
+			<li><a href="${contextPath}/user/list.do" class="icon"><spring:message code="list"/> </a></li>
 			<li><a href="${contextPath}/actor/edit.do"><spring:message code="profile" /> </a></li>
 			<li><a href="${contextPath}/message/list.do"><spring:message code="messages" /></a></li>
 			<li><a href="${contextPath}/security/login.do"><spring:message code="login"/></a></li>

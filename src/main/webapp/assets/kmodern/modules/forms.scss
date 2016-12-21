@@ -13,7 +13,6 @@ input{
     width:80%!important;
   }
     margin:5px;
-    display:inline-block;
     padding:10px;
     color:$blue-grey2;
     background-color: $white1;
@@ -24,12 +23,10 @@ input{
       @extend .button!optional;
       cursor:pointer;
     }
-    &[type=text],[type=search],[type=url],[type=email],[type=select],textarea{
       &:focus{
         outline: none;
         border-color: $blue-grey2;
         background-color: $grey1;
-      }
     }
     }
   textarea{
@@ -49,7 +46,7 @@ input{
 .form-group-2{
   padding:10px;
   display:inline-table;
-  width:48%;
+  width:45%!important;
 }
 
 
