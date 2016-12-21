@@ -41,7 +41,7 @@ public class NutritionistController extends AbstractController {
     }
 
 
-    @RequestMapping(value = "/register",method = RequestMethod.POST,params = "register")
+    @RequestMapping(value = "/register",method = RequestMethod.POST, params = "register")
     public ModelAndView create(
             @ModelAttribute("sponsor") @Valid Nutritionist nutritionist, BindingResult binding
     ) {

@@ -12,8 +12,8 @@
 
 <h1><spring:message code="administrator.header"/></h1>
 
-<form:form method="GET" modelAttribute="spamTags" action="administrator/spamTags/new.do">
+<form:form method="POST" modelAttribute="spamTags" action="administrator/spamTags/new.do">
 	<form:label path="name"><spring:message code="administrator.spamTag"/></form:label>
 	<form:input path="name" type="text"/>
-	<input type="submit" value="<spring:message code="administrator.add"/>" />
+	<input type="submit" name="save" value="<spring:message code="administrator.add"/>" />
 </form:form>

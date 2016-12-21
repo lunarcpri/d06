@@ -26,7 +26,7 @@ public class SpamTagsController {
         Collection<SpamTags> spamTags;
 
         spamTags = spamTagsService.findAll();
-        result = new ModelAndView("spamTags/list");
+        result = new ModelAndView("administrator/spamTags/list");
         result.addObject("spamTags", spamTags);
         result.addObject("requestURI", "spamTags/list.do");
 
@@ -50,6 +50,7 @@ public class SpamTagsController {
 
         if(bindingResult.hasErrors()){
             result = createEditSpamTagView(spamTags, "wrong");
+            System.out.println(bindingResult.getAllErrors());
         }
         else{
             try{
@@ -58,6 +59,7 @@ public class SpamTagsController {
             }
             catch (Throwable oops){
                 result = createEditSpamTagView(spamTags, "spamTags.commit.error");
+                System.out.println(oops.getMessage());
             }
         }
         return result;
