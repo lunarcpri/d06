@@ -5,9 +5,9 @@
 <tiles-definitions>
 
 
-	<definition name="spamTahs/list" extends="master.page">
+	<definition name="spamTags/list" extends="master.page">
 		<put-attribute name="title" value="Lista de etiquetas de spam"/>
-		<put-attribute name="body" value="/views/spamTags/list.jsp"/>
+		<put-attribute name="body" value="/views/administrator/spamTags/list.jsp"/>
 	</definition>
 
 	<definition name="spamTags/createTag" extends="master.page">

@@ -54,7 +54,7 @@ public class SpamTagsController {
         else{
             try{
                 spamTagsService.save(spamTags);
-                result = new ModelAndView("redirect:spamTags/list.do");
+                result = new ModelAndView("redirect:administrator/spamTags/list.do");
             }
             catch (Throwable oops){
                 result = createEditSpamTagView(spamTags, "spamTags.commit.error");
@@ -67,7 +67,7 @@ public class SpamTagsController {
 
         ModelAndView result;
 
-        result = new ModelAndView("/administrator/createTag");
+        result = new ModelAndView("/administrator/spamTags/createTag");
         result.addObject("spamTags", spamTags);
         result.addObject("message", message);
         return result;

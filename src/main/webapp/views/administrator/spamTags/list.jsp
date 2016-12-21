@@ -10,6 +10,10 @@
 
     <h1><spring:message code="spamTags.header"/></h1>
     <article>
+        <ul class="horizontal-list message-list-options">
+
+            <li><a href="${contextPath}/administrator/spamTags/new.do"><i class="fa fa-plus"></i> New SpamTag</a></li>
+        </ul>
         <display:table pagesize="5" class="displaytag" keepStatus="true"
                        name="spamTags" requestURI="${requestURI}" id="row">
 
