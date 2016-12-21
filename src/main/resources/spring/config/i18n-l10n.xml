@@ -39,6 +39,8 @@
 		<value>/views/folder/messages</value>
 		<value>/views/administrator/messages</value>
 		<value>/views/administrator/spamTags/messages</value>
+		<value>/views/administrator/category/messages</value>
+
 
 	</util:list>
 
