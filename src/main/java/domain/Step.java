@@ -3,10 +3,8 @@ package domain;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.URL;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+
+import javax.persistence.*;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -56,5 +54,15 @@ public class Step extends domain.DomainEntity {
 
     public void setRecipe(Recipe recipe) {
         this.recipe = recipe;
+    }
+
+    @Override
+    public String toString() {
+        return "Step{" +
+                "picture='" + picture + '\'' +
+                ", description='" + description + '\'' +
+                ", hints='" + hints + '\'' +
+                ", recipe=" + recipe +
+                '}';
     }
 }

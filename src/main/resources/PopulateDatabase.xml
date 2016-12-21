@@ -246,53 +246,53 @@
 
     <bean id="ingredient1" class="domain.Ingredient">
         <property name="description" value="description" />
-        <property name="name" value="name" />
+        <property name="name" value="Azucar" />
     </bean>
 
 
     <bean id="ingredient2" class="domain.Ingredient">
         <property name="description" value="description" />
-        <property name="name" value="name" />
+        <property name="name" value="Sal" />
     </bean>
 
     <bean id="ingredient3" class="domain.Ingredient">
         <property name="description" value="description" />
-        <property name="name" value="name" />
+        <property name="name" value="Agua" />
     </bean>
 
     <bean id="ingredient4" class="domain.Ingredient">
         <property name="description" value="description" />
-        <property name="name" value="name" />
+        <property name="name" value="Aceite" />
     </bean>
 
     <bean id="ingredient5" class="domain.Ingredient">
         <property name="description" value="description" />
-        <property name="name" value="name" />
+        <property name="name" value="Tomate" />
     </bean>
 
     <bean id="ingredient6" class="domain.Ingredient">
         <property name="description" value="description" />
-        <property name="name" value="name" />
+        <property name="name" value="Cebolla" />
     </bean>
 
     <bean id="ingredient7" class="domain.Ingredient">
         <property name="description" value="description" />
-        <property name="name" value="name" />
+        <property name="name" value="Pimiento" />
     </bean>
 
     <bean id="ingredient8" class="domain.Ingredient">
         <property name="description" value="description" />
-        <property name="name" value="name" />
+        <property name="name" value="Zanahoria" />
     </bean>
 
     <bean id="ingredient9" class="domain.Ingredient">
         <property name="description" value="description" />
-        <property name="name" value="name" />
+        <property name="name" value="Pollo" />
     </bean>
 
     <bean id="ingredient10" class="domain.Ingredient">
         <property name="description" value="description" />
-        <property name="name" value="name" />
+        <property name="name" value="Ternera" />
     </bean>
 
 

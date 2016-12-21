@@ -1,12 +1,4 @@
-<%--
- * list.jsp
- *
- * Copyright (C) 2016 Universidad de Sevilla
- * 
- * The use of this project is hereby constrained to the conditions of the 
- * TDG Licence, a copy of which you may download from 
- * http://www.tdg-seville.info/License.html
- --%>
+
 
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -22,8 +14,8 @@
 <%@ include file="/views/actor/layout.jsp" %>
 <article class="col s7" style="margin-left:2%">
 	<ul class="horizontal-list message-list-options">
-		<li><a href="${contextPath}/user/recipe/new.do"><i class="fa fa-plus"></i> New Recipe</a></li>
-		<li><a href="${contextPath}/user/qualify.do"><i class="fa fa-plus"></i> Qualify to a Contest</a></li>
+		<li><a href="${contextPath}/user/recipe/new.do"><i class="fa fa-plus"></i> <spring:message code="newrecipe"/> </a></li>
+		<li><a href="${contextPath}/user/qualify.do"><i class="fa fa-plus"></i> <spring:message code="qualifyrecipe"/> </a></li>
 	</ul>
 <<h2>Recipes Authored</h2>
 	<display:table pagesize="5" class="displaytag" keepStatus="true"
