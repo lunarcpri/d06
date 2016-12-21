@@ -1,8 +1,10 @@
 package services;
 
+import domain.Step;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 import repositories.StepRepository;
 
 @Service
@@ -15,5 +17,11 @@ public class StepService {
 
     public StepService(){
         super();
+    }
+
+    public Step save(Step s){
+        Assert.notNull(s);
+
+        return stepRepository.save(s);
     }
 }

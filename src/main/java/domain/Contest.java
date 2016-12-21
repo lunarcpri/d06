@@ -65,7 +65,7 @@ public class Contest extends DomainEntity {
         this.ended = ended;
     }
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     public Collection<Recipe> getRecipesQualified() {
         return recipesQualified;
     }

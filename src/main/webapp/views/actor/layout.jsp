@@ -19,7 +19,7 @@
             <li><a href="${contextPath}/actor/edit.do?edit=curriculum">Edit Curriculum</a> </li>
         </security:authorize>
         <security:authorize access="hasAnyRole('USER')">
-            <li><a href="${contextPath}/user/recipe/list.do"><spring:message code="recipes"/> </a> </li>
+            <li><a href="${contextPath}/user/recipe/list.do"><spring:message code="managerecipes"/> </a> </li>
         </security:authorize>
         <li><a href="${contextPath}/actor/socialIdentity/list.do">Manage Social Identities</a> </li>
     </ul>

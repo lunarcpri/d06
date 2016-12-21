@@ -1,10 +1,7 @@
 package domain;
 
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -33,7 +30,7 @@ public class Likes  extends DomainEntity{
         this.userOrNutritionist = userOrNutritionist;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     public Recipe getRecipe() {
         return recipe;
     }

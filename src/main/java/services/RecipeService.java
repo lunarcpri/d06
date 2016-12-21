@@ -33,6 +33,12 @@ public class RecipeService {
     @Autowired
     CategoryService categoryService;
 
+    @Autowired
+    StepService stepService;
+
+    @Autowired
+    QuantityService quantityService;
+
     public RecipeService(){
 
         super();
@@ -83,7 +89,16 @@ public class RecipeService {
         recipe.setTicker(generateTicker());
         recipe.setAuthor(userService.findByPrincipal());
 
-        return save(recipe);
+         Recipe recipe2 = save(recipe);
+         for(Step s: recipe.getSteps()){
+             s.setRecipe(recipe2);
+             stepService.save(s);
+         }
+         for(Quantity q : recipe.getQuantities()){
+             q.setRecipe(recipe2);
+             quantityService.save(q);
+         }
+         return recipe2;
     }
 
     private String generateTicker(){

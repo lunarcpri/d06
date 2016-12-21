@@ -1,6 +1,7 @@
 package domain;
 
 
+import collections.StepMap;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.URL;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -12,6 +13,8 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -24,20 +27,19 @@ public class Recipe  extends DomainEntity {
     private boolean read_only;
     private String picture;
     private String summary;
-    private Collection<Quantity> quantities;
-    private Collection<Step> steps;
+    private List<Quantity> quantities;
+    private List<Step> steps;
     private User author;
     private Collection<Likes> likes;
     private Category category;
-    private Collection<Contest> contests;
     private Collection<Comment> comments;
     private Collection<Contest> winnedContests;
+    private Collection<Contest> qualifiedContests;
 
     public Recipe() {
         super();
     }
 
-    @NotBlank
     @Column(unique=true)
     @Pattern(regexp = "^([0-9]{2})([0-9]{2})([0-9]{2})-([a-zA-Z]{4})$")
     public String getTicker() {
@@ -57,7 +59,6 @@ public class Recipe  extends DomainEntity {
         this.title = title;
     }
 
-    @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     @Past
     @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
@@ -69,7 +70,6 @@ public class Recipe  extends DomainEntity {
         this.created_at = created_at;
     }
 
-    @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     @Past
     @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
@@ -101,28 +101,26 @@ public class Recipe  extends DomainEntity {
     //Relationship
 
     @Valid
-    @OneToMany (mappedBy = "recipe",cascade = CascadeType.ALL)
-    public Collection<Quantity> getQuantities() {
+    @OneToMany (mappedBy = "recipe",orphanRemoval = true)
+    public List<Quantity> getQuantities() {
         return quantities;
     }
 
-    public void setQuantities(Collection<Quantity> quantities) {
+    public void setQuantities(List<Quantity> quantities) {
         this.quantities = quantities;
     }
 
     @Valid
-    @NotNull
-    @OneToMany (mappedBy = "recipe",cascade = CascadeType.ALL)
-    public Collection<Step> getSteps() {
+    @OneToMany (mappedBy = "recipe",cascade = CascadeType.REMOVE,orphanRemoval = true)
+    public List<Step> getSteps() {
         return steps;
     }
 
-    public void setSteps(Collection<Step> steps) {
+    public void setSteps(List<Step> steps) {
         this.steps = steps;
     }
 
     @Valid
-    @NotNull
     @ManyToOne(optional = false)
     public User getAuthor() {
         return author;
@@ -132,7 +130,7 @@ public class Recipe  extends DomainEntity {
         this.author = user;
     }
 
-    @OneToMany(mappedBy = "recipe")
+    @OneToMany(mappedBy = "recipe",orphanRemoval = true,cascade = CascadeType.REMOVE)
     public Collection<Likes> getLikes() {
         return likes;
     }
@@ -151,14 +149,6 @@ public class Recipe  extends DomainEntity {
         this.category = category;
     }
 
-    @ManyToMany
-    public Collection<Contest> getContests() {
-        return contests;
-    }
-
-    public void setContests(Collection<Contest> contests) {
-        this.contests = contests;
-    }
 
     @OneToMany(mappedBy = "recipe")
     public Collection<Comment> getComments() {
@@ -178,13 +168,42 @@ public class Recipe  extends DomainEntity {
         this.read_only = read_only;
     }
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.REMOVE)
     public Collection<Contest> getWinnedContests() {
         return winnedContests;
     }
 
     public void setWinnedContests(Collection<Contest> winnedContests) {
         this.winnedContests = winnedContests;
+    }
+
+    @ManyToMany(mappedBy = "recipesQualified",cascade = CascadeType.REMOVE)
+    public Collection<Contest> getQualifiedContests() {
+        return qualifiedContests;
+    }
+
+    public void setQualifiedContests(Collection<Contest> qualifiedContests) {
+        this.qualifiedContests = qualifiedContests;
+    }
+
+    @Override
+    public String toString() {
+        return "Recipe{" +
+                "ticker='" + ticker + '\'' +
+                ", title='" + title + '\'' +
+                ", created_at=" + created_at +
+                ", updated_at=" + updated_at +
+                ", read_only=" + read_only +
+                ", picture='" + picture + '\'' +
+                ", summary='" + summary + '\'' +
+                ", quantities=" + quantities +
+                ", steps=" + steps +
+                ", author=" + author +
+                ", likes=" + likes +
+                ", category=" + category +
+                ", comments=" + comments +
+                ", winnedContests=" + winnedContests +
+                '}';
     }
 }
 

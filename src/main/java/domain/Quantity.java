@@ -62,8 +62,7 @@ public class Quantity extends domain.DomainEntity
 
 
     @Valid
-    @ManyToOne(optional = false)
-    @NotNull
+    @ManyToOne(optional = true)
     public Recipe getRecipe() {
         return recipe;
     }
@@ -73,7 +72,13 @@ public class Quantity extends domain.DomainEntity
     }
 
 
-
-
-
+    @Override
+    public String toString() {
+        return "Quantity{" +
+                "unit=" + unit +
+                ", quantity=" + quantity +
+                ", ingredient=" + ingredient +
+                ", recipe=" + recipe +
+                '}';
+    }
 }

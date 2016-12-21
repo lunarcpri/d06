@@ -46,7 +46,15 @@
                     <li><a href="${contextPath}/user/list.do"><spring:message code="list"/></a></li>
                 </ul></li>
             <li><a href="${contextPath}/contest/list.do" class="icon"><i class="fa fa-trophy"></i> <spring:message code="contests"/></a></li>
-            <li><a href="${contextPath}/recipe/list.do" class="icon"><i class="fa fa-envira"></i> <spring:message code="recipes"/> </a></li>
+            <li><a href="${contextPath}/recipe/list.do" class="icon"><i class="fa fa-envira"></i> <spring:message code="recipes"/> </a>
+            <security:authorize access="hasAnyRole('USER')">
+                <ul>
+                    <li><a href="${contextPath}/user/recipe/list.do"><spring:message code="managerecipes"/> </a></li>
+                    <li><a href="${contextPath}/user/recipe/new.do"><spring:message code="newrecipe"/> </a></li>
+                    <li><a href="${contextPath}/user/recipe/qualify.do"><spring:message code="qualifyrecipe"/></a></li>
+                </ul>
+            </security:authorize>
+            </li>
             <li><a href="${contextPath}/category/list.do" class="icon"><i class="fa fa-tags"></i> <spring:message code="categories"/></a></li>
             <li><a href="${contextPath}/masterclass/list.do" class="icon"><i class="fa fa-book"></i> <spring:message code="masterclasses"/></a></li>
         </ul>
