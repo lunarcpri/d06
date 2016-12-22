@@ -14,6 +14,8 @@
 
     <div class="form-group-2">
 <form:form action="user/recipe/new.do" modelAttribute="recipe" method="POST">
+
+
     <form:label path="title">
         <spring:message code="title" />:
     </form:label>

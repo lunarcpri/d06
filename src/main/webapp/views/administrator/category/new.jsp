@@ -10,51 +10,66 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <section class="main">
-    <h1>Edit Category ${category.name}</h1>
+    <h1>New Category</h1>
 
-    <div class="form-group-1">
-        <form:form action="administrator/category/edit.do" modelAttribute="category" method="POST">
+    <div class="form-group-2">
+
+        <form:form action="administrator/category/new.do" modelAttribute="category" method="POST">
 
             <form:label path="name">
                 <spring:message code="administrator.categories.name" />:
             </form:label>
-            <form:input path="name"/>
-            <form:errors cssClass="error" path="name"  />
+                <form:input path="name"/>
+                <form:errors cssClass="error" path="name"  />
 
             <form:label path="description">
                 <spring:message code="administrator.categories.description"/>
             </form:label>
-            <form:input path="description"/>
-            <form:errors cssClass="error" path="description"  />
+                <form:input path="description"/>
+                <form:errors cssClass="error" path="description"  />
 
             <form:label path="picture">
                 <spring:message code="administrator.categories.picture"/>
             </form:label>
-            <form:input path="picture" type="url"/>
-            <form:errors cssClass="error" path="picture"  />
+                <form:input path="picture" type="url"/>
+                <form:errors cssClass="error" path="picture"  />
 
             <form:label path="tags">
                 <spring:message code="administrator.categories.tags"/>
             </form:label>
-            <form:input path="tags" type="text"/>
-            <form:errors cssClass="error" path="tags" />
+                <form:input path="tags" type="text"/>
+                <form:errors cssClass="error" path="tags" />
 
             <form:label path="parent">
-                <spring:message code="category" />:
+                <spring:message code="administrator.categories.parent"/>
             </form:label>
             <form:select path="parent" style="width:50%">
                 <form:options items="${categories}" itemValue="id" itemLabel="name"/>
             </form:select>
-            <form:errors cssClass="error" path="parent"/>
+                <form:errors cssClass="error" path="parent"/>
+            
+            <form:label path="childrens">
+                <spring:message code="administrator.categories.childrens"/> 
+            </form:label>
+            <form:select path="childrens" style="width:50%" multiple="true">
+                <form:options items="${categories}" itemValue="id" itemLabel="name"/>
+            </form:select>
 
-            <form:hidden path="id"/>
-            <form:hidden path="version"/>
+            <form:label path="recipes">
+                <spring:message code="administrator.categories.recipes"/>
+            </form:label>
+            <form:select path="recipes" style="width:50%" multiple="true">
+                <form:options items="${recipes}" itemValue="id" itemLabel="title"/>
+            </form:select>
+
+                <form:hidden path="id"/>
+                <form:hidden path="version"/>
 
             <div class="block">
-            <input type="submit" name="save" value="<spring:message code="administrator.categories.edit" /> " />
+                <input type="submit" name="save" value="<spring:message code="administrator.categories.create" /> " />
                 <a class="button" href="${contextPath}/administrator/category/list.do"><spring:message code="cancel"/> </a>
             </div>
-        </form:form>
-    </div>
-</section>
 
+
+
+        </form:form>

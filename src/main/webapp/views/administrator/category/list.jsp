@@ -10,6 +10,12 @@
 
     <h1>List of Categories</h1>
     <article>
+
+        <ul class="horizontal-list message-list-options">
+
+            <li><a href="${contextPath}/administrator/category/new.do"><i class="fa fa-plus"></i> New category</a></li>
+        </ul>
+
 <display:table pagesize="5" class="displaytag" keepStatus="true"
                name="categories" requestURI="${requestURI}" id="row">
 
@@ -29,13 +35,17 @@
 
     <spring:message code="administrator.category.edit" var="editHeader" />
     <display:column  title="${editHeader}">
-    <a href="${contextPath}/administrator/category/edit.do?categoryId=${row.id}">
+
+        <a href="${contextPath}/administrator/category/edit.do?categoryId=${row.id}">
             ${editHeader}
                 </display:column>
 
 
 
-    <input type="submit" name="delete" value="<spring:message code="administrator.categories.delete"></spring:message>" />
+                    <spring:message code="delete" var="deleteHeader" />
+                <display:column title="${deleteHeader}">
+                <a href="http://localhost:8080/administrator/category/delete.do?categoryId=${row.id}">${deleteHeader}</a>
+                </display:column>
 
 </display:table>
     </article>
