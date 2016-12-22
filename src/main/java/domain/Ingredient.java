@@ -8,15 +8,14 @@ import java.util.Collection;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Ingredient extends domain.DomainEntity{
+public class Ingredient extends domain.DomainEntity {
 
     private String name;
     private String description;
     private Collection<Property> properties;
     private Collection<Quantity> quantities;
 
-    public Ingredient()
-    {
+    public Ingredient() {
         super();
     }
 
@@ -43,26 +42,22 @@ public class Ingredient extends domain.DomainEntity{
 
     @Valid
     @OneToMany(mappedBy = "ingredient")
-    public Collection<Quantity> getQuantities()
-    {
+    public Collection<Quantity> getQuantities() {
         return this.quantities;
     }
 
-    public void setQuantities(Collection<Quantity> quantities)
-    {
+    public void setQuantities(Collection<Quantity> quantities) {
         this.quantities = quantities;
     }
 
 
     @Valid
     @ManyToMany
-    public Collection<Property> getProperties()
-    {
+    public Collection<Property> getProperties() {
         return this.properties;
     }
 
-    public void setProperties(Collection<Property> properties)
-    {
+    public void setProperties(Collection<Property> properties) {
         this.properties = properties;
     }
 

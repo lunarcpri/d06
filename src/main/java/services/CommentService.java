@@ -31,15 +31,16 @@ public class CommentService {
     private ActorService actorService;
 
 
-    public CommentService(){
+    public CommentService() {
         super();
     }
 
 
-    public Comment create(){
+    public Comment create() {
         return new Comment();
     }
-    public Comment findOne(int id){
+
+    public Comment findOne(int id) {
         Comment result;
 
         result = commentRepository.findOne(id);
@@ -48,15 +49,15 @@ public class CommentService {
         return result;
     }
 
-    public Comment save(Comment comment){
+    public Comment save(Comment comment) {
         Assert.notNull(comment);
         UserOrNutritionist principal = (UserOrNutritionist) actorService.findActorByPrincipal();
-        Assert.isTrue(comment.getAuthor().getId()==principal.getId());
+        Assert.isTrue(comment.getAuthor().getId() == principal.getId());
         comment.setCreated_at(new Date());
         return commentRepository.save(comment);
     }
 
-    public Collection<Comment> findAll(){
+    public Collection<Comment> findAll() {
         Collection<Comment> result;
 
         result = commentRepository.findAll();

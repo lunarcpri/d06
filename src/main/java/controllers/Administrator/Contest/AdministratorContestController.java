@@ -1,8 +1,6 @@
 package controllers.Administrator.Contest;
 
-import domain.Category;
 import domain.Contest;
-import domain.Recipe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
@@ -17,7 +15,6 @@ import services.RecipeService;
 
 import javax.validation.Valid;
 import java.util.Collection;
-import java.util.Date;
 
 @Controller
 @RequestMapping("administrator/contest")
@@ -40,12 +37,12 @@ public class AdministratorContestController {
         contestCollection = contestService.findAll();
 
         result.addObject("contests", contestCollection);
-        result.addObject("requestURI","administrator/contest/list.do");
+        result.addObject("requestURI", "administrator/contest/list.do");
         return result;
     }
 
     @RequestMapping(value = "/new", method = RequestMethod.GET)
-    public ModelAndView newContest(){
+    public ModelAndView newContest() {
 
         Contest contest = new Contest();
 
@@ -56,16 +53,16 @@ public class AdministratorContestController {
     }
 
     @RequestMapping(value = "/new", method = RequestMethod.POST, params = "save")
-    public ModelAndView newContest(@Valid Contest contest, BindingResult binding){
+    public ModelAndView newContest(@Valid Contest contest, BindingResult binding) {
         ModelAndView result;
-            if (binding.hasErrors()){
-                System.out.println(binding.getAllErrors().get(0));
-                result = createNewModelAndView(contest, "wrong");
-            }
-        try{
+        if (binding.hasErrors()) {
+            System.out.println(binding.getAllErrors().get(0));
+            result = createNewModelAndView(contest, "wrong");
+        }
+        try {
             contestService.save(contest);
             result = new ModelAndView("redirect:list.do");
-        }catch(Throwable oops){
+        } catch (Throwable oops) {
             System.out.print(oops.getMessage());
             result = createNewModelAndView(contest, "wrong");
         }
@@ -90,16 +87,16 @@ public class AdministratorContestController {
     @RequestMapping(value = "/edit", method = RequestMethod.POST, params = "edit")
     public ModelAndView save(@Valid Contest contest, BindingResult bindingResult) {
         ModelAndView result;
-        if(bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             result = createEditModelAndView(contest, "wrong");
             System.out.println(bindingResult.getAllErrors());
-        }else{
-            try{
+        } else {
+            try {
 
 
                 contestService.save(contest);
                 result = new ModelAndView("redirect:list.do");
-            }catch (Throwable oops){
+            } catch (Throwable oops) {
                 result = createEditModelAndView(contest, "wrong");
                 System.out.println(oops.getMessage());
             }
@@ -110,39 +107,39 @@ public class AdministratorContestController {
 
 
     @RequestMapping(value = "/delete")
-    public ModelAndView deleteContest(@RequestParam int contestId){
+    public ModelAndView deleteContest(@RequestParam int contestId) {
         ModelAndView result;
         Contest contest = contestRepository.findContestById(contestId);
-        try{
+        try {
             contestService.delete(contest);
             result = new ModelAndView("redirect:list.do");
 
-        }catch (Throwable oops){
+        } catch (Throwable oops) {
             result = createEditModelAndView(contest, "wrong");
         }
         return result;
     }
 
-    protected ModelAndView createNewModelAndView(Contest contest, String message){
+    protected ModelAndView createNewModelAndView(Contest contest, String message) {
         ModelAndView result;
         Assert.notNull(contest);
 
         result = new ModelAndView("administrator/contest/new");
-        result.addObject("actionURI","/administrator/contest/new.do");
-        result.addObject("contest",contest);
-        result.addObject("message",message);
+        result.addObject("actionURI", "/administrator/contest/new.do");
+        result.addObject("contest", contest);
+        result.addObject("message", message);
 
-        return  result;
+        return result;
     }
 
-    protected ModelAndView createEditModelAndView(Contest contest, String message){
+    protected ModelAndView createEditModelAndView(Contest contest, String message) {
         ModelAndView result;
         Assert.notNull(contest);
 
         result = new ModelAndView("administrator/contest/edit");
         result.addObject("contest", contest);
-        result.addObject("message",message);
+        result.addObject("message", message);
 
-        return  result;
+        return result;
     }
 }

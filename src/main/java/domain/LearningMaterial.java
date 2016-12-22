@@ -8,7 +8,7 @@ import java.util.Collection;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public abstract class LearningMaterial extends DomainEntity{
+public abstract class LearningMaterial extends DomainEntity {
     private String title;
     private String resume;
     private Collection<Attachment> attachments;
@@ -34,7 +34,7 @@ public abstract class LearningMaterial extends DomainEntity{
     }
 
     @Valid
-    @OneToMany(mappedBy = "learningMaterial",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "learningMaterial", cascade = CascadeType.ALL)
     public Collection<Attachment> getAttachments() {
         return attachments;
     }

@@ -1,5 +1,3 @@
-
-
 package security;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -16,89 +14,89 @@ import java.util.Collection;
 @Access(AccessType.PROPERTY)
 public class Authority implements GrantedAuthority {
 
-	// Constructors -----------------------------------------------------------
+    // Constructors -----------------------------------------------------------
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	public Authority() {
-		super();
-	}
+    public Authority() {
+        super();
+    }
 
-	// Values -----------------------------------------------------------------
+    // Values -----------------------------------------------------------------
 
-	private static final String ADMIN = "ADMIN";
-	private static final String NUTRITIONIST = "NUTRITIONIST";
-	private static final String USER = "USER";
-	private static final String SPONSOR = "SPONSOR";
-	private static final String COOK = "COOK";
+    private static final String ADMIN = "ADMIN";
+    private static final String NUTRITIONIST = "NUTRITIONIST";
+    private static final String USER = "USER";
+    private static final String SPONSOR = "SPONSOR";
+    private static final String COOK = "COOK";
 
-	// Attributes -------------------------------------------------------------
+    // Attributes -------------------------------------------------------------
 
-	private String authority;
+    private String authority;
 
-	@NotBlank
-	@Pattern(regexp = "^" + ADMIN + "|" + NUTRITIONIST + "|" + USER + "|" + SPONSOR + "|" + COOK + "$")
-	@Override
-	public String getAuthority() {
-		return authority;
-	}
+    @NotBlank
+    @Pattern(regexp = "^" + ADMIN + "|" + NUTRITIONIST + "|" + USER + "|" + SPONSOR + "|" + COOK + "$")
+    @Override
+    public String getAuthority() {
+        return authority;
+    }
 
-	public void setAuthority(String authority) {
-		this.authority = authority;
-	}
+    public void setAuthority(String authority) {
+        this.authority = authority;
+    }
 
-	public static Collection<Authority> listAuthorities() {
-		Collection<Authority> result;
-		Authority authority;
+    public static Collection<Authority> listAuthorities() {
+        Collection<Authority> result;
+        Authority authority;
 
-		result = new ArrayList<Authority>();
+        result = new ArrayList<Authority>();
 
-		authority = new Authority();
-		authority.setAuthority(ADMIN);
-		result.add(authority);
+        authority = new Authority();
+        authority.setAuthority(ADMIN);
+        result.add(authority);
 
-		authority = new Authority();
-		authority.setAuthority(NUTRITIONIST);
-		result.add(authority);
-		
-		authority = new Authority();
-		authority.setAuthority(USER);
-		result.add(authority);
+        authority = new Authority();
+        authority.setAuthority(NUTRITIONIST);
+        result.add(authority);
 
-		authority = new Authority();
-		authority.setAuthority(SPONSOR);
-		result.add(authority);
+        authority = new Authority();
+        authority.setAuthority(USER);
+        result.add(authority);
 
-		authority = new Authority();
-		authority.setAuthority(COOK);
-		result.add(authority);
+        authority = new Authority();
+        authority.setAuthority(SPONSOR);
+        result.add(authority);
+
+        authority = new Authority();
+        authority.setAuthority(COOK);
+        result.add(authority);
 
 
-		return result;
-	}
+        return result;
+    }
 
-	// Equality ---------------------------------------------------------------
+    // Equality ---------------------------------------------------------------
 
-	@Override
-	public int hashCode() {
-		return this.getAuthority().hashCode();
-	}
+    @Override
+    public int hashCode() {
+        return this.getAuthority().hashCode();
+    }
 
-	@Override
-	public boolean equals(Object other) {
-		boolean result;
+    @Override
+    public boolean equals(Object other) {
+        boolean result;
 
-		if (this == other)
-			result = true;
-		else if (other == null)
-			result = false;
-		else if (!this.getClass().isInstance(other))
-			result = false;
-		else
-			result = (this.getAuthority().equals(((Authority) other)
-					.getAuthority()));
+        if (this == other)
+            result = true;
+        else if (other == null)
+            result = false;
+        else if (!this.getClass().isInstance(other))
+            result = false;
+        else
+            result = (this.getAuthority().equals(((Authority) other)
+                    .getAuthority()));
 
-		return result;
-	}
+        return result;
+    }
 
 }

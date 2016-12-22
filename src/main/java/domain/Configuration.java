@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Configuration extends DomainEntity{
+public class Configuration extends DomainEntity {
 
     private double fee;
 

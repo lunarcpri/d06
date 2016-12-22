@@ -27,17 +27,17 @@ public class CurriculumService {
     @Autowired
     private ReferenceService referenceService;
 
-    public CurriculumService(){
+    public CurriculumService() {
         super();
     }
 
 
-    private Curriculum create(){
+    private Curriculum create() {
         return new Curriculum();
     }
 
 
-    public Curriculum findOne(int id){
+    public Curriculum findOne(int id) {
         Curriculum result;
 
         result = curriculumRepository.findOne(id);
@@ -46,32 +46,15 @@ public class CurriculumService {
         return result;
     }
 
-    public Curriculum findByActor(int id){
-        Curriculum result;
 
-        result = curriculumRepository.findCurriculumByActor(id);
-        Assert.notNull(result);
-
-        return result;
-    }
-
-    public void deleteCurriculum(int id){
-        Actor a = nutritionistService.findByPrincipal();
-        Curriculum curriculum = findOne(id);
-
-        if (curriculum.getNutritionist() == a){
-            delete(curriculum);
-        }
-    }
-
-    public void deleteByPrincipal(){
+    public void deleteByPrincipal() {
         Nutritionist a = nutritionistService.findByPrincipal();
         Curriculum curriculum = a.getCurriculum();
         a.setCurriculum(null);
         nutritionistService.save(a);
     }
 
-    public void delete(Curriculum curriculum){
+    public void delete(Curriculum curriculum) {
         Assert.notNull(curriculum);
         Nutritionist nutritionist = nutritionistService.findByPrincipal();
         curriculum.setNutritionist(nutritionist);
@@ -79,15 +62,15 @@ public class CurriculumService {
         curriculumRepository.delete(curriculum);
     }
 
-    public void save(Curriculum curriculum){
+    public void save(Curriculum curriculum) {
         Assert.notNull(curriculum);
         Curriculum curriculum1 = curriculum;
         Nutritionist nutritionist = nutritionistService.findByPrincipal();
         curriculum = curriculumRepository.save(curriculum);
         nutritionist.setCurriculum(curriculum);
         nutritionistService.save(nutritionist);
-        if (curriculum1.getReferences()!= null){
-            for (Reference r: curriculum1.getReferences()){
+        if (curriculum1.getReferences() != null) {
+            for (Reference r : curriculum1.getReferences()) {
                 if (r == null) continue;
                 r.setCurriculum(curriculum);
                 referenceService.save(r);
@@ -96,23 +79,4 @@ public class CurriculumService {
     }
 
 
-    public void newCurriculum(Curriculum curriculum){
-        userAccountService.assertRole("NUTRITIONIST");
-        Nutritionist nutritionist = nutritionistService.findByPrincipal();
-        curriculum.setNutritionist(nutritionist);
-        save(curriculum);
-
-    }
-
-    public void modify(int id, Curriculum curr){
-        userAccountService.assertRole("NUTRITIONIST");
-        Nutritionist nutritionist = nutritionistService.findByPrincipal();
-        Curriculum curriculum = findOne(id);
-        curriculum.setEducational(curr.getEducational());
-        curriculum.setExperience(curr.getExperience());
-        curriculum.setHobbies(curr.getHobbies());
-        curriculum.setReferences(curr.getReferences());
-
-        save(curriculum);
-    }
 }

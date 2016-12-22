@@ -1,6 +1,5 @@
 package services;
 
-import domain.Actor;
 import domain.User;
 import domain.UserOrNutritionist;
 import org.junit.Test;
@@ -13,7 +12,6 @@ import org.springframework.util.Assert;
 import utilities.AbstractTest;
 
 import java.util.Collection;
-import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -28,32 +26,32 @@ public class UserServiceTest extends AbstractTest {
     private ActorService actorService;
 
     @Autowired
-    private  UserOrNutritionistService userOrNutritionistService;
+    private UserOrNutritionistService userOrNutritionistService;
 
 
     @Test
-    public void testFindUserWithMoreRecipes(){
+    public void testFindUserWithMoreRecipes() {
         User result = userService.findUserWithMoreRecipes();
         Collection<User> users = userService.findAll();
         User aux = null;
-        for(User e: users){
-            if (aux==null || aux.getRecipes().size()<e.getRecipes().size()){
+        for (User e : users) {
+            if (aux == null || aux.getRecipes().size() < e.getRecipes().size()) {
                 aux = e;
             }
         }
-        Assert.isTrue(aux==result);
+        Assert.isTrue(aux == result);
     }
+
     @Test
-    public void testFollows()
-    {
+    public void testFollows() {
         super.authenticate("nutritionist1");
         UserOrNutritionist follower = (UserOrNutritionist) actorService.findActorByPrincipal();
         UserOrNutritionist followed = (UserOrNutritionist) actorService.findOne(13);
-        System.out.print(userOrNutritionistService.isFollowing(follower,followed));
-        userOrNutritionistService.follow(follower,followed);
-        System.out.print(userOrNutritionistService.isFollowing(follower,followed));
-        userOrNutritionistService.unfollow(follower,followed);
-        System.out.print(userOrNutritionistService.isFollowing(follower,followed));
+        System.out.print(userOrNutritionistService.isFollowing(follower, followed));
+        userOrNutritionistService.follow(follower, followed);
+        System.out.print(userOrNutritionistService.isFollowing(follower, followed));
+        userOrNutritionistService.unfollow(follower, followed);
+        System.out.print(userOrNutritionistService.isFollowing(follower, followed));
 
     }
 }

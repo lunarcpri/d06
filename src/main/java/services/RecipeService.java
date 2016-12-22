@@ -1,6 +1,5 @@
 package services;
 
-import com.sun.org.apache.regexp.internal.RE;
 import domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,25 +41,18 @@ public class RecipeService {
     @Autowired
     QuantityService quantityService;
 
-    public RecipeService(){
+    public RecipeService() {
 
         super();
     }
 
-    public Collection<Recipe> findAllRecipesByUser(int userId)
-    {
 
-        return recipeRepository.findRecipesByUser(userId);
-    }
-
-
-    public Collection<Recipe> findAll()
-    {
+    public Collection<Recipe> findAll() {
 
         return recipeRepository.findAll();
     }
 
-    public Recipe findOne(int id){
+    public Recipe findOne(int id) {
         Recipe result;
 
         result = recipeRepository.findOne(id);
@@ -69,7 +61,7 @@ public class RecipeService {
         return result;
     }
 
-    public Recipe create(){
+    public Recipe create() {
         Recipe result;
 
         result = new Recipe();
@@ -77,13 +69,13 @@ public class RecipeService {
         return result;
     }
 
-    public Recipe save(Recipe recipe){
+    public Recipe save(Recipe recipe) {
         Assert.notNull(recipe);
 
         return recipeRepository.save(recipe);
     }
 
-    public Recipe newRecipe(Recipe recipe){
+    public Recipe newRecipe(Recipe recipe) {
 
         userAccountService.assertRole("USER");
         Date createdAt = new Date();
@@ -92,20 +84,20 @@ public class RecipeService {
         recipe.setTicker(generateTicker());
         recipe.setAuthor(userService.findByPrincipal());
 
-         Recipe recipe2 = save(recipe);
-         for(Step s: recipe.getSteps()){
-             s.setRecipe(recipe2);
-             stepService.save(s);
-         }
-         for(Quantity q : recipe.getQuantities()){
-             q.setRecipe(recipe2);
-             quantityService.save(q);
-         }
-         return recipe2;
+        Recipe recipe2 = save(recipe);
+        for (Step s : recipe.getSteps()) {
+            s.setRecipe(recipe2);
+            stepService.save(s);
+        }
+        for (Quantity q : recipe.getQuantities()) {
+            q.setRecipe(recipe2);
+            quantityService.save(q);
+        }
+        return recipe2;
     }
 
 
-    public Recipe editRecipe(Recipe recipe){
+    public Recipe editRecipe(Recipe recipe) {
 
         userAccountService.assertRole("USER");
         Date createdAt = new Date();
@@ -113,33 +105,33 @@ public class RecipeService {
         recipe.setAuthor(userService.findByPrincipal());
 
         Recipe recipe2 = save(recipe);
-        for(Step s: recipe.getSteps()){
+        for (Step s : recipe.getSteps()) {
             s.setRecipe(recipe2);
             stepService.save(s);
         }
-        for(Quantity q : recipe.getQuantities()){
+        for (Quantity q : recipe.getQuantities()) {
             q.setRecipe(recipe2);
             quantityService.save(q);
         }
         return recipe2;
     }
 
-    private String generateTicker(){
+    private String generateTicker() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
-        String result=calendar.get(Calendar.YEAR) % 100+""+calendar.get(Calendar.MONTH)+""+calendar.get(Calendar.DAY_OF_MONTH)+"-";
+        String result = calendar.get(Calendar.YEAR) % 100 + "" + calendar.get(Calendar.MONTH) + "" + calendar.get(Calendar.DAY_OF_MONTH) + "-";
         Date date = new Date();
-        for(int i=0;i<4;i++){
+        for (int i = 0; i < 4; i++) {
             Random r = new Random();
-            char c = (char)(r.nextInt(26) + 'a');
-            result=result+String.valueOf(c);
+            char c = (char) (r.nextInt(26) + 'a');
+            result = result + String.valueOf(c);
         }
         return result;
 
     }
 
 
-    public Collection<Recipe> findByKeyword(String key){
+    public Collection<Recipe> findByKeyword(String key) {
         Collection<Recipe> result;
 
         result = recipeRepository.findByKeyword(key);
@@ -148,37 +140,17 @@ public class RecipeService {
         return result;
     }
 
-    public void modifyRecipe(Recipe recipe){
-        userAccountService.assertRole("USER");
-        Recipe old = findOne(recipe.getId());
-        Assert.isTrue(!old.isRead_only());
-        Date updatedAt = new Date();
 
-        old.setUpdated_at(updatedAt);
-        old.setTitle(recipe.getTitle());
-        old.setPicture(recipe.getPicture());
-        old.setSummary(recipe.getSummary());
-        old.setUpdated_at(new Date());
-        Assert.notNull(recipe.getQuantities());
-        old.setQuantities(recipe.getQuantities());
-        Assert.notNull(recipe.getSteps());
-        old.setSteps(recipe.getSteps());
-        Assert.notNull(recipe.getCategory());
-        old.setCategory(recipe.getCategory());
-
-        save(old);
-    }
-
-    public void delete(Recipe recipe){
+    public void delete(Recipe recipe) {
         Assert.notNull(recipe);
         userAccountService.assertRole("USER");
         Collection<Contest> contests = recipe.getQualifiedContests();
-        for(Contest c: contests){
+        for (Contest c : contests) {
             c.getRecipesQualified().remove(recipe);
             contestService.save(c);
         }
         contests = recipe.getWinnedContests();
-        for(Contest c: contests){
+        for (Contest c : contests) {
             c.getRecipesQualified().remove(recipe);
             contestService.save(c);
         }
@@ -186,17 +158,7 @@ public class RecipeService {
     }
 
 
-
-
-
-
-    public boolean isActorAuthoredRecipe(int actorid, int recipeid){
-        Recipe recipe = findOne(recipeid);
-        Actor actor = userOrNutritionistService.findOne(actorid);
-        return recipe.getAuthor() == actor;
-    }
-
-    public List<Object[]> findStdevAvgStepsPerRecipe(){
+    public List<Object[]> findStdevAvgStepsPerRecipe() {
         List<Object[]> result;
 
         result = recipeRepository.findStdevAvgStepsPerRecipe();
@@ -205,40 +167,30 @@ public class RecipeService {
         return result;
     }
 
-    public List<Object[]> findStdevAvgIngredientsPerRecipe()
-    {
+    public List<Object[]> findStdevAvgIngredientsPerRecipe() {
         List<Object[]> result;
 
         result = recipeRepository.findStdevAvgIngredientsPerRecipe();
         Assert.notNull(result);
 
-        return  result;
+        return result;
     }
 
-    public Collection<Recipe> findAllByCategory(int id){
-        Collection<Recipe> result;
-
-        result = recipeRepository.findAllByCategory(id);
-        Assert.notNull(result);
-
-        return  result;
-    }
-
-    public Integer getNumberOfDisLike(Recipe r){
+    public Integer getNumberOfDisLike(Recipe r) {
         Integer result;
 
         result = recipeRepository.getNumberOfDisLike(r.getId());
 
-        return (result !=null) ? result : 0;
+        return (result != null) ? result : 0;
     }
 
 
-    public Integer getNumberOfLike(Recipe r){
+    public Integer getNumberOfLike(Recipe r) {
         Integer result;
 
         result = recipeRepository.getNumberOfLike(r.getId());
 
-        return (result !=null) ? result : 0;
+        return (result != null) ? result : 0;
     }
 
 }

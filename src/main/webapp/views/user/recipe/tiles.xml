@@ -12,29 +12,29 @@
  -->
 
 <!DOCTYPE tiles-definitions PUBLIC
-       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
-       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 
 <tiles-definitions>
 
-	<definition name="user/recipe/list" extends="master.page">
-		<put-attribute name="title" value="Manage Recipes" />
-		<put-attribute name="body" value="/views/user/recipe/list.jsp" />
-	</definition>
+    <definition name="user/recipe/list" extends="master.page">
+        <put-attribute name="title" value="Manage Recipes"/>
+        <put-attribute name="body" value="/views/user/recipe/list.jsp"/>
+    </definition>
 
-	<definition name="user/recipe/new" extends="master.page">
-		<put-attribute name="title" value="New Recipe" />
-		<put-attribute name="body" value="/views/user/recipe/new.jsp" />
-	</definition>
+    <definition name="user/recipe/new" extends="master.page">
+        <put-attribute name="title" value="New Recipe"/>
+        <put-attribute name="body" value="/views/user/recipe/new.jsp"/>
+    </definition>
 
-	<definition name="user/recipe/edit" extends="master.page">
-		<put-attribute name="title" value="Edit Recipe" />
-		<put-attribute name="body" value="/views/user/recipe/edit.jsp" />
-	</definition>
+    <definition name="user/recipe/edit" extends="master.page">
+        <put-attribute name="title" value="Edit Recipe"/>
+        <put-attribute name="body" value="/views/user/recipe/edit.jsp"/>
+    </definition>
 
     <definition name="user/recipe/qualify" extends="master.page">
-        <put-attribute name="title" value="Qualify Recipe" />
-        <put-attribute name="body" value="/views/user/recipe/qualify.jsp" />
+        <put-attribute name="title" value="Qualify Recipe"/>
+        <put-attribute name="body" value="/views/user/recipe/qualify.jsp"/>
     </definition>
 
 </tiles-definitions>

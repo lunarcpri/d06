@@ -30,7 +30,7 @@ public class RecipeServiceTest extends AbstractTest {
     private UserService userService;
 
     @Test
-    public void testNewRecipe(){
+    public void testNewRecipe() {
         super.authenticate("user1");
 
         Recipe recipe = new Recipe();
@@ -43,10 +43,10 @@ public class RecipeServiceTest extends AbstractTest {
     }
 
     @Test
-    public void testFindByKeyword(){
+    public void testFindByKeyword() {
         super.authenticate("user1");
 
-        Step  step1 = new Step();
+        Step step1 = new Step();
         step1.setPicture("http://google.es");
         step1.setDescription("Description");
         step1.setHints("Hints");

@@ -14,8 +14,7 @@ public abstract class UserOrNutritionist extends Actor {
     private Collection<UserOrNutritionist> following;
 
 
-    public UserOrNutritionist()
-    {
+    public UserOrNutritionist() {
         super();
     }
 

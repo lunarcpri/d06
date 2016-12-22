@@ -21,11 +21,11 @@ public class PropertyService {
     private UserAccountService userAccountService;
 
 
-    public PropertyService(){
+    public PropertyService() {
         super();
     }
 
-    public Property findOne(int id){
+    public Property findOne(int id) {
         Property result;
 
         result = propertyRepository.findOne(id);
@@ -34,7 +34,7 @@ public class PropertyService {
         return result;
     }
 
-    public Collection<Property> findAll(){
+    public Collection<Property> findAll() {
         Collection<Property> result;
 
         result = propertyRepository.findAll();
@@ -43,13 +43,13 @@ public class PropertyService {
         return result;
     }
 
-    public void save(Property property){
+    public void save(Property property) {
         Assert.notNull(property);
 
         propertyRepository.save(property);
     }
 
-    public void create(Property property){
+    public void create(Property property) {
 
         Assert.notNull(property);
 
@@ -57,14 +57,14 @@ public class PropertyService {
     }
 
 
-    public void delete(Property property){
+    public void delete(Property property) {
         Assert.notNull(property);
-        Assert.isTrue(property.getIngredients().size()==0);
+        Assert.isTrue(property.getIngredients().size() == 0);
 
         propertyRepository.delete(property);
     }
 
-    public void modify(Property property){
+    public void modify(Property property) {
 
         Assert.notNull(property);
 

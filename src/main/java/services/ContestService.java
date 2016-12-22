@@ -23,9 +23,7 @@ public class ContestService {
 
 
     @Autowired
-    private UserAccountService userAccountService;
-
-    @Autowired UserService userService;
+    UserService userService;
 
 
     @Autowired
@@ -35,25 +33,18 @@ public class ContestService {
     RecipeService recipeService;
 
 
-    public ContestService(){
+    public ContestService() {
         super();
     }
 
-    private Contest create(){
-        Contest result;
 
-        result = new Contest();
-
-        return result;
-    }
-
-    public void save(Contest contest){
+    public Contest save(Contest contest) {
         Assert.notNull(contest);
 
-        contestRepository.save(contest);
+        return contestRepository.save(contest);
     }
 
-    public Contest findOne(int id){
+    public Contest findOne(int id) {
         Contest result;
 
         result = contestRepository.findOne(id);
@@ -62,7 +53,7 @@ public class ContestService {
         return result;
     }
 
-    public void delete(Contest contest){
+    public void delete(Contest contest) {
         Assert.notNull(contest);
         Assert.isTrue(contest.getRecipesQualified().isEmpty());
 
@@ -71,7 +62,7 @@ public class ContestService {
 
     }
 
-    public Collection<Contest> findAll(){
+    public Collection<Contest> findAll() {
         Collection<Contest> result;
 
         result = contestRepository.findAll();
@@ -81,22 +72,15 @@ public class ContestService {
     }
 
 
-    public void newContest(Contest contest){
-        userAccountService.assertRole("ADMIN");
-        Assert.isTrue(contest.getClosed_at().after(contest.getOpened_at()));
-        Assert.isTrue(contest.getOpened_at().after(new Date()));
-        Assert.notNull(contest);
-        save(contest);
-    }
 
-    public Collection<Contest> findOpenContests(){
+    public Collection<Contest> findOpenContests() {
         return contestRepository.findOpenContests();
     }
 
-    public void qualifyRecipe(Recipe r, Contest c){
+    public void qualifyRecipe(Recipe r, Contest c) {
         Assert.notNull(r);
         Assert.notNull(c);
-        Assert.isTrue(recipeService.getNumberOfDisLike(r)==0 && recipeService.getNumberOfLike(r)>=5);
+        Assert.isTrue(recipeService.getNumberOfDisLike(r) == 0 && recipeService.getNumberOfLike(r) >= 5);
         r.setRead_only(true);
         Collection<Recipe> recipeCollection = c.getRecipesQualified();
         recipeCollection.add(r);
@@ -104,38 +88,30 @@ public class ContestService {
         save(c);
     }
 
-    public void modify(Contest c){
-        Contest modified = findOne(c.getId());
-        if(c.getRecipesQualified().size()==0){
-            modified.setTitle(c.getTitle());
-            modified.setOpened_at(c.getOpened_at());
-            modified.setClosed_at(c.getClosed_at());
-            save(modified);
-        }else if(c.getClosed_at().after(new Date())){
-            modified.setClosed_at(c.getClosed_at());
-            save(modified);
-        }
-    }
 
 
-    public void processWinner(){
+    public void processWinner() {
         Collection<Contest> result;
 
-        userAccountService.assertRole("ADMIN");
 
         result = contestRepository.findClosedContests();
-        Assert.notNull(result);
-        for(Contest e: result) {
-           List<Recipe> recipes = findContestRecipesOrderByLikes(e.getId());
-            if (recipes.size()>0){
-                int winners = (recipes.size()>3) ? 3 : recipes.size();
-                List<Recipe> winnersList = recipes.subList(0,winners);
+        for (Contest e : result) {
+            List<Recipe> recipes = findContestRecipesOrderByLikes(e.getId());
+            if (recipes.size() > 0) {
+                int winners = (recipes.size() > 3) ? 3 : recipes.size();
+                List<Recipe> winnersList = recipes.subList(0, winners);
                 e.setWinnerRecipes(winnersList);
+                for (Recipe w : winnersList) {
+                    Collection<Contest> winnedContest = w.getWinnedContests();
+                    winnedContest.add(e);
+                    w.setWinnedContests(winnedContest);
+                    recipeService.save(w);
+                }
             }
             e.setEnded(true);
             save(e);
-            for(Recipe f : e.getRecipesQualified()){
-                if (findOpenContestsByRecipe(f).size()==0){
+            for (Recipe f : e.getRecipesQualified()) {
+                if (findOpenContestsByRecipe(f).size() == 0) {
                     f.setRead_only(false);
                     recipeService.save(f);
                 }
@@ -145,31 +121,30 @@ public class ContestService {
     }
 
 
-
-    public Collection<Contest> findOpenContestsByRecipe(Recipe r){
+    public Collection<Contest> findOpenContestsByRecipe(Recipe r) {
         Collection<Contest> result;
 
         result = contestRepository.findOpenContestsByRecipe(r.getId());
         Assert.notNull(result);
 
-        return  result;
+        return result;
     }
 
 
-    public List<Recipe> findContestRecipesOrderByLikes(int id){
+    public List<Recipe> findContestRecipesOrderByLikes(int id) {
         List<Recipe> result = new ArrayList<Recipe>();
 
         Collection<Object[]> collection = contestRepository.findContestRecipesOrderByLikes(id);
         Assert.notNull(collection);
 
-        for(Object[] e: collection){
+        for (Object[] e : collection) {
             result.add((Recipe) e[0]);
         }
 
-        return  result;
+        return result;
     }
 
-    public List<Object[]> findMinMaxAvgRecipesPerContest(){
+    public List<Object[]> findMinMaxAvgRecipesPerContest() {
         List<Object[]> result;
 
         result = contestRepository.findMinMaxAvgRecipesPerContest();
@@ -178,13 +153,13 @@ public class ContestService {
         return result;
     }
 
-    public Contest findContestWithMoreRecipes(){
-        Contest result;
+    public Contest findContestWithMoreRecipes() {
+        List<Contest> result;
 
         result = contestRepository.findContestWithMoreRecipes();
         Assert.notNull(result);
 
-        return result;
+        return result.get(0);
     }
 }
 

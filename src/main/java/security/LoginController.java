@@ -26,45 +26,45 @@ import javax.validation.Valid;
 @RequestMapping("/security")
 public class LoginController extends AbstractController {
 
-	// Supporting services ----------------------------------------------------
-	
-	@Autowired
+    // Supporting services ----------------------------------------------------
+
+    @Autowired
     LoginService service;
-	
-	// Constructors -----------------------------------------------------------
-	
-	public LoginController() {
-		super();
-	}
-	
-	// Login ------------------------------------------------------------------
 
-	@RequestMapping("/login")
-	public ModelAndView login(
-			@Valid @ModelAttribute Credentials credentials,
-			BindingResult bindingResult,
-			@RequestParam(required = false) boolean showError) {
-		Assert.notNull(credentials);
-		Assert.notNull(bindingResult);
-		
-		ModelAndView result;
+    // Constructors -----------------------------------------------------------
 
-		result = new ModelAndView("security/login");
-		result.addObject("credentials", credentials);
-		result.addObject("showError", showError);
+    public LoginController() {
+        super();
+    }
 
-		return result;
-	}
-	
-	// LoginFailure -----------------------------------------------------------
+    // Login ------------------------------------------------------------------
 
-	@RequestMapping("/loginFailure")
-	public ModelAndView failure() {
-		ModelAndView result;
+    @RequestMapping("/login")
+    public ModelAndView login(
+            @Valid @ModelAttribute Credentials credentials,
+            BindingResult bindingResult,
+            @RequestParam(required = false) boolean showError) {
+        Assert.notNull(credentials);
+        Assert.notNull(bindingResult);
 
-		result = new ModelAndView("redirect:login.do?showError=true");
+        ModelAndView result;
 
-		return result;
-	}
+        result = new ModelAndView("security/login");
+        result.addObject("credentials", credentials);
+        result.addObject("showError", showError);
+
+        return result;
+    }
+
+    // LoginFailure -----------------------------------------------------------
+
+    @RequestMapping("/loginFailure")
+    public ModelAndView failure() {
+        ModelAndView result;
+
+        result = new ModelAndView("redirect:login.do?showError=true");
+
+        return result;
+    }
 
 }

@@ -12,7 +12,7 @@ public class LearningMaterialService {
     @Autowired
     private LearningMaterialRepository learningMaterialRepository;
 
-    public LearningMaterialService(){
+    public LearningMaterialService() {
         super();
     }
 }

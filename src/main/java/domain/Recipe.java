@@ -1,24 +1,21 @@
 package domain;
 
 
-import collections.StepMap;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.URL;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Recipe  extends DomainEntity {
+public class Recipe extends DomainEntity {
 
     private String ticker;
     private String title;
@@ -40,7 +37,7 @@ public class Recipe  extends DomainEntity {
         super();
     }
 
-    @Column(unique=true)
+    @Column(unique = true)
     @Pattern(regexp = "^([0-9]{2})([0-9]{2})([0-9]{2})-([a-zA-Z]{4})$")
     public String getTicker() {
         return ticker;
@@ -101,7 +98,7 @@ public class Recipe  extends DomainEntity {
     //Relationship
 
     @Valid
-    @OneToMany (mappedBy = "recipe",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
     public List<Quantity> getQuantities() {
         return quantities;
     }
@@ -111,7 +108,7 @@ public class Recipe  extends DomainEntity {
     }
 
     @Valid
-    @OneToMany (mappedBy = "recipe",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
     public List<Step> getSteps() {
         return steps;
     }
@@ -130,7 +127,7 @@ public class Recipe  extends DomainEntity {
         this.author = user;
     }
 
-    @OneToMany(mappedBy = "recipe",cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.REMOVE)
     public Collection<Likes> getLikes() {
         return likes;
     }

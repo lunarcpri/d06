@@ -20,19 +20,19 @@ public class CategoryService {
     @Autowired
     private UserAccountService userAccountService;
 
-    public CategoryService(){
+    public CategoryService() {
         super();
     }
 
-    public Collection<Category> findAll(){
+    public Collection<Category> findAll() {
         return categoryRepository.findAll();
     }
 
-    private Category create(){
+    private Category create() {
         return new Category();
     }
 
-    public Category findOne(int id){
+    public Category findOne(int id) {
         Category result;
 
         result = categoryRepository.findOne(id);
@@ -41,40 +41,27 @@ public class CategoryService {
         return result;
     }
 
-    public void save(Category category){
+    public void save(Category category) {
         Assert.notNull(category);
 
         categoryRepository.save(category);
     }
 
 
-
-
-    public void create(Category category){
+    public void create(Category category) {
         userAccountService.assertRole("ADMIN");
 
         save(category);
     }
 
-    public void modify(Category category){
-        userAccountService.assertRole("ADMIN");
-        Category categoryModified = findOne(category.getId());
-        categoryModified.setName(category.getName());
-        categoryModified.setDescription(category.getDescription());
-        categoryModified.setParent(category.getParent());
-        categoryModified.setPicture(category.getPicture());
-        categoryModified.setTags(category.getTags());
 
-        save(category);
-    }
-
-    public void delete(Category category){
+    public void delete(Category category) {
         userAccountService.assertRole("ADMIN");
 
         Assert.notNull(category);
-        Assert.isTrue(category.getRecipes().size()==0);
-            for(Category e:category.getChildrens()){
-               Assert.isTrue(e.getRecipes().size()>0);
+        Assert.isTrue(category.getRecipes().size() == 0);
+        for (Category e : category.getChildrens()) {
+            Assert.isTrue(e.getRecipes().size() > 0);
         }
         categoryRepository.delete(category);
     }

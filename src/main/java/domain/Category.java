@@ -8,7 +8,7 @@ import java.util.Collection;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Category extends domain.DomainEntity{
+public class Category extends domain.DomainEntity {
 
     private String name;
     private String description;
@@ -18,8 +18,7 @@ public class Category extends domain.DomainEntity{
     private Collection<Category> childrens;
     private Collection<Recipe> recipes;
 
-    public Category()
-    {
+    public Category() {
         super();
     }
 
@@ -53,7 +52,7 @@ public class Category extends domain.DomainEntity{
 
     //Relationships
 
-    
+
     public String getTags() {
         return tags;
     }

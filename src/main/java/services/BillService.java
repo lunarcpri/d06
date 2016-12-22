@@ -20,11 +20,11 @@ public class BillService {
     @Autowired
     public SponsorService sponsorService;
 
-    public BillService(){
-       super();
+    public BillService() {
+        super();
     }
 
-    public Collection<Bill> list(){
+    public Collection<Bill> list() {
         Collection<Bill> bills;
         System.out.println(sponsorService.findByPrincipal().getId());
         bills = billRepository.getMonthlyBills(sponsorService.findByPrincipal().getId(), new Date());
@@ -33,21 +33,19 @@ public class BillService {
         return bills;
     }
 
-    public Collection<Bill> list(Date date){
+    public Collection<Bill> list(Date date) {
 
         return billRepository.getMonthlyBills(sponsorService.findByPrincipal().getId(), date);
     }
 
-    public void paid(Collection<Bill> bills){
+    public void paid(Collection<Bill> bills) {
 
         Assert.notNull(bills);
-        for(Bill bill:bills){
+        for (Bill bill : bills) {
 
             bill.setPaid_at(new Date());
         }
     }
-
-
 
 
 }

@@ -14,7 +14,6 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<User, Integer> {
 
 
-
     @Query("select c from User c where c.userAccount.id=?1")
     User findByUserAccountId(int userAccountId);
 
@@ -35,7 +34,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
             " (select avg(l.size) from User u2 join u2.recipes r join r.likes l where u2.id=u.id and l.isLike=false) as average2 " +
             "from User u order by averagel DESC, average2 ASC")
     List<Object[]> findAllByLikes();
-
 
 
 }

@@ -8,11 +8,11 @@ function relativeRedir(loc) {
     window.location.replace(loc);
 }
 
-$(document).ready(function(){
-    $(".cancel_button").on('click',function (e) {
+$(document).ready(function () {
+    $(".cancel_button").on('click', function (e) {
         e.preventDefault();
         relativeRedir('../');
     });
 
-    $('select').chosen({width:"60%"});
+    $('select').chosen({width: "60%"});
 });

@@ -12,7 +12,7 @@ public class VideoMaterialService {
     @Autowired
     private VideoMaterialRepository videoMaterialRepository;
 
-    public VideoMaterialService(){
+    public VideoMaterialService() {
         super();
     }
 }

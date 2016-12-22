@@ -12,8 +12,6 @@ import java.util.Collection;
 public interface LikesRepository extends JpaRepository<Likes, Integer> {
 
 
-    @Query("select r from UserOrNutritionist u join u.likes r where r.id=?2 and u.id=?1 and r.isLike=?3")
-    Collection<Recipe> isRecipeLikedByActor(int actorid, int recipeid, boolean liked);
 
     @Query("select l from Likes l where l.userOrNutritionist.id=?1 and l.recipe.id = ?2")
     Likes findRecipeLikeByActor(int actorid, int recipeid);

@@ -9,8 +9,7 @@ import javax.persistence.Entity;
 @Access(AccessType.PROPERTY)
 public class Administrator extends Actor {
 
-    public Administrator()
-    {
+    public Administrator() {
         super();
     }
 }

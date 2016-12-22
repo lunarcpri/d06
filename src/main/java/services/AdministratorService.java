@@ -1,13 +1,15 @@
 package services;
 
-import domain.*;
+import domain.Actor;
+import domain.Administrator;
+import domain.Message;
+import domain.Sponsor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import repositories.AdministratorRepository;
 import repositories.SponsorRepository;
-import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import security.UserAccountService;
@@ -32,9 +34,6 @@ public class AdministratorService {
     private MessageService messageService;
 
     @Autowired
-    private MasterClassService masterClassService;
-
-    @Autowired
     private SponsorRepository sponsorRepository;
 
     @Autowired
@@ -44,7 +43,7 @@ public class AdministratorService {
     private FolderService folderService;
     // Constructors -----------------------------------------------------------
 
-    public AdministratorService(){
+    public AdministratorService() {
 
         super();
     }
@@ -52,8 +51,7 @@ public class AdministratorService {
     // Simple CRUD methods ----------------------------------------------------
 
 
-    public Collection<Administrator> findAll()
-    {
+    public Collection<Administrator> findAll() {
         return administratorRepository.findAll();
     }
 
@@ -69,7 +67,7 @@ public class AdministratorService {
     }
 
 
-    public void notifyToSponsorsWithUnpaidBills(){
+    public void notifyToSponsorsWithUnpaidBills() {
 
         userAccountService.assertRole("ADMINISTRATOR");
 
@@ -83,15 +81,13 @@ public class AdministratorService {
     }
 
 
-    public void create(Administrator administrator){
+    public void create(Administrator administrator) {
         Assert.notNull(administrator);
         administrator = administratorRepository.save(administrator);
         Assert.notNull(administrator);
 
         folderService.createDefaultFolders(administrator);
     }
-
-
 
 
 }

@@ -1,6 +1,5 @@
 package services;
 
-import domain.Actor;
 import domain.Cook;
 import domain.MasterClass;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import repositories.CookRepository;
-import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import security.UserAccountService;
@@ -36,12 +34,12 @@ public class CookService {
     @Autowired
     private FolderService folderService;
 
-    public CookService(){
+    public CookService() {
 
         super();
     }
 
-    public Cook save(Cook cook){
+    public Cook save(Cook cook) {
 
         Assert.notNull(cook);
 
@@ -49,7 +47,7 @@ public class CookService {
 
     }
 
-    public Collection<MasterClass> findCookMasterClasses(Cook c){
+    public Collection<MasterClass> findCookMasterClasses(Cook c) {
 
         userAccountServiceServic.assertRole("COOK");
         return c.getMasterClasses();
@@ -62,16 +60,16 @@ public class CookService {
 
         userAccount = LoginService.getPrincipal();
         Assert.notNull(userAccount);
-        result =cookRepository.findByCookAccountId(userAccount.getId());
+        result = cookRepository.findByCookAccountId(userAccount.getId());
 
         return result;
     }
 
-    List<Cook> findCooksOrderByPromotedMasterClasses(){
+    List<Cook> findCooksOrderByPromotedMasterClasses() {
         List<Cook> result = new ArrayList<Cook>();
         List<Object[]> sqlResult = cookRepository.findCooksOrderByPromotedMasterClasses();
         Assert.notNull(sqlResult);
-        for(Object[] e: sqlResult){
+        for (Object[] e : sqlResult) {
             result.add((Cook) e[0]);
         }
         Assert.notNull(result);
@@ -79,7 +77,7 @@ public class CookService {
         return result;
     }
 
-    public void registerNewCook(Cook cook){
+    public void registerNewCook(Cook cook) {
 
         userAccountService.assertRole("ADMINISTRATOR");
         Assert.notNull(cook);
@@ -88,7 +86,6 @@ public class CookService {
         folderService.createDefaultFolders(cook);
 
     }
-
 
 
 }

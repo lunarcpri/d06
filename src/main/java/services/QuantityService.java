@@ -15,11 +15,11 @@ public class QuantityService {
     private QuantityRepository quantityRepository;
 
 
-    public QuantityService(){
+    public QuantityService() {
         super();
     }
 
-    public Quantity save(Quantity quantity){
+    public Quantity save(Quantity quantity) {
         Assert.notNull(quantity);
 
         return quantityRepository.save(quantity);

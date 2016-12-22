@@ -17,11 +17,11 @@ public class CreditCardService {
     @Autowired
     private SponsorService sponsorService;
 
-    public CreditCardService(){
+    public CreditCardService() {
         super();
     }
 
-    public CreditCard change(CreditCard card){
+    public CreditCard change(CreditCard card) {
 
         Assert.notNull(card);
         Assert.isTrue(card == sponsorService.findByPrincipal().getCreditCard());
@@ -40,7 +40,7 @@ public class CreditCardService {
     }
 
 
-    public CreditCard save(CreditCard c){
+    public CreditCard save(CreditCard c) {
 
         Assert.notNull(c);
         return creditCardRepository.save(c);

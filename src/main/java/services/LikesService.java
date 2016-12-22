@@ -2,7 +2,6 @@ package services;
 
 import domain.Likes;
 import domain.Recipe;
-import domain.User;
 import domain.UserOrNutritionist;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,94 +25,80 @@ public class LikesService {
     private ActorService actorService;
 
 
-    public LikesService(){
+    public LikesService() {
         super();
     }
 
-    public Likes create(){
+    public Likes create() {
         return new Likes();
     }
 
-    public boolean isRecipeLikedByActor(int actorid, int recipeid,boolean liked){
-        Collection<Recipe> recipes = likesRepository.isRecipeLikedByActor(actorid,recipeid,liked);
-        Assert.notNull(recipeid);
 
-        return recipes.size()!=0;
-    }
-
-    public void delete(Likes likes){
+    public void delete(Likes likes) {
         Assert.notNull(likes);
 
         likesRepository.delete(likes);
     }
 
 
-
-
-    public Likes save(Likes likes){
+    public Likes save(Likes likes) {
         Assert.notNull(likes);
 
         return likesRepository.save(likes);
     }
 
-    public Likes like(Recipe recipe){
-       UserOrNutritionist u = (UserOrNutritionist) actorService.findActorByPrincipal();
-       Likes likeresult;
-       Likes likes = likesRepository.findRecipeLikeByActor(u.getId(),recipe.getId());
-       if (likes!=null){
-           if (likes.getIsLike()){
-               delete(likes);
-               likeresult = null;
-           }else{
-               likes.setIsLike(true);
-               likeresult = save(likes);
-
-           }
-       }else{
-           likes = new Likes();
-           likes.setIsLike(true);
-           likes.setUserOrNutritionist(u);
-           likes.setRecipe(recipe);
-           likeresult = save(likes);
-       }
-
-       return likeresult;
-    }
-
-    public Likes findRecipeLikeByActor(Recipe recipe){
-        UserOrNutritionist u = (UserOrNutritionist) actorService.findActorByPrincipal();
-
-        return likesRepository.findRecipeLikeByActor(u.getId(),recipe.getId());
-    }
-
-    public boolean doesUserLikedRecipe(Recipe recipe){
-        UserOrNutritionist u = (UserOrNutritionist) actorService.findActorByPrincipal();
-        Likes like = likesRepository.findRecipeLikeByActor(u.getId(),recipe.getId());
-        return (like!= null) ? like.getIsLike() : false;
-    }
-
-    public boolean doesUserDisLikedRecipe(Recipe recipe){
-        UserOrNutritionist u = (UserOrNutritionist) actorService.findActorByPrincipal();
-        Likes like = likesRepository.findRecipeLikeByActor(u.getId(),recipe.getId());
-        return (like!= null) && !like.getIsLike();
-    }
-
-
-
-    public Likes dislike(Recipe recipe){
+    public Likes like(Recipe recipe) {
         UserOrNutritionist u = (UserOrNutritionist) actorService.findActorByPrincipal();
         Likes likeresult;
-        Likes likes = likesRepository.findRecipeLikeByActor(u.getId(),recipe.getId());
-        if (likes!=null){
-            if (likes.getIsLike()){
-                likes.setIsLike(false);
-                likeresult = save(likes);
-            }else{
+        Likes likes = likesRepository.findRecipeLikeByActor(u.getId(), recipe.getId());
+        if (likes != null) {
+            if (likes.getIsLike()) {
                 delete(likes);
-                likeresult =null;
+                likeresult = null;
+            } else {
+                likes.setIsLike(true);
+                likeresult = save(likes);
 
             }
-        }else{
+        } else {
+            likes = new Likes();
+            likes.setIsLike(true);
+            likes.setUserOrNutritionist(u);
+            likes.setRecipe(recipe);
+            likeresult = save(likes);
+        }
+
+        return likeresult;
+    }
+
+
+    public boolean doesUserLikedRecipe(Recipe recipe) {
+        UserOrNutritionist u = (UserOrNutritionist) actorService.findActorByPrincipal();
+        Likes like = likesRepository.findRecipeLikeByActor(u.getId(), recipe.getId());
+        return (like != null) ? like.getIsLike() : false;
+    }
+
+    public boolean doesUserDisLikedRecipe(Recipe recipe) {
+        UserOrNutritionist u = (UserOrNutritionist) actorService.findActorByPrincipal();
+        Likes like = likesRepository.findRecipeLikeByActor(u.getId(), recipe.getId());
+        return (like != null) && !like.getIsLike();
+    }
+
+
+    public Likes dislike(Recipe recipe) {
+        UserOrNutritionist u = (UserOrNutritionist) actorService.findActorByPrincipal();
+        Likes likeresult;
+        Likes likes = likesRepository.findRecipeLikeByActor(u.getId(), recipe.getId());
+        if (likes != null) {
+            if (likes.getIsLike()) {
+                likes.setIsLike(false);
+                likeresult = save(likes);
+            } else {
+                delete(likes);
+                likeresult = null;
+
+            }
+        } else {
             likes = new Likes();
             likes.setIsLike(false);
             likes.setUserOrNutritionist(u);

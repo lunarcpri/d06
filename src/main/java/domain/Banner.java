@@ -12,8 +12,7 @@ public class Banner extends DomainEntity {
     private int displayed_time;
     private Campaign campaign;
 
-    public Banner()
-    {
+    public Banner() {
         super();
     }
 

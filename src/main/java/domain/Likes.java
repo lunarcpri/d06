@@ -1,12 +1,15 @@
 package domain;
 
 
-import javax.persistence.*;
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Likes  extends DomainEntity{
+public class Likes extends DomainEntity {
 
     private Boolean isLike;
     private UserOrNutritionist userOrNutritionist;

@@ -2,7 +2,6 @@ package controllers.Actor.SocialIdentity;
 
 import controllers.AbstractController;
 import domain.Actor;
-import domain.Folder;
 import domain.SocialIdentity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,57 +29,57 @@ public class SocialIdentityController extends AbstractController {
     private SocialIdentityService socialIdentityService;
 
     @RequestMapping(value = "/edit")
-    public ModelAndView index(@RequestParam(required=true) SocialIdentity socialIdentityId) {
+    public ModelAndView index(@RequestParam(required = true) SocialIdentity socialIdentityId) {
         ModelAndView result;
         Assert.notNull(socialIdentityId);
         Actor principal = actorService.findActorByPrincipal();
         Assert.isTrue(principal.getSocialIdentities().contains(socialIdentityId));
 
-        return createEditModelAndView(socialIdentityId,null);
+        return createEditModelAndView(socialIdentityId, null);
     }
 
     @RequestMapping(value = "/new")
     public ModelAndView newSI() {
         ModelAndView result;
 
-        return creatNewModelAndView(new SocialIdentity(),null);
+        return creatNewModelAndView(new SocialIdentity(), null);
     }
 
-    @RequestMapping(value = "/edit", method = RequestMethod.POST,params = "save")
+    @RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
     public ModelAndView editPost(@Valid @ModelAttribute("socialIdentity") SocialIdentity socialIdentity,
                                  BindingResult binding) {
         ModelAndView result;
         Assert.notNull(socialIdentity);
         Actor principal = actorService.findActorByPrincipal();
-        if (binding.hasErrors()){
-            return createEditModelAndView(socialIdentity,"wrong");
+        if (binding.hasErrors()) {
+            return createEditModelAndView(socialIdentity, "wrong");
         }
-        try{
+        try {
             socialIdentityService.save(socialIdentity);
-            return  new ModelAndView("redirect:/actor/socialIdentity/list.do");
-        }catch (Throwable oops){
+            return new ModelAndView("redirect:/actor/socialIdentity/list.do");
+        } catch (Throwable oops) {
             System.out.print(oops.getLocalizedMessage());
-            return createEditModelAndView(socialIdentity,"wrong");
+            return createEditModelAndView(socialIdentity, "wrong");
         }
     }
 
-    @RequestMapping(value = "/new", method = RequestMethod.POST,params = "save")
+    @RequestMapping(value = "/new", method = RequestMethod.POST, params = "save")
     public ModelAndView createPost(@Valid @ModelAttribute("socialIdentity") SocialIdentity socialIdentity,
-                                 BindingResult binding) {
+                                   BindingResult binding) {
         ModelAndView result;
         Assert.notNull(socialIdentity);
         Actor principal = actorService.findActorByPrincipal();
 
         socialIdentity.setActor(principal);
         result = new ModelAndView("socialIdentity/new");
-        if (binding.hasErrors()){
-            return createEditModelAndView(socialIdentity,"wrong");
+        if (binding.hasErrors()) {
+            return createEditModelAndView(socialIdentity, "wrong");
         }
-        try{
+        try {
             socialIdentityService.save(socialIdentity);
-            return  new ModelAndView("redirect:/actor/socialIdentity/list.do");
-        }catch (Throwable oops){
-            return createEditModelAndView(socialIdentity,"wrong");
+            return new ModelAndView("redirect:/actor/socialIdentity/list.do");
+        } catch (Throwable oops) {
+            return createEditModelAndView(socialIdentity, "wrong");
         }
     }
 
@@ -89,46 +88,45 @@ public class SocialIdentityController extends AbstractController {
         ModelAndView result;
         Collection<SocialIdentity> socialIdentities = actorService.findActorByPrincipal().getSocialIdentities();
         result = new ModelAndView("socialIdentity/list");
-        result.addObject("socialIdentities",socialIdentities);
+        result.addObject("socialIdentities", socialIdentities);
         return result;
     }
 
 
-
-    protected ModelAndView createEditModelAndView(SocialIdentity socialIdentity, String message){
+    protected ModelAndView createEditModelAndView(SocialIdentity socialIdentity, String message) {
         ModelAndView result;
         Assert.notNull(socialIdentity);
 
         result = new ModelAndView("socialIdentity/edit");
-        result.addObject("socialIdentity",socialIdentity);
-        result.addObject("message",message);
+        result.addObject("socialIdentity", socialIdentity);
+        result.addObject("message", message);
 
-        return  result;
+        return result;
     }
 
-    protected ModelAndView creatNewModelAndView(SocialIdentity socialIdentity, String message){
+    protected ModelAndView creatNewModelAndView(SocialIdentity socialIdentity, String message) {
         ModelAndView result;
         Assert.notNull(socialIdentity);
 
         result = new ModelAndView("socialIdentity/new");
-        result.addObject("socialIdentity",socialIdentity);
-        result.addObject("message",message);
+        result.addObject("socialIdentity", socialIdentity);
+        result.addObject("message", message);
 
-        return  result;
+        return result;
     }
 
 
     @RequestMapping(value = "/delete")
-    public ModelAndView editPost(@RequestParam(required=true) SocialIdentity socialIdentityId) {
+    public ModelAndView editPost(@RequestParam(required = true) SocialIdentity socialIdentityId) {
         ModelAndView result;
         Assert.notNull(socialIdentityId);
         Actor principal = actorService.findActorByPrincipal();
         Assert.isTrue(principal == socialIdentityId.getActor());
-        try{
+        try {
             socialIdentityService.delete(socialIdentityId);
-            return  new ModelAndView("redirect:/actor/socialIdentity/list.do");
-        }catch (Throwable oops){
-            return  new ModelAndView("redirect:/actor/socialIdentity/list.do");
+            return new ModelAndView("redirect:/actor/socialIdentity/list.do");
+        } catch (Throwable oops) {
+            return new ModelAndView("redirect:/actor/socialIdentity/list.do");
         }
     }
 

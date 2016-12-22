@@ -1,6 +1,5 @@
 package services;
 
-import domain.MasterClass;
 import domain.SpamTags;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,28 +22,27 @@ public class SpamTagsService {
     private UserAccountService userAccountService;
 
 
-
-    public SpamTagsService(){
+    public SpamTagsService() {
         super();
     }
 
-    public Collection<SpamTags> findAll(){
+    public Collection<SpamTags> findAll() {
         Assert.notNull(spamTagsRepository);
 
         return spamTagsRepository.findAll();
     }
 
-    public SpamTags create(){
+    public SpamTags create() {
         return new SpamTags();
     }
 
-    public void addSpamTag(String tag){
+    public void addSpamTag(String tag) {
         userAccountService.assertRole("Admin");
 
 
     }
 
-    public void save(SpamTags spamTags){
+    public void save(SpamTags spamTags) {
         Assert.notNull(spamTags);
         spamTagsRepository.save(spamTags);
     }

@@ -20,7 +20,7 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<%-- Attributes --%> 
+<%-- Attributes --%>
 
 <%@ attribute name="path" required="true" %>
 <%@ attribute name="code" required="true" %>
@@ -31,24 +31,24 @@
 <%@ attribute name="onchange" required="false" %>
 
 <jstl:if test="${id == null}">
-	<jstl:set var="id" value="${UUID.randomUUID().toString()}" />
+    <jstl:set var="id" value="${UUID.randomUUID().toString()}"/>
 </jstl:if>
 
 <jstl:if test="${onchange == null}">
-	<jstl:set var="onchange" value="javascript: return true;" />
+    <jstl:set var="onchange" value="javascript: return true;"/>
 </jstl:if>
 
 <%-- Definition --%>
 
 <div>
-	<form:label path="${path}">
-		<spring:message code="${code}" />
-	</form:label>	
-	<form:select id="${id}" path="${path}" onchange="${onchange}">
-		<form:option value="0" label="----" />		
-		<form:options items="${items}" itemValue="id" itemLabel="${itemLabel}" />
-	</form:select>
-	<form:errors path="${path}" cssClass="error" />
+    <form:label path="${path}">
+        <spring:message code="${code}"/>
+    </form:label>
+    <form:select id="${id}" path="${path}" onchange="${onchange}">
+        <form:option value="0" label="----"/>
+        <form:options items="${items}" itemValue="id" itemLabel="${itemLabel}"/>
+    </form:select>
+    <form:errors path="${path}" cssClass="error"/>
 </div>
 
 

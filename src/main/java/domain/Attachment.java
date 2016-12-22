@@ -11,12 +11,11 @@ import javax.validation.Valid;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Attachment extends DomainEntity{
+public class Attachment extends DomainEntity {
     private String url;
     private LearningMaterial learningMaterial;
 
-    public Attachment()
-    {
+    public Attachment() {
         super();
     }
 

@@ -2,28 +2,17 @@ package controllers.Actor;
 
 import controllers.AbstractController;
 import domain.Actor;
-import domain.Nutritionist;
-import domain.SocialIdentity;
-import domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import security.LoginService;
-import security.UserAccount;
 import services.ActorService;
-import services.UserService;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.Collection;
 
 @Controller
 @RequestMapping("/actor")
@@ -34,19 +23,19 @@ public class ActorController extends AbstractController {
 
 
     @RequestMapping(value = "/edit")
-    public ModelAndView index(@RequestParam(required=false,defaultValue = "personal") String edit) {
+    public ModelAndView index(@RequestParam(required = false, defaultValue = "personal") String edit) {
         ModelAndView result;
         Actor actor;
         result = new ModelAndView("actor/edit");
         actor = actorService.findActorByPrincipal();
-        result.addObject("actor",actor);
-        result.addObject("edit",edit);
-        result.addObject("role",actor.getClass().getName());
+        result.addObject("actor", actor);
+        result.addObject("edit", edit);
+        result.addObject("role", actor.getClass().getName());
 
         return result;
     }
 
-    @RequestMapping(value = "/edit",method = RequestMethod.POST,params = "save")
+    @RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
     public ModelAndView edit(
             @Valid @ModelAttribute("role") Actor actor, BindingResult binding
     ) {
@@ -54,24 +43,23 @@ public class ActorController extends AbstractController {
         ModelAndView result;
         result = index("personal");
 
-        if (binding.hasErrors()){
+        if (binding.hasErrors()) {
             System.out.print("binding error");
-        }else{
-            try{
+        } else {
+            try {
                 actor.setUserAccount(principal.getUserAccount());
                 actor.setFolders(principal.getFolders());
                 actorService.save(actor);
                 System.out.println("No error");
-            }catch (Throwable oops){
+            } catch (Throwable oops) {
                 System.out.print(oops.toString());
-                result.addObject("message","wrong");
+                result.addObject("message", "wrong");
             }
 
         }
 
         return result;
     }
-
 
 
 }

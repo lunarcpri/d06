@@ -28,13 +28,13 @@ public class UserService {
     @Autowired
     private FolderService folderService;
 
-    public UserService(){
+    public UserService() {
         super();
     }
 
     // Simple CRUD methods ----------------------------------------------------
 
-    public User create(){
+    public User create() {
         User result;
 
         result = new User();
@@ -42,7 +42,7 @@ public class UserService {
         return result;
     }
 
-    public User findOne(int userId){
+    public User findOne(int userId) {
         User result;
         result = userRepository.findOne(userId);
         Assert.notNull(result);
@@ -51,19 +51,18 @@ public class UserService {
     }
 
 
-    public Collection<User> findAll()
-    {
+    public Collection<User> findAll() {
         Collection<User> result;
 
         result = userRepository.findAll();
         Assert.notNull(result);
 
-        return  result;
+        return result;
     }
-    
-    public void save(User user){
+
+    public void save(User user) {
         Assert.notNull(user);
-        
+
         userRepository.save(user);
     }
 
@@ -71,7 +70,7 @@ public class UserService {
         Assert.notNull(user);
         Assert.isTrue(user.getId() != 0);
 
-       userRepository.delete(user);
+        userRepository.delete(user);
     }
 
 
@@ -80,7 +79,7 @@ public class UserService {
     public User edit(User user) {
         User result;
 
-        result =  findByPrincipal();
+        result = findByPrincipal();
         Assert.notNull(result);
         result.setName(user.getName());
         result.setSurnames(user.getSurnames());
@@ -93,7 +92,7 @@ public class UserService {
         return result;
     }
 
-    public List<Object[]> findMinMaxAvgRecipesPerUser(){
+    public List<Object[]> findMinMaxAvgRecipesPerUser() {
         List<Object[]> result;
 
         result = userRepository.findMinMaxAvgRecipesPerUser();
@@ -102,7 +101,7 @@ public class UserService {
         return result;
     }
 
-    public User findUserWithMoreRecipes(){
+    public User findUserWithMoreRecipes() {
         User result;
 
         result = userRepository.findUserWithMoreRecipes();
@@ -115,7 +114,7 @@ public class UserService {
         return userRepository.findAllByPopularity();
     }
 
-    public List<Object[]> findAllByLikes(){
+    public List<Object[]> findAllByLikes() {
         return userRepository.findAllByLikes();
     }
 
@@ -131,7 +130,7 @@ public class UserService {
     }
 
 
-    public Collection<User> findByKeyword(String key){
+    public Collection<User> findByKeyword(String key) {
         Collection<User> result;
 
         result = userRepository.findByKeyword(key);
@@ -140,7 +139,7 @@ public class UserService {
         return result;
     }
 
-    public void create(User u){
+    public void create(User u) {
         Assert.notNull(u);
         List<Authority> authorities = new ArrayList<Authority>();
         Authority a = new Authority();

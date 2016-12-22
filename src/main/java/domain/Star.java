@@ -9,14 +9,12 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Star extends domain.DomainEntity
-{
+public class Star extends domain.DomainEntity {
     private Integer stars;
     private Comment comment;
     private Actor actor;
 
-    public Star()
-    {
+    public Star() {
 
     }
 

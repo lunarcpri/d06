@@ -1,33 +1,32 @@
 package converters;
 
+import domain.Recipe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-
 import repositories.RecipeRepository;
-import domain.Recipe;
 
 @Component
 @Transactional
 public class StringToRecipeConverter implements Converter<String, Recipe> {
 
-	@Autowired
-	RecipeRepository recipeRepository;
+    @Autowired
+    RecipeRepository recipeRepository;
 
-	@Override
-	public Recipe convert(String text) {
-		Recipe result;
-		int id;
+    @Override
+    public Recipe convert(String text) {
+        Recipe result;
+        int id;
 
-		try {
-			id = Integer.valueOf(text);
-			result = recipeRepository.findOne(id);
-		} catch (Throwable oops) {
-			throw new IllegalArgumentException(oops);
-		}
+        try {
+            id = Integer.valueOf(text);
+            result = recipeRepository.findOne(id);
+        } catch (Throwable oops) {
+            throw new IllegalArgumentException(oops);
+        }
 
-		return result;
-	}
+        return result;
+    }
 
 }

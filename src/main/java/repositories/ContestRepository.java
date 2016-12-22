@@ -1,6 +1,5 @@
 package repositories;
 
-import domain.Category;
 import domain.Contest;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -13,7 +12,7 @@ import java.util.List;
 @Repository
 public interface ContestRepository extends JpaRepository<Contest, Integer> {
 
-    @Query("select c from Contest c where c.closed_at < CURRENT_DATE and c.ended=true")
+    @Query("select c from Contest c where c.closed_at < CURRENT_DATE")
     Collection<Contest> findClosedContests();
 
     @Query("select c from Contest c where c.closed_at > CURRENT_DATE and c.ended=false")
@@ -23,7 +22,7 @@ public interface ContestRepository extends JpaRepository<Contest, Integer> {
     List<Object[]> findMinMaxAvgRecipesPerContest();
 
     @Query("select c from Contest c where c.recipesQualified.size = (select max(c2.recipesQualified.size) from Contest c2)")
-    Contest findContestWithMoreRecipes();
+    List<Contest> findContestWithMoreRecipes();
 
     @Query("select r,(select distinct l1.size from Recipe r1 join r1.likes l1 where r1.id=r.id and isLike=true) as likes, " +
             "(select distinct  l2.size from Recipe r2 join r2.likes l2 where r2.id=r.id and isLike=false) as dislikes  " +

@@ -7,10 +7,10 @@
  * TDG Licence, a copy of which you may download from 
  * http://www.tdg-seville.info/License.html
  --%>
- 
+
 <%@ tag language="java" body-content="empty" %>
- 
- <%-- Taglibs --%>
+
+<%-- Taglibs --%>
 
 <%@ taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -20,15 +20,15 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<%-- Attributes --%> 
- 
+<%-- Attributes --%>
+
 <%@ attribute name="code" required="true" %>
 <%@ attribute name="url" required="true" %>
 
 <%-- Definition --%>
 
-<button type="button" onclick="relativeRedir('${url}')" >
-	<spring:message code="${code}" />
+<button type="button" onclick="relativeRedir('${url}')">
+    <spring:message code="${code}"/>
 </button>
 
 <%-- Notes --%>

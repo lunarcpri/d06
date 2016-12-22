@@ -36,34 +36,34 @@ public class RecipeController extends AbstractController {
     private StarService starService;
 
     @RequestMapping(value = "/list")
-    public ModelAndView list(@RequestParam(required=false) String query) {
+    public ModelAndView list(@RequestParam(required = false) String query) {
         ModelAndView result;
         Collection<Recipe> recipeCollection;
         result = new ModelAndView("recipe/list");
         recipeCollection = recipeService.findAll();
 
-        if (query!= null){
+        if (query != null) {
             recipeCollection = recipeService.findByKeyword(query);
         }
         result.addObject("recipes", recipeCollection);
-        result.addObject("requestURI","recipe/list.do");
+        result.addObject("requestURI", "recipe/list.do");
         return result;
     }
 
 
     @RequestMapping(value = "/{recipe}")
     public ModelAndView index(@PathVariable Recipe recipe) {
-        return createIndexView(recipe,null);
+        return createIndexView(recipe, null);
     }
 
 
-    protected ModelAndView createIndexView(Recipe recipe,String message){
+    protected ModelAndView createIndexView(Recipe recipe, String message) {
         ModelAndView result;
         Assert.notNull(recipe);
         result = new ModelAndView("recipe/index");
-        result.addObject("canlike",false);
-        if (LoginService.isAuthorized()){
-            Actor principal =  actorService.findActorByPrincipal();
+        result.addObject("canlike", false);
+        if (LoginService.isAuthorized()) {
+            Actor principal = actorService.findActorByPrincipal();
             Authority user = new Authority();
             user.setAuthority("USER");
             Authority nutritionist = new Authority();
@@ -83,26 +83,27 @@ public class RecipeController extends AbstractController {
             }
         }
         result.addObject("recipe", recipe);
-        result.addObject("likes",recipeService.getNumberOfLike(recipe));
-        result.addObject("dislikes",recipeService.getNumberOfDisLike(recipe));
-        result.addObject("likeURI","recipe/like.do?recipeId="+recipe.getId());
-        result.addObject("dislikeURI","recipe/dislike.do?recipeId="+recipe.getId());
-        result.addObject("requestURI","recipe/index.do");
-        result.addObject("title",recipe.getTitle());
+        result.addObject("likes", recipeService.getNumberOfLike(recipe));
+        result.addObject("dislikes", recipeService.getNumberOfDisLike(recipe));
+        result.addObject("likeURI", "recipe/like.do?recipeId=" + recipe.getId());
+        result.addObject("dislikeURI", "recipe/dislike.do?recipeId=" + recipe.getId());
+        result.addObject("requestURI", "recipe/index.do");
+        result.addObject("title", recipe.getTitle());
         return result;
     }
+
     @RequestMapping(value = "/like")
     public ModelAndView likeRecipe(@RequestParam Recipe recipeId) {
         Recipe recipe = recipeId;
         ModelAndView result;
         Assert.notNull(recipe);
-        if (LoginService.isAuthorized()){
+        if (LoginService.isAuthorized()) {
             UserOrNutritionist principal = (UserOrNutritionist) actorService.findActorByPrincipal();
-            if (principal.getId()!=recipe.getAuthor().getId()) {
+            if (principal.getId() != recipe.getAuthor().getId()) {
                 likesService.like(recipe);
             }
         }
-        return new ModelAndView("redirect:"+recipe.getId()+".do");
+        return new ModelAndView("redirect:" + recipe.getId() + ".do");
     }
 
     @RequestMapping(value = "/dislike")
@@ -111,30 +112,30 @@ public class RecipeController extends AbstractController {
         ModelAndView result;
         Assert.notNull(recipe);
         UserOrNutritionist principal = (UserOrNutritionist) actorService.findActorByPrincipal();
-        if (principal.getId()!=recipe.getAuthor().getId()) {
+        if (principal.getId() != recipe.getAuthor().getId()) {
             likesService.dislike(recipe);
         }
-        return new ModelAndView("redirect:"+recipe.getId()+".do");
+        return new ModelAndView("redirect:" + recipe.getId() + ".do");
     }
 
-    @RequestMapping(value = "/{recipe}",method = RequestMethod.POST,params = "tocomment")
+    @RequestMapping(value = "/{recipe}", method = RequestMethod.POST, params = "tocomment")
     public ModelAndView comment(@ModelAttribute("comment") @Valid Comment comment, BindingResult binding,
-                                @PathVariable Recipe recipe){
+                                @PathVariable Recipe recipe) {
         ModelAndView result;
 
-        if (binding.hasErrors()){
-            result = createIndexView(recipe,"wrong");
-            for(ObjectError o: binding.getAllErrors()){
+        if (binding.hasErrors()) {
+            result = createIndexView(recipe, "wrong");
+            for (ObjectError o : binding.getAllErrors()) {
 
             }
             return result;
         }
-        try{
+        try {
             commentService.save(comment);
-            return new ModelAndView("redirect:"+recipe.getId()+".do");
-        }catch (Throwable throwable){
+            return new ModelAndView("redirect:" + recipe.getId() + ".do");
+        } catch (Throwable throwable) {
             System.out.print(throwable.getMessage());
-            result = createIndexView(recipe,"wrong");
+            result = createIndexView(recipe, "wrong");
             return result;
         }
     }
@@ -147,15 +148,15 @@ public class RecipeController extends AbstractController {
         Actor principal = actorService.findActorByPrincipal();
         ModelAndView result;
         Assert.notNull(recipe);
-        Assert.isTrue(stars>=0 && stars<=5);
-        Star curentStar = starService.findStarByActorAndComment(principal,comment);
-        if (curentStar == null){
+        Assert.isTrue(stars >= 0 && stars <= 5);
+        Star curentStar = starService.findStarByActorAndComment(principal, comment);
+        if (curentStar == null) {
             curentStar = new Star();
             curentStar.setActor(principal);
             curentStar.setComment(comment);
         }
         curentStar.setStars(stars);
         starService.save(curentStar);
-        return new ModelAndView("redirect:"+recipe.getId()+".do");
+        return new ModelAndView("redirect:" + recipe.getId() + ".do");
     }
 }

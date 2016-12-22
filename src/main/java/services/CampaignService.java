@@ -21,18 +21,18 @@ public class CampaignService {
     @Autowired
     private SponsorService sponsorService;
 
-    public CampaignService(){
+    public CampaignService() {
         super();
     }
 
 
-    public Campaign create(Campaign c){
+    public Campaign create(Campaign c) {
 
         return this.save(c);
 
     }
 
-    private Campaign save(Campaign c){
+    private Campaign save(Campaign c) {
 
         Assert.notNull(c);
 
@@ -43,7 +43,7 @@ public class CampaignService {
 
     }
 
-    public Campaign modify(int ID, Campaign c){
+    public Campaign modify(int ID, Campaign c) {
 
 
         Assert.isTrue(c.getSponsor().equals(this.getActualSponsor()));
@@ -60,7 +60,7 @@ public class CampaignService {
     }
 
 
-    public void delete(int ID){
+    public void delete(int ID) {
 
         Campaign campaign = campaignRepository.findOne(ID);
 
@@ -71,24 +71,24 @@ public class CampaignService {
 
     }
 
-    public Collection<Campaign> list(){
+    public Collection<Campaign> list() {
 
         return this.getActualSponsor().getCampaigns();
 
     }
 
-    private Sponsor getActualSponsor(){
+    private Sponsor getActualSponsor() {
 
         return sponsorService.findByPrincipal();
     }
 
-    private boolean isActive(Campaign c){
+    private boolean isActive(Campaign c) {
 
         Date actualDate = new Date();
         return c.getStart_at().before(actualDate) && c.getEnd_at().after(actualDate);
     }
 
-    private boolean hasPassed(Campaign c){
+    private boolean hasPassed(Campaign c) {
 
         Date actualDate = new Date();
         return c.getStart_at().before(actualDate);

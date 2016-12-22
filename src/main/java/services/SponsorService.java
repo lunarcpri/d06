@@ -1,7 +1,6 @@
 package services;
 
 import domain.CreditCard;
-import domain.Nutritionist;
 import domain.Sponsor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,7 +27,7 @@ public class SponsorService {
     @Autowired
     CreditCardService creditCardService;
 
-    public SponsorService(){
+    public SponsorService() {
         super();
     }
 
@@ -43,14 +42,14 @@ public class SponsorService {
         return result;
     }
 
-    public void create(Sponsor s){
+    public void create(Sponsor s) {
         Assert.notNull(s);
         List<Authority> authorities = new ArrayList<Authority>();
         Authority a = new Authority();
         a.setAuthority("SPONSOR");
         authorities.add(a);
         s.getUserAccount().setAuthorities(authorities);
-        if (s.getCreditCard()!=null){
+        if (s.getCreditCard() != null) {
             System.out.println("ey");
             CreditCard c = creditCardService.save(s.getCreditCard());
             s.setCreditCard(c);
@@ -60,7 +59,7 @@ public class SponsorService {
         folderService.createDefaultFolders(s);
     }
 
-    public Sponsor save(Sponsor s){
+    public Sponsor save(Sponsor s) {
         Assert.notNull(s);
 
         return sponsorRepository.save(s);

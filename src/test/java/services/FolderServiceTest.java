@@ -19,7 +19,7 @@ import java.util.ArrayList;
 })
 
 @Transactional
-public class FolderServiceTest  extends AbstractTest{
+public class FolderServiceTest extends AbstractTest {
 
 
     @Autowired
@@ -34,7 +34,7 @@ public class FolderServiceTest  extends AbstractTest{
     }
 
     @Test
-    public void createCustomFolder(){
+    public void createCustomFolder() {
         super.authenticate("user1");
         String name = "Normal Box";
         Folder f = new Folder();

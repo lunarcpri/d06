@@ -29,8 +29,6 @@ public class ActorService {
 
     // Supporting services ----------------------------------------------------
 
-    @Autowired
-    private UserAccountService userAccountService;
 
     // Constructors -----------------------------------------------------------
 
@@ -86,10 +84,9 @@ public class ActorService {
 
     // Other business methods -------------------------------------------------
 
-        public Actor findActorByPrincipal()
-        {
-            UserAccount userAccount = LoginService.getPrincipal();
-            return actorRepository.findActorByUserAccount(userAccount);
-        }
+    public Actor findActorByPrincipal() {
+        UserAccount userAccount = LoginService.getPrincipal();
+        return actorRepository.findActorByUserAccount(userAccount);
+    }
 
 }

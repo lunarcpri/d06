@@ -12,41 +12,41 @@
  -->
 
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
-	xsi:schemaLocation="
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd 
 	">
 
-	<util:list id="messages">
-		<value>/views/master-page/messages</value>
-		<value>/views/misc/messages</value>
-		<value>/views/security/messages</value>		
-		<value>/views/welcome/messages</value>
-		<value>/views/actor/messages</value>
-		<value>/views/nutritionist/messages</value>
-		<value>/views/nutritionist/ingredient/messages</value>
-		<value>/views/nutritionist/property/messages</value>
-		<value>/views/nutritionist/curriculum/messages</value>
-		<value>/views/sponsor/messages</value>
-		<value>/views/campaign/messages</value>
-		<value>/views/bill/messages</value>
-		<value>/views/master-class/messages</value>
-		<value>/views/cook/messages</value>
-		<value>/views/recipe/messages</value>
-		<value>/views/user/messages</value>
-		<value>/views/user/recipe/messages</value>
-		<value>/views/category/messages</value>
-		<value>/views/userornutritionist/messages</value>
-		<value>/views/message/messages</value>
-		<value>/views/contest/messages</value>
-		<value>/views/folder/messages</value>
-		<value>/views/administrator/messages</value>
-		<value>/views/administrator/spamTags/messages</value>
-		<value>/views/administrator/category/messages</value>
-		<value>/views/administrator/contest/messages</value>
+    <util:list id="messages">
+        <value>/views/master-page/messages</value>
+        <value>/views/misc/messages</value>
+        <value>/views/security/messages</value>
+        <value>/views/welcome/messages</value>
+        <value>/views/actor/messages</value>
+        <value>/views/nutritionist/messages</value>
+        <value>/views/nutritionist/ingredient/messages</value>
+        <value>/views/nutritionist/property/messages</value>
+        <value>/views/nutritionist/curriculum/messages</value>
+        <value>/views/sponsor/messages</value>
+        <value>/views/campaign/messages</value>
+        <value>/views/bill/messages</value>
+        <value>/views/master-class/messages</value>
+        <value>/views/cook/messages</value>
+        <value>/views/recipe/messages</value>
+        <value>/views/user/messages</value>
+        <value>/views/user/recipe/messages</value>
+        <value>/views/category/messages</value>
+        <value>/views/userornutritionist/messages</value>
+        <value>/views/message/messages</value>
+        <value>/views/contest/messages</value>
+        <value>/views/folder/messages</value>
+        <value>/views/administrator/messages</value>
+        <value>/views/administrator/spamTags/messages</value>
+        <value>/views/administrator/category/messages</value>
+        <value>/views/administrator/contest/messages</value>
 
 
-	</util:list>
+    </util:list>
 
 </beans>

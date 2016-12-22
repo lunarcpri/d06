@@ -34,13 +34,12 @@ public class MasterClassService {
     private UserService userService;
 
 
-
-    public MasterClassService(){
+    public MasterClassService() {
 
         super();
     }
 
-    public MasterClass findOne(int id){
+    public MasterClass findOne(int id) {
         MasterClass result;
 
         result = masterClassRepository.findOne(id);
@@ -49,7 +48,7 @@ public class MasterClassService {
         return result;
     }
 
-    public void save(MasterClass masterClass){
+    public void save(MasterClass masterClass) {
 
         Assert.notNull(masterClass);
 
@@ -57,20 +56,20 @@ public class MasterClassService {
 
     }
 
-    private void delete(MasterClass masterClass){
+    private void delete(MasterClass masterClass) {
 
         Assert.notNull(masterClass);
         masterClassRepository.delete(masterClass.getId());
 
     }
 
-    public Collection<MasterClass> list(){
+    public Collection<MasterClass> list() {
 
         return masterClassRepository.findAll();
 
     }
 
-    public MasterClass newMasterClass(MasterClass masterClass){
+    public MasterClass newMasterClass(MasterClass masterClass) {
 
 
         Assert.notNull(masterClass);
@@ -85,7 +84,7 @@ public class MasterClassService {
 
     }
 
-    public MasterClass modifyMasterClass(int id, MasterClass masterClass){
+    public MasterClass modifyMasterClass(int id, MasterClass masterClass) {
 
 
         userAccountService.assertRole("COOK");
@@ -102,21 +101,21 @@ public class MasterClassService {
 
     }
 
-    public void deleteMasterClass(MasterClass masterClass){
+    public void deleteMasterClass(MasterClass masterClass) {
 
         userAccountService.assertRole("COOK");
         delete(masterClass);
 
-            Message message = new Message();
+        Message message = new Message();
 
-            message.setPriority(Message.Priority.HIGH);
-            message.setBody("The master class "+masterClass.getTitle()+" was deleted by its owner. We are really sorry");
-            message.setSubject("SYSTEM MESSAGE: The master class "+masterClass.getTitle()+" was deleted.");
-            message.setRecipients(masterClass.getAttendingUsers());
-            messageService.saveMessage(message);
+        message.setPriority(Message.Priority.HIGH);
+        message.setBody("The master class " + masterClass.getTitle() + " was deleted by its owner. We are really sorry");
+        message.setSubject("SYSTEM MESSAGE: The master class " + masterClass.getTitle() + " was deleted.");
+        message.setRecipients(masterClass.getAttendingUsers());
+        messageService.saveMessage(message);
     }
 
-    public void attendMasterClass(MasterClass masterClass){
+    public void attendMasterClass(MasterClass masterClass) {
 
         userAccountService.assertRole("USER");
         User user = userService.findByPrincipal();
@@ -132,7 +131,7 @@ public class MasterClassService {
 
     }
 
-    public List<Object[]> findMinMaxAvgStddevMasterClassesPerCook(){
+    public List<Object[]> findMinMaxAvgStddevMasterClassesPerCook() {
         List<Object[]> result;
 
         result = masterClassRepository.findMinMaxAvgStddevMasterClassesPerCook();
@@ -141,7 +140,7 @@ public class MasterClassService {
         return result;
     }
 
-    public   Integer numberOfPromotedMasterClasses(){
+    public Integer numberOfPromotedMasterClasses() {
         Integer result;
 
         result = masterClassRepository.numberOfPromotedMasterClasses();
@@ -150,16 +149,16 @@ public class MasterClassService {
         return result;
     }
 
-    List<Double> AvgLearningMaterialsPerMasterClassGroupByLearningMaterialKind(){
+    List<Double> AvgLearningMaterialsPerMasterClassGroupByLearningMaterialKind() {
         List<Double> result;
 
         result = masterClassRepository.AvgLearningMaterialsPerMasterClassGroupByLearningMaterialKind();
         Assert.notNull(result);
 
-        return  result;
+        return result;
     }
 
-    Double[] findAvgPromotedDemotedMasterClasses(){
+    Double[] findAvgPromotedDemotedMasterClasses() {
         Double[] result;
 
         result = masterClassRepository.findAvgPromotedDemotedMasterClasses();
@@ -168,7 +167,7 @@ public class MasterClassService {
         return result;
     }
 
-    public void promoteMasterClass(MasterClass masterClass){
+    public void promoteMasterClass(MasterClass masterClass) {
 
         userAccountService.assertRole("ADMINISTRATOR");
         Assert.notNull(masterClass);
@@ -182,7 +181,7 @@ public class MasterClassService {
 
     }
 
-    public void demoteMasterClass(MasterClass masterClass){
+    public void demoteMasterClass(MasterClass masterClass) {
 
 
         userAccountService.assertRole("ADMINISTRATOR");

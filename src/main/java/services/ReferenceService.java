@@ -15,11 +15,11 @@ public class ReferenceService {
     private ReferenceRepository referenceRepository;
 
 
-    public ReferenceService(){
+    public ReferenceService() {
         super();
     }
 
-    public Reference save(Reference reference){
+    public Reference save(Reference reference) {
         Assert.notNull(reference);
 
         return referenceRepository.save(reference);

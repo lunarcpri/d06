@@ -10,14 +10,14 @@ public class Nutritionist extends UserOrNutritionist {
 
 
     private Curriculum curriculum;
-    public Nutritionist()
-    {
+
+    public Nutritionist() {
         super();
     }
 
 
     @Valid
-    @OneToOne (cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     public Curriculum getCurriculum() {
         return curriculum;
     }

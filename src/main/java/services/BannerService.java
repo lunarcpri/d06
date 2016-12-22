@@ -13,7 +13,7 @@ public class BannerService {
     private BannerRepository bannerRepository;
 
 
-    public BannerService(){
+    public BannerService() {
         super();
     }
 }

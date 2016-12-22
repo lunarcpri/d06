@@ -7,26 +7,23 @@ import java.util.Collection;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Property extends domain.DomainEntity{
+public class Property extends domain.DomainEntity {
 
     private String name;
     private Collection<Ingredient> ingredients;
 
 
-    public Property()
-    {
+    public Property() {
         super();
     }
 
     @NotBlank
-    @Column(unique=true)
-    public String getName()
-    {
+    @Column(unique = true)
+    public String getName() {
         return this.name;
     }
 
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 

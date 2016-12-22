@@ -11,9 +11,7 @@ import org.springframework.util.Assert;
 import repositories.UserOrNutritionistRepository;
 import security.UserAccountService;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 @Service
 @Transactional
@@ -32,8 +30,7 @@ public class UserOrNutritionistService {
     private ActorService actorService;
 
 
-
-    public UserOrNutritionistService(){
+    public UserOrNutritionistService() {
 
         super();
 
@@ -76,20 +73,20 @@ public class UserOrNutritionistService {
         userOrNutritionistRepository.delete(userOrNutritionist);
     }
 
-    public Boolean isFollowing(UserOrNutritionist follower, UserOrNutritionist following){
+    public Boolean isFollowing(UserOrNutritionist follower, UserOrNutritionist following) {
         Assert.notNull(following);
-        return  follower.getFollowing().contains(following);
+        return follower.getFollowing().contains(following);
     }
 
 
-    public void follow(UserOrNutritionist follower, UserOrNutritionist followed){
+    public void follow(UserOrNutritionist follower, UserOrNutritionist followed) {
         Collection<UserOrNutritionist> followers;
         Collection<UserOrNutritionist> following;
         Assert.notNull(follower);
         Assert.notNull(followed);
-        Assert.isTrue(follower.getId()!=followed.getId());
+        Assert.isTrue(follower.getId() != followed.getId());
 
-        Assert.isTrue(!isFollowing(follower,followed));
+        Assert.isTrue(!isFollowing(follower, followed));
         followers = followed.getFollower();
         following = follower.getFollowing();
         followers.add(follower);
@@ -103,14 +100,14 @@ public class UserOrNutritionistService {
     }
 
 
-    public void unfollow(UserOrNutritionist unfollower, UserOrNutritionist unfollowed){
+    public void unfollow(UserOrNutritionist unfollower, UserOrNutritionist unfollowed) {
 
         Collection<UserOrNutritionist> unfollowers;
         Collection<UserOrNutritionist> unfollowing;
         Assert.notNull(unfollower);
         Assert.notNull(unfollowed);
-        Assert.isTrue(unfollower.getId()!=unfollowed.getId());
-        Assert.isTrue(isFollowing(unfollower,unfollowed));
+        Assert.isTrue(unfollower.getId() != unfollowed.getId());
+        Assert.isTrue(isFollowing(unfollower, unfollowed));
 
         unfollowers = unfollowed.getFollower();
         unfollowing = unfollower.getFollowing();
@@ -124,25 +121,9 @@ public class UserOrNutritionistService {
         save(unfollower);
 
     }
-    public Collection<Recipe> latestFollowingUserRecipes(){
-       Collection<Recipe> result;
-        User u = userService.findByPrincipal();
-        result = userOrNutritionistRepository.streamRecipesFollowingUsers(u.getId());
-        Assert.notNull(result);
 
-        return result;
-    }
 
-    public UserOrNutritionist findUserOrNutritionistByActor(Actor actor){
-        UserOrNutritionist result;
-
-        result = findOne(actor.getId());
-        Assert.notNull(result);
-
-        return result;
-    }
-
-    public Collection<Recipe> findAllRecipesByFollowingActors(){
+    public Collection<Recipe> findAllRecipesByFollowingActors() {
         UserOrNutritionist userOrNutritionist = (UserOrNutritionist) actorService.findActorByPrincipal();
         Collection<Recipe> list = userOrNutritionistRepository.streamRecipesFollowingUsers(userOrNutritionist.getId());
         Assert.notNull(list);

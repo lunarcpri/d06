@@ -56,7 +56,7 @@ public class Contest extends DomainEntity {
     }
 
 
-    @Column(columnDefinition="bit default 0")
+    @Column(columnDefinition = "bit default 0")
     public boolean isEnded() {
         return ended;
     }

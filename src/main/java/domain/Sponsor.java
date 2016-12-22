@@ -15,8 +15,7 @@ public class Sponsor extends Actor {
     private Collection<Bill> bills;
     private Collection<Campaign> campaigns;
 
-    public Sponsor()
-    {
+    public Sponsor() {
         super();
     }
 
@@ -41,7 +40,7 @@ public class Sponsor extends Actor {
     }
 
     @Valid
-    @OneToMany (mappedBy = "sponsor")
+    @OneToMany(mappedBy = "sponsor")
     public Collection<Bill> getBills() {
         return bills;
     }
@@ -52,7 +51,7 @@ public class Sponsor extends Actor {
 
 
     @Valid
-    @OneToMany(mappedBy = "sponsor",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "sponsor", cascade = CascadeType.ALL)
     public Collection<Campaign> getCampaigns() {
         return campaigns;
     }

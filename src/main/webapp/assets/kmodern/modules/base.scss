@@ -1,8 +1,4 @@
-
 //Fonts
-
-
-
 @import "colors";
 @import "fonts";
 @import "cols";
@@ -21,16 +17,16 @@
 @import "badge";
 
 $base-font-size: 0.85em;
-$font-family:Roboto-Regular;
-$margin:0;
-$padding:0;
+$font-family: Roboto-Regular;
+$margin: 0;
+$padding: 0;
 
-body{
+body {
   font-size: $base-font-size;
   font-family: $font-family;
-  text-rendering:optimizeLegibility;
+  text-rendering: optimizeLegibility;
   margin: $margin;
-  color:$black-1;
+  color: $black-1;
   padding: $padding;
   -webkit-font-smoothing: antialiased;
 }

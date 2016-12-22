@@ -13,7 +13,7 @@ public class DomainEntityService {
     private DomainEntityRepository domainEntityRepository;
 
 
-    public DomainEntityService(){
+    public DomainEntityService() {
         super();
     }
 }

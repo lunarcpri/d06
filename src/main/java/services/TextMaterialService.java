@@ -12,7 +12,7 @@ public class TextMaterialService {
     @Autowired
     private TextMaterialRepository textMaterialRepository;
 
-    public TextMaterialService(){
+    public TextMaterialService() {
         super();
     }
 }

@@ -10,7 +10,7 @@ import java.util.Date;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Bill extends DomainEntity{
+public class Bill extends DomainEntity {
 
     private Date created_at;
     private Date paid_at;
@@ -18,8 +18,7 @@ public class Bill extends DomainEntity{
     private String description;
     private Sponsor sponsor;
 
-    public Bill()
-    {
+    public Bill() {
         super();
     }
 

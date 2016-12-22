@@ -12,7 +12,6 @@ import org.springframework.util.Assert;
 import utilities.AbstractTest;
 
 import java.util.Collection;
-import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -32,27 +31,28 @@ public class ContestServiceTest extends AbstractTest {
 
 
     @Test
-    public void testfindContestWithMoreRecipes(){
+    public void testfindContestWithMoreRecipes() {
         Contest result = contestService.findContestWithMoreRecipes();
         Collection<Contest> contests = contestService.findAll();
         Contest aux = null;
-        for(Contest e: contests){
-            if (aux==null || aux.getRecipesQualified().size()<e.getRecipesQualified().size()){
+        for (Contest e : contests) {
+            if (aux == null || aux.getRecipesQualified().size() < e.getRecipesQualified().size()) {
                 aux = e;
             }
         }
-        Assert.isTrue(aux==result);
+        Assert.isTrue(aux == result);
     }
 
     @Test
-    public void testProcessWinner(){
+    public void testProcessWinner() {
         super.authenticate("admin");
         contestService.processWinner();
     }
+
     @Test
-    public void testQualifyRecipe(){
+    public void testQualifyRecipe() {
         Recipe r = recipeService.findOne(63);
         Contest c = contestService.findOne(115);
-        contestService.qualifyRecipe(r,c);
+        contestService.qualifyRecipe(r, c);
     }
 }

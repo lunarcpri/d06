@@ -8,11 +8,10 @@ import java.util.Collection;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class User extends UserOrNutritionist
-{
+public class User extends UserOrNutritionist {
     private Collection<Recipe> recipes;
-    public User()
-    {
+
+    public User() {
         super();
     }
 

@@ -10,7 +10,7 @@ import java.util.Collection;
 @Access(AccessType.PROPERTY)
 public class Folder extends domain.DomainEntity {
 
-    public enum FolderType{
+    public enum FolderType {
         SPAMBOX, INBOX, OUTBOX, THRASHBOX, CUSTOM
     }
 
@@ -33,7 +33,7 @@ public class Folder extends domain.DomainEntity {
     }
 
     @Valid
-    @ManyToMany(cascade ={CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     public Collection<Message> getMessages() {
         return messages;
     }

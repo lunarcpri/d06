@@ -9,7 +9,7 @@ import java.util.Collection;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class MasterClass extends DomainEntity{
+public class MasterClass extends DomainEntity {
 
     private String title;
     private String description;
@@ -18,8 +18,7 @@ public class MasterClass extends DomainEntity{
     private boolean promoted;
     private Collection<Actor> attendingUsers;
 
-    public MasterClass()
-    {
+    public MasterClass() {
         super();
     }
 
@@ -44,7 +43,7 @@ public class MasterClass extends DomainEntity{
 
 
     @Valid
-    @OneToMany(mappedBy = "masterClass",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "masterClass", cascade = CascadeType.ALL)
     public Collection<LearningMaterial> getLearningMaterials() {
         return learningMaterials;
     }
@@ -55,7 +54,7 @@ public class MasterClass extends DomainEntity{
 
     @Valid
     @NotNull
-    @ManyToOne (optional = false)
+    @ManyToOne(optional = false)
     public Cook getCook() {
         return cook;
     }

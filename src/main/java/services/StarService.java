@@ -16,25 +16,26 @@ public class StarService {
     @Autowired
     private StarRepository starRepository;
 
-    public StarService(){
+    public StarService() {
         super();
     }
 
-    public Star save(Star star){
+    public Star save(Star star) {
         Assert.notNull(star);
 
         return starRepository.save(star);
     }
-    public void delete(Star star){
+
+    public void delete(Star star) {
         Assert.notNull(star);
 
         starRepository.delete(star);
     }
 
-    public Star findStarByActorAndComment(Actor actor, Comment comment){
+    public Star findStarByActorAndComment(Actor actor, Comment comment) {
         Assert.notNull(actor);
         Assert.notNull(comment);
 
-        return starRepository.findStarByActorAndComment(actor.getId(),comment.getId());
+        return starRepository.findStarByActorAndComment(actor.getId(), comment.getId());
     }
 }

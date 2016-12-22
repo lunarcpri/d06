@@ -17,11 +17,11 @@ public class ConfigurationService {
     @Autowired
     private UserAccountService userAccountService;
 
-    public ConfigurationService(){
+    public ConfigurationService() {
         super();
     }
 
-    public Configuration changeBannersCost(double cost){
+    public Configuration changeBannersCost(double cost) {
 
         Configuration config = configurationRepository.findAll().get(1);
 
@@ -30,7 +30,7 @@ public class ConfigurationService {
 
     }
 
-    public Configuration changeBannersCost(){
+    public Configuration changeBannersCost() {
 
         userAccountService.assertRole("ADMINISTRATOR");
 

@@ -20,13 +20,13 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<%-- Attributes --%> 
+<%-- Attributes --%>
 
-<%@ attribute name="name" required="true" %> 
+<%@ attribute name="name" required="true" %>
 <%@ attribute name="code" required="true" %>
 
 <%-- Definition --%>
 
 <button type="submit" name="${name}" class="btn btn-primary">
-	<spring:message code="${code}" />
+    <spring:message code="${code}"/>
 </button>

@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AdministratorRepository extends JpaRepository<Administrator, Integer> {
 
-	@Query("select a from Administrator a where a.userAccount.id=?1")
-	Administrator findByAdministratorAccountId(int userAccountId);
+    @Query("select a from Administrator a where a.userAccount.id=?1")
+    Administrator findByAdministratorAccountId(int userAccountId);
 }

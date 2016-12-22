@@ -18,13 +18,12 @@ public class CreditCard extends DomainEntity {
     private String holder_name;
     private String brand_name;
     private String number;
-    private int  expired_month;
+    private int expired_month;
     private int expired_year;
     private int cvv;
     private Sponsor sponsor;
 
-    public CreditCard()
-    {
+    public CreditCard() {
         super();
     }
 
@@ -55,7 +54,7 @@ public class CreditCard extends DomainEntity {
         this.number = number;
     }
 
-    @Range(min=0, max=12)
+    @Range(min = 0, max = 12)
     @NotNull
     public int getExpired_month() {
         return expired_month;
@@ -74,7 +73,7 @@ public class CreditCard extends DomainEntity {
         this.expired_year = expired_year;
     }
 
-    @Range(min=100, max=999)
+    @Range(min = 100, max = 999)
     @NotNull
     public int getCvv() {
         return cvv;

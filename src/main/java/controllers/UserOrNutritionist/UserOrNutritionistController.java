@@ -12,7 +12,6 @@ package controllers.UserOrNutritionist;
 
 import controllers.AbstractController;
 import domain.Recipe;
-import domain.UserOrNutritionist;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,32 +25,32 @@ import java.util.Collection;
 @RequestMapping("/userornutritionist")
 public class UserOrNutritionistController extends AbstractController {
 
-	// Constructors -----------------------------------------------------------
+    // Constructors -----------------------------------------------------------
 
-	public UserOrNutritionistController() {
-		super();
-	}
+    public UserOrNutritionistController() {
+        super();
+    }
 
-	@Autowired
-	RecipeService recipeService;
+    @Autowired
+    RecipeService recipeService;
 
-	@Autowired
-	UserOrNutritionistService userOrNutritionistService;
+    @Autowired
+    UserOrNutritionistService userOrNutritionistService;
 
-	// Index ------------------------------------------------------------------		
+    // Index ------------------------------------------------------------------
 
-	@RequestMapping(value = "/list")
-	public ModelAndView index() {
-		ModelAndView result;
-		Collection<Recipe> recipeCollection;
+    @RequestMapping(value = "/list")
+    public ModelAndView index() {
+        ModelAndView result;
+        Collection<Recipe> recipeCollection;
 
-		result = new ModelAndView("userornutritionist/list");
-		recipeCollection = userOrNutritionistService.findAllRecipesByFollowingActors();
-		result.addObject("recipes", recipeCollection);
-		result.addObject("requestURI","userornutritionist/list.do");
+        result = new ModelAndView("userornutritionist/list");
+        recipeCollection = userOrNutritionistService.findAllRecipesByFollowingActors();
+        result.addObject("recipes", recipeCollection);
+        result.addObject("requestURI", "userornutritionist/list.do");
 
-		return result;
-	}
+        return result;
+    }
 
 
 }

@@ -1,44 +1,47 @@
 @import "kmodern/kmodern";
+
 body {
   background-color: $grey1;
 }
-h1{
-  color:$red3;
-  font-family: Roboto-Thin!important;
+
+h1 {
+  color: $red3;
+  font-family: Roboto-Thin !important;
 }
-header{
-  color:$white2;
-  padding:10px;
+
+header {
+  color: $white2;
+  padding: 10px;
   background-color: $red3;
-  h1{
-    a,a:link,a:visited{
-      color:$white1;
-      &:hover{
-        color:$white1;
+  h1 {
+    a, a:link, a:visited {
+      color: $white1;
+      &:hover {
+        color: $white1;
         text-decoration: underline;
       }
     }
   }
-  article,h1{
+  article, h1 {
     display: inline-table;
   }
-  .search-section{
-    width:30%;
-    input{
+  .search-section {
+    width: 30%;
+    input {
       display: inline-table;
     }
   }
-  .user-section{
-    width:46%;
+  .user-section {
+    width: 46%;
     font-size: 1.2em;
-    ul{
-      li{
+    ul {
+      li {
         display: inline-table;
         position: relative;
-        a{
-          color:$black-4;
-          &:hover{
-            color:$black-3;
+        a {
+          color: $black-4;
+          &:hover {
+            color: $black-3;
           }
         }
         ul {
@@ -54,112 +57,110 @@ header{
             display: list-item;
             padding: 10px;
             width: 250px;
-            a{
-              color:$black-2;
-              &:hover{
+            a {
+              color: $black-2;
+              &:hover {
                 text-decoration: underline;
               }
             }
           }
         }
-        &:hover > ul{
-          display:block;
+        &:hover > ul {
+          display: block;
         }
       }
     }
   }
 }
 
-.wrapper{
-  margin-left:8%;
-  margin-right:8%;
-  box-shadow:$normal-box-shadow;
+.wrapper {
+  margin-left: 8%;
+  margin-right: 8%;
+  box-shadow: $normal-box-shadow;
   background-color: #FFF;
 }
 
-.main{
-  article{
+.main {
+  article {
     display: inline-table;
-    width:100%;
+    width: 100%;
   }
 }
 
-.banners{
-  width:100%;
-  article{
-    overflow-x:scroll;
+.banners {
+  width: 100%;
+  article {
+    overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
-    img{
-      height:248px;
-      display:inline-block;
-      overflow:hidden;
+    img {
+      height: 248px;
+      display: inline-block;
+      overflow: hidden;
     }
   }
 }
 
-main{
-  padding:15px;
+main {
+  padding: 15px;
 }
 
-.list{
-  li{
-    max-width:20%;
-    margin:5px;
-    display:inline-table;
-    border:3px solid $blue-grey4;
-    border-radius:8px;
-    img{
-      width:200px;
+.list {
+  li {
+    max-width: 20%;
+    margin: 5px;
+    display: inline-table;
+    border: 3px solid $blue-grey4;
+    border-radius: 8px;
+    img {
+      width: 200px;
       height: 120px;
     }
   }
 }
 
-
-footer{
-  padding:15px;
+footer {
+  padding: 15px;
   background-color: $white1;
-  border-radius:4px;
-  margin-top:30px;
-  margin-bottom:50px;
-  margin-left:25%;
-  margin-right:25%;
-  article{
-    display:inline-table;
-    width:32%;
-    a{
-      color:$black-1;
+  border-radius: 4px;
+  margin-top: 30px;
+  margin-bottom: 50px;
+  margin-left: 25%;
+  margin-right: 25%;
+  article {
+    display: inline-table;
+    width: 32%;
+    a {
+      color: $black-1;
     }
   }
-  .copyright{
-    margin:20px;
+  .copyright {
+    margin: 20px;
     text-align: center;
-    font-size:0.9em;
-    color:$grey3;
+    font-size: 0.9em;
+    color: $grey3;
   }
 }
 
-.register-list{
+.register-list {
   li {
     background-color: $grey1;
-    border-radius:8px;
-    padding:8px;
-    margin-right:1%;
+    border-radius: 8px;
+    padding: 8px;
+    margin-right: 1%;
     display: inline-table;
     width: 30%;
-    ul{
-      padding:5px;
-      margin-left:5%;
-      li{
-        display:list-item;
-        width:auto;
+    ul {
+      padding: 5px;
+      margin-left: 5%;
+      li {
+        display: list-item;
+        width: auto;
         list-style: square;
       }
     }
   }
 }
-
 
 .error {
   color: red;
@@ -171,42 +172,42 @@ footer{
   font-weight: bolder;
 }
 
-table{
-  border-collapse:collapse;
-  width:80%;
-  margin:0 auto;
-  border:1px solid $black-3;
-  a{
+table {
+  border-collapse: collapse;
+  width: 80%;
+  margin: 0 auto;
+  border: 1px solid $black-3;
+  a {
     text-decoration: underline;
-    color:$white1!important;
+    color: $white1 !important;
   }
-  thead{
-    tr{
+  thead {
+    tr {
       text-align: left;
-      th{
-        padding:13px;
+      th {
+        padding: 13px;
         background-color: $blue-grey2;
-        color:$white1;
-        font-size:1.2em;
-        a{
+        color: $white1;
+        font-size: 1.2em;
+        a {
           text-decoration: underline;
-          color:$white1;
+          color: $white1;
         }
       }
     }
   }
-  tbody{
-    a{
+  tbody {
+    a {
       text-decoration: underline;
-      color:$indigo3!important;
+      color: $indigo3 !important;
     }
-    tr{
-      td{
-        padding:8px;
+    tr {
+      td {
+        padding: 8px;
         background-color: $white1;
       }
-      &:nth-child(odd){
-        td{
+      &:nth-child(odd) {
+        td {
           background-color: $blue-grey5;
         }
       }
@@ -214,70 +215,70 @@ table{
   }
 }
 
-.pagebanner{
-  display:block;
-  margin:8px;
-  padding:5px;
+.pagebanner {
+  display: block;
+  margin: 8px;
+  padding: 5px;
   background-color: $grey1;
   font-size: 1.2em;
-  width:50%;
+  width: 50%;
   border-radius: 5px;
 }
 
-.pagelinks{
-  display:block;
-  margin-top:10px;
-  padding:5px;
+.pagelinks {
+  display: block;
+  margin-top: 10px;
+  padding: 5px;
 }
 
-.step{
-  padding:10px;
-  margin-left:30px;
-  img{
-    margin:10px;
+.step {
+  padding: 10px;
+  margin-left: 30px;
+  img {
+    margin: 10px;
   }
 }
 
-.ingredients{
-  li{
-    margin:10px;
+.ingredients {
+  li {
+    margin: 10px;
     list-style: circle;
-    font-size:1.4em;
+    font-size: 1.4em;
   }
 }
 
-.recipe-info{
+.recipe-info {
   background-color: $grey1;
-  padding:10px;
+  padding: 10px;
 
 }
 
-.navbar{
-  ul{
-    border-radius:6px;
-    li{
-      a{
-      padding:8px;
-      background-color: $blue-grey5;
-      border-bottom: 1px solid $grey2;
+.navbar {
+  ul {
+    border-radius: 6px;
+    li {
+      a {
+        padding: 8px;
+        background-color: $blue-grey5;
+        border-bottom: 1px solid $grey2;
         display: list-item;
       }
     }
   }
 }
 
-.folder-list{
-  border-radius:4px;
-  ul{
-    li{
-      a{
+.folder-list {
+  border-radius: 4px;
+  ul {
+    li {
+      a {
         padding: 10px;
-        font-size:1.3em;
+        font-size: 1.3em;
         background-color: $blue-grey5;
         display: list-item;
-        color:$black-1;
+        color: $black-1;
         transition: all 0.2s ease-out;
-        &:hover{
+        &:hover {
           background-color: $blue-grey3;
         }
       }
@@ -285,94 +286,98 @@ table{
   }
 }
 
-.message-list-options{
-  margin:10px;
-  li{
-    a{
+.message-list-options {
+  margin: 10px;
+  li {
+    a {
       padding: 5px;
       background-color: $blue-grey2;
-      color:$white1;
+      color: $white1;
       transition: all 0.2s ease-out;
-      &:hover{
+      &:hover {
         background-color: $blue-grey3;
-        color:$white1;
+        color: $white1;
       }
     }
   }
 }
-.messageView{
-  margin-left:15%;
-  margin-right:15%;
-  width:70%;
-  padding:15px;
+
+.messageView {
+  margin-left: 15%;
+  margin-right: 15%;
+  width: 70%;
+  padding: 15px;
   background-color: $blue-grey5;
-  border-radius:4px;
-  p{
+  border-radius: 4px;
+  p {
     background: $white1;
-    padding:15px;
+    padding: 15px;
   }
 }
 
-.login-form{
-  margin-left:20%;
-  margin-right:20%;
-  width:59%;
-  input[type=text],input[type=password]{
-    width:70%;
+.login-form {
+  margin-left: 20%;
+  margin-right: 20%;
+  width: 59%;
+  input[type=text], input[type=password] {
+    width: 70%;
   }
 }
 
-.liked{
-  color: rgba(100, 211, 61, 0.93)!important;
+.liked {
+  color: rgba(100, 211, 61, 0.93) !important;
 }
 
-.disliked{
-  color: #ff2e2b!important;
+.disliked {
+  color: #ff2e2b !important;
 }
-.likes{
-  font-size:1.4em;
-  a{
-    color:$grey3;
-    margin-right:5px;
+
+.likes {
+  font-size: 1.4em;
+  a {
+    color: $grey3;
+    margin-right: 5px;
   }
 }
 
-.like{
-  &:hover{
+.like {
+  &:hover {
     color: rgba(100, 211, 61, 0.93);
   }
 }
 
-.dislike{
-  &:hover{
+.dislike {
+  &:hover {
     color: #ff2e2b;
   }
 }
-.writecomment{
-  input[type=text]{
-    width: 80%!important;
+
+.writecomment {
+  input[type=text] {
+    width: 80% !important;
   }
-  textarea{
-    width:80%!important;
-    min-height: 120px!important;
-  }
-}
-.comments{
-  .comment{
-    margin:15px;
-    padding: 10px;
-    .dateauthor{
-      font-size:0.9em;
-      color:$grey4;
-    }
-    border-bottom:1px solid $blue-grey3;
+  textarea {
+    width: 80% !important;
+    min-height: 120px !important;
   }
 }
 
-.comment-section{
-  padding:10px;
-  width:78%!important;
-  margin-left:10%;
+.comments {
+  .comment {
+    margin: 15px;
+    padding: 10px;
+    .dateauthor {
+      font-size: 0.9em;
+      color: $grey4;
+    }
+    border-bottom: 1px solid $blue-grey3;
+  }
+}
+
+.comment-section {
+  padding: 10px;
+  width: 78% !important;
+  margin-left: 10%;
   background-color: $blue-grey5;
-  margin-right:10%;
+  margin-right: 10%;
 }

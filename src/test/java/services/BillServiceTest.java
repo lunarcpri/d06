@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import utilities.AbstractTest;
 
-import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 
@@ -26,14 +25,14 @@ public class BillServiceTest extends AbstractTest {
     private BillService billService;
 
     @Test
-    public void testGetMonthlyBills(){
+    public void testGetMonthlyBills() {
 
         super.authenticate("user3");
 
         Collection<Bill> bills = billService.list();
 
         Assert.notEmpty(bills);
-        for (Bill bill: bills){
+        for (Bill bill : bills) {
 
             Assert.isTrue(bill.getSponsor().equals(billService.sponsorService.findByPrincipal()));
             Assert.isTrue(bill.getCreated_at().equals(new Date()));
@@ -43,7 +42,7 @@ public class BillServiceTest extends AbstractTest {
     }
 
     @Test
-    public void testGetMonthlyBillsFromDate(){
+    public void testGetMonthlyBillsFromDate() {
 
         super.authenticate("user3");
 
@@ -51,7 +50,7 @@ public class BillServiceTest extends AbstractTest {
 
         Collection<Bill> bills = billService.list();
 
-        for (Bill bill: bills){
+        for (Bill bill : bills) {
 
             Assert.isTrue(bill.getSponsor().equals(billService.sponsorService.findByPrincipal()));
 

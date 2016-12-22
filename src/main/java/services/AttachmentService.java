@@ -12,7 +12,7 @@ public class AttachmentService {
     @Autowired
     private AttachmentRepository attachmentRepository;
 
-    public AttachmentService(){
+    public AttachmentService() {
 
         super();
     }

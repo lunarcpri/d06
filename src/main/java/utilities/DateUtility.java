@@ -13,7 +13,7 @@ public class DateUtility {
     private Date date;
 
 
-    public static Date stringToDate(String date){
+    public static Date stringToDate(String date) {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         try {
             return dateFormat.parse(date);

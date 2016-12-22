@@ -12,7 +12,7 @@ public class SpamTags extends domain.DomainEntity {
 
     private String name;
 
-    public SpamTags(){
+    public SpamTags() {
         super();
     }
 

@@ -15,11 +15,11 @@ public class StepService {
     private StepRepository stepRepository;
 
 
-    public StepService(){
+    public StepService() {
         super();
     }
 
-    public Step save(Step s){
+    public Step save(Step s) {
         Assert.notNull(s);
 
         return stepRepository.save(s);

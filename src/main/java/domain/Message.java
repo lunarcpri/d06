@@ -12,7 +12,7 @@ import java.util.Date;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Message  extends domain.DomainEntity implements Cloneable{
+public class Message extends domain.DomainEntity implements Cloneable {
 
 
     public enum Priority {
@@ -27,8 +27,7 @@ public class Message  extends domain.DomainEntity implements Cloneable{
     private Actor sender;
     private Collection<Folder> folders;
 
-    public Message()
-    {
+    public Message() {
         super();
     }
 
@@ -85,7 +84,7 @@ public class Message  extends domain.DomainEntity implements Cloneable{
     }
 
     @Valid
-    @ManyToOne (optional = false)
+    @ManyToOne(optional = false)
     public Actor getSender() {
         return sender;
     }
@@ -94,7 +93,7 @@ public class Message  extends domain.DomainEntity implements Cloneable{
         this.sender = sender;
     }
 
-    @ManyToMany(cascade ={CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     public Collection<Folder> getFolders() {
         return folders;
     }
@@ -109,12 +108,11 @@ public class Message  extends domain.DomainEntity implements Cloneable{
     }
 
     @PreRemove
-    private void removeFolder()
-    {
-        for(Folder f : folders){
+    private void removeFolder() {
+        for (Folder f : folders) {
             f.getMessages().remove(this);
         }
-        for(Actor a: recipients){
+        for (Actor a : recipients) {
             a.getReceivedMessages().remove(this);
         }
         sender.getSendedMessages().remove(this);

@@ -20,17 +20,17 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<%-- Attributes --%> 
- 
+<%-- Attributes --%>
+
 <%@ attribute name="path" required="true" rtexprvalue="true" %>
 <%@ attribute name="code" required="true" rtexprvalue="true" %>
 
 <%-- Definition --%>
 
 <div>
-	<form:label path="${path}">
-		<spring:message code="${code}" />
-	</form:label>
-	<form:password path="${path}"/>
-	<form:errors path="${path}" cssClass="error" />
+    <form:label path="${path}">
+        <spring:message code="${code}"/>
+    </form:label>
+    <form:password path="${path}"/>
+    <form:errors path="${path}" cssClass="error"/>
 </div>

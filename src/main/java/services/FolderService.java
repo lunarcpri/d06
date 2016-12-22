@@ -3,16 +3,13 @@ package services;
 import domain.Actor;
 import domain.Folder;
 import domain.Message;
-import domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import repositories.FolderRepository;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 @Service
 @Transactional
@@ -28,13 +25,12 @@ public class FolderService {
     private MessageService messageService;
 
 
-    public FolderService(){
+    public FolderService() {
         super();
     }
 
 
-
-    public Folder findOne(int folderId){
+    public Folder findOne(int folderId) {
         Folder result;
 
         result = folderRepository.findOne(folderId);
@@ -43,7 +39,7 @@ public class FolderService {
         return result;
     }
 
-    public Collection<Folder> findAll(){
+    public Collection<Folder> findAll() {
         Collection<Folder> result;
 
         result = folderRepository.findAll();
@@ -53,22 +49,21 @@ public class FolderService {
     }
 
 
-    public void delete(Folder folder){
+    public void delete(Folder folder) {
 
         Assert.notNull(folder);
-       folderRepository.delete(folder);
+        folderRepository.delete(folder);
     }
 
 
-    private void save(Folder folder){
+    private void save(Folder folder) {
         Assert.notNull(folder);
 
         folderRepository.save(folder);
     }
 
 
-
-    private Folder create(){
+    private Folder create() {
         Folder result;
 
         result = new Folder();
@@ -77,16 +72,7 @@ public class FolderService {
     }
 
 
-    public Collection<Folder> findAllCustomFolderByPrincipal(){
-        Collection<Folder> result;
-        Actor user = userService.findByPrincipal();
-        result = folderRepository.findCustomFoldersByActorId(user.getId());
-        Assert.notNull(result);
-
-        return  result;
-    }
-
-    public Folder createCustomFolder(Folder folder){
+    public Folder createCustomFolder(Folder folder) {
 
         Actor user = userService.findByPrincipal();
         folder.setActor(user);
@@ -96,14 +82,7 @@ public class FolderService {
         return folder;
     }
 
-    public void editCustomFolder(int folderId, String name){
-        Folder folder = findOne(folderId);
-        folder.setName(name);
-
-        save(folder);
-    }
-
-    public void createDefaultFolders(Actor u){
+    public void createDefaultFolders(Actor u) {
         Folder inbox = create();
         inbox.setName("Inbox");
         inbox.setFolderType(Folder.FolderType.INBOX);
@@ -127,17 +106,17 @@ public class FolderService {
 
     }
 
-    public Folder findFolderByMessageAndActor(int actorid, int messageid){
+    public Folder findFolderByMessageAndActor(int actorid, int messageid) {
         Folder result;
 
 
-        result = folderRepository.findFolderByMessageAndActor(actorid,messageid);
+        result = folderRepository.findFolderByMessageAndActor(actorid, messageid);
         Assert.notNull(result);
 
         return result;
     }
 
-    public Folder findInbox(int id){
+    public Folder findInbox(int id) {
         Folder result;
 
         result = folderRepository.findInboxFolderByActorId(id);
@@ -146,7 +125,7 @@ public class FolderService {
         return result;
     }
 
-    public Folder findSpambox(int id){
+    public Folder findSpambox(int id) {
         Folder result;
 
         result = folderRepository.findSpamboxFolderByActorId(id);
@@ -155,7 +134,7 @@ public class FolderService {
         return result;
     }
 
-    public Folder findOutbox(int id){
+    public Folder findOutbox(int id) {
         Folder result;
 
         result = folderRepository.findOutboxFolderByActorId(id);
@@ -164,7 +143,7 @@ public class FolderService {
         return result;
     }
 
-    public Folder findTrashbox(int id){
+    public Folder findTrashbox(int id) {
         Folder result;
         System.out.print(id);
         result = folderRepository.findTrashboxFolderByActorId(id);
@@ -173,7 +152,7 @@ public class FolderService {
         return result;
     }
 
-    public void addMessage(int id, Message message){
+    public void addMessage(int id, Message message) {
         Folder folder = folderRepository.findOne(id);
         Assert.notNull(folder);
         folder.getMessages().add(message);
@@ -183,14 +162,14 @@ public class FolderService {
     }
 
 
-    public void addSenderMessage(int id, Message message){
+    public void addSenderMessage(int id, Message message) {
         Folder folder = folderRepository.findOne(id);
         Message copyMessage = message;
         Assert.notNull(folder);
         try {
             copyMessage = (Message) message.clone();
             copyMessage.setId(0);
-            copyMessage= messageService.save(copyMessage);
+            copyMessage = messageService.save(copyMessage);
         } catch (CloneNotSupportedException e) {
             Assert.notNull(null);
         }
@@ -200,19 +179,18 @@ public class FolderService {
         save(folder);
     }
 
-    public void edit(Folder folder){
+    public void edit(Folder folder) {
         Assert.notNull(folder);
         folderRepository.save(folder);
     }
 
-    public void removeMessage(int id,Message message){
+    public void removeMessage(int id, Message message) {
         Folder folder = folderRepository.findOne(id);
         folder.getMessages().remove(message);
         Collection<Message> newMessages = folder.getMessages();
         folder.setMessages(newMessages);
         save(folder);
     }
-
 
 
 }

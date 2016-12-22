@@ -23,45 +23,44 @@ public class IngredientService {
     @Autowired
     private UserAccountService userAccountService;
 
-    public IngredientService(){
+    public IngredientService() {
         super();
     }
 
 
     // Listing
-    public Collection<Ingredient> findAll(){
+    public Collection<Ingredient> findAll() {
         Collection<Ingredient> result;
 
         result = ingredientRepository.findAll();
         Assert.notNull(result);
 
-        return  result;
+        return result;
     }
 
-    public Ingredient findOne(int id){
+    public Ingredient findOne(int id) {
         Ingredient result;
 
         result = ingredientRepository.findOne(id);
         Assert.notNull(result);
 
-        return  result;
+        return result;
     }
 
     // Create
 
-    public Ingredient create(){
+    public Ingredient create() {
         return new Ingredient();
     }
 
-    public void save(Ingredient ingredient){
+    public void save(Ingredient ingredient) {
         Assert.notNull(ingredient);
 
         ingredientRepository.save(ingredient);
     }
 
 
-
-    public void newIngredient(Ingredient ingredient){
+    public void newIngredient(Ingredient ingredient) {
         userAccountService.assertRole("NUTRITIONIST");
         Assert.notNull(ingredient);
 
@@ -69,11 +68,11 @@ public class IngredientService {
     }
 
 
-     public void delete(Ingredient ingredient){
+    public void delete(Ingredient ingredient) {
 
-         Assert.isTrue(ingredient.getQuantities().size()==0);
+        Assert.isTrue(ingredient.getQuantities().size() == 0);
 
-         ingredientRepository.delete(ingredient);
-     }
+        ingredientRepository.delete(ingredient);
+    }
 
 }

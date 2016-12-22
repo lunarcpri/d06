@@ -3,17 +3,17 @@ package controllers.Folder;
 import controllers.AbstractController;
 import domain.Actor;
 import domain.Folder;
-import domain.Recipe;
-import javafx.geometry.Pos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import services.ActorService;
 import services.FolderService;
-import services.RecipeService;
 
 import javax.validation.Valid;
 import java.util.Collection;
@@ -36,36 +36,36 @@ public class FolderController extends AbstractController {
 
         foldersCollection = principal.getFolders();
         result = new ModelAndView("folder/list");
-        result.addObject("folderList",foldersCollection);
-        result.addObject("requestURI","folder/list.do");
+        result.addObject("folderList", foldersCollection);
+        result.addObject("requestURI", "folder/list.do");
         return result;
     }
 
 
     @RequestMapping(value = "/edit")
     public ModelAndView edit(@RequestParam Folder folderId) {
-        return createEditModelAndView(folderId,null);
+        return createEditModelAndView(folderId, null);
     }
 
     @RequestMapping(value = "/new")
     public ModelAndView newFolder() {
-        return createNewModelAndView(new Folder(),null);
+        return createNewModelAndView(new Folder(), null);
     }
 
-    @RequestMapping(value = "/new", method = RequestMethod.POST,params = "send")
+    @RequestMapping(value = "/new", method = RequestMethod.POST, params = "send")
     public ModelAndView newFolderPost(@Valid @ModelAttribute("folder") Folder folder, BindingResult bindingResult) {
         Assert.notNull(folder);
         Actor principal = actorService.findActorByPrincipal();
         folder.setActor(principal);
         folder.setFolderType(Folder.FolderType.CUSTOM);
-        if (bindingResult.hasErrors()){
-            return createNewModelAndView(folder,"wrong");
+        if (bindingResult.hasErrors()) {
+            return createNewModelAndView(folder, "wrong");
         }
-        try{
+        try {
             folderService.edit(folder);
             return new ModelAndView("redirect:list.do");
-        }catch (Throwable throwable){
-            return createNewModelAndView(folder,"wrong");
+        } catch (Throwable throwable) {
+            return createNewModelAndView(folder, "wrong");
         }
     }
 
@@ -74,11 +74,11 @@ public class FolderController extends AbstractController {
         Assert.notNull(folderId);
         Actor principal = actorService.findActorByPrincipal();
         Assert.isTrue(principal.getFolders().contains(folderId));
-        try{
+        try {
             folderId.setActor(null);
             folderService.delete(folderId);
             return new ModelAndView("redirect:list.do");
-        }catch (Throwable throwable){
+        } catch (Throwable throwable) {
             System.out.print(throwable.toString());
             return new ModelAndView("redirect:list.do");
         }
@@ -87,38 +87,38 @@ public class FolderController extends AbstractController {
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public ModelAndView edit(@Valid @ModelAttribute("folder") Folder folder, BindingResult bindingResult) {
         Assert.notNull(folder);
-        if (bindingResult.hasErrors()){
-            return createEditModelAndView(folder,"wrong");
+        if (bindingResult.hasErrors()) {
+            return createEditModelAndView(folder, "wrong");
         }
-        try{
+        try {
             folderService.edit(folder);
             return new ModelAndView("redirect:list.do");
-        }catch (Throwable oops){
+        } catch (Throwable oops) {
             System.out.println(oops.getMessage());
-            return createEditModelAndView(folder,"wrong");
+            return createEditModelAndView(folder, "wrong");
         }
     }
 
-    protected ModelAndView createEditModelAndView(Folder folder, String message){
+    protected ModelAndView createEditModelAndView(Folder folder, String message) {
         ModelAndView result;
         Assert.notNull(folder);
 
         result = new ModelAndView("folder/edit");
-        result.addObject("folder",folder);
-        result.addObject("message",message);
+        result.addObject("folder", folder);
+        result.addObject("message", message);
 
-        return  result;
+        return result;
     }
 
 
-    protected ModelAndView createNewModelAndView(Folder folder, String message){
+    protected ModelAndView createNewModelAndView(Folder folder, String message) {
         ModelAndView result;
         Assert.notNull(folder);
 
         result = new ModelAndView("folder/new");
-        result.addObject("folder",folder);
-        result.addObject("message",message);
+        result.addObject("folder", folder);
+        result.addObject("message", message);
 
-        return  result;
+        return result;
     }
 }

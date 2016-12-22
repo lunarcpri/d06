@@ -10,44 +10,41 @@
 
 package controllers;
 
-import java.text.SimpleDateFormat;
-import java.util.Collection;
-import java.util.Date;
-
 import domain.Recipe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import services.RecipeService;
+
+import java.util.Collection;
 
 @Controller
 @RequestMapping("/welcome")
 public class WelcomeController extends AbstractController {
 
-	// Constructors -----------------------------------------------------------
+    // Constructors -----------------------------------------------------------
 
-	public WelcomeController() {
-		super();
-	}
+    public WelcomeController() {
+        super();
+    }
 
-	@Autowired
-	RecipeService recipeService;
+    @Autowired
+    RecipeService recipeService;
 
-	// Index ------------------------------------------------------------------		
+    // Index ------------------------------------------------------------------
 
-	@RequestMapping(value = "/index")
-	public ModelAndView index() {
-		ModelAndView result;
-		Collection<Recipe> recipeCollection;
+    @RequestMapping(value = "/index")
+    public ModelAndView index() {
+        ModelAndView result;
+        Collection<Recipe> recipeCollection;
 
-		result = new ModelAndView("welcome/index");
-		recipeCollection = recipeService.findAll();
-		result.addObject("recipes", recipeCollection);
+        result = new ModelAndView("welcome/index");
+        recipeCollection = recipeService.findAll();
+        result.addObject("recipes", recipeCollection);
 
-		return result;
-	}
+        return result;
+    }
 
 
 }

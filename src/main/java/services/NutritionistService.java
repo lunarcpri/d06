@@ -23,11 +23,11 @@ public class NutritionistService {
     @Autowired
     private FolderService folderService;
 
-    public NutritionistService(){
+    public NutritionistService() {
         super();
     }
 
-    public Nutritionist findOne(int id){
+    public Nutritionist findOne(int id) {
         Nutritionist result;
 
         result = nutritionistRepository.findOne(id);
@@ -46,12 +46,13 @@ public class NutritionistService {
         return result;
     }
 
-    public Nutritionist save(Nutritionist n){
+    public Nutritionist save(Nutritionist n) {
         Assert.notNull(n);
 
         return nutritionistRepository.save(n);
     }
-    public void create(Nutritionist n){
+
+    public void create(Nutritionist n) {
         Assert.notNull(n);
         List<Authority> authorities = new ArrayList<Authority>();
         Authority a = new Authority();

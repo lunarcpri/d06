@@ -20,10 +20,7 @@ public class Campaign extends DomainEntity {
     private Integer max_time_banners;
 
 
-
-
-    public Campaign()
-    {
+    public Campaign() {
         super();
     }
 

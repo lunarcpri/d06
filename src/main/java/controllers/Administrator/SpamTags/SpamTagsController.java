@@ -20,8 +20,8 @@ public class SpamTagsController {
     @Autowired
     private SpamTagsService spamTagsService;
 
-    @RequestMapping(value = "/list", method= RequestMethod.GET)
-    public ModelAndView list(){
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public ModelAndView list() {
         ModelAndView result;
         Collection<SpamTags> spamTags;
 
@@ -34,29 +34,27 @@ public class SpamTagsController {
     }
 
     @RequestMapping(value = "/new", method = RequestMethod.GET)
-    public ModelAndView newSpamTag(){
+    public ModelAndView newSpamTag() {
 
         ModelAndView result;
         result = new ModelAndView("administrator/spamTags/createTag");
-        result.addObject("spamTags",new SpamTags());
+        result.addObject("spamTags", new SpamTags());
 
         return result;
 
     }
 
-    @RequestMapping(value="/new", method=RequestMethod.POST, params = "save")
-    public ModelAndView save(@Valid SpamTags spamTags, BindingResult bindingResult){
+    @RequestMapping(value = "/new", method = RequestMethod.POST, params = "save")
+    public ModelAndView save(@Valid SpamTags spamTags, BindingResult bindingResult) {
         ModelAndView result;
 
-        if(bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             result = createEditSpamTagView(spamTags, "wrong");
-        }
-        else{
-            try{
+        } else {
+            try {
                 spamTagsService.save(spamTags);
                 result = new ModelAndView("redirect:list.do");
-            }
-            catch (Throwable oops){
+            } catch (Throwable oops) {
                 result = createEditSpamTagView(spamTags, "spamTags.commit.error");
                 System.out.println(oops.getMessage());
             }

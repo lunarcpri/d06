@@ -1,5 +1,3 @@
-
-
 package domain;
 
 import org.hibernate.validator.constraints.Email;
@@ -16,113 +14,111 @@ import java.util.List;
 @Access(AccessType.PROPERTY)
 public abstract class Actor extends DomainEntity {
 
-	// Constructors -----------------------------------------------------------
+    // Constructors -----------------------------------------------------------
 
-	public Actor() {
-		super();
-	}
+    public Actor() {
+        super();
+    }
 
-	// Attributes -------------------------------------------------------------
+    // Attributes -------------------------------------------------------------
 
-	private String name;
-	private String email;
-	private String surnames;
-	private String phone;
-	private String address;
-	private Collection<Message> SendedMessages;
-	private Collection<Message> ReceivedMessages;
-	private List<SocialIdentity> socialIdentities;
+    private String name;
+    private String email;
+    private String surnames;
+    private String phone;
+    private String address;
+    private Collection<Message> SendedMessages;
+    private Collection<Message> ReceivedMessages;
+    private List<SocialIdentity> socialIdentities;
     private UserAccount userAccount;
     private Collection<Star> starses;
-	private Collection<Folder> folders;
-	private Collection<MasterClass> attendingMasterClasses;
+    private Collection<Folder> folders;
+    private Collection<MasterClass> attendingMasterClasses;
 
 
-	@NotBlank
-	public String getName() {
-		return name;
-	}
+    @NotBlank
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	@Email
-	@NotBlank
-	public String getEmail() {
-		return email;
-	}
+    @Email
+    @NotBlank
+    public String getEmail() {
+        return email;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	@NotBlank
-	public String getSurnames() {
-		return surnames;
-	}
+    @NotBlank
+    public String getSurnames() {
+        return surnames;
+    }
 
-	public void setSurnames(String surnames) {
-		this.surnames = surnames;
-	}
+    public void setSurnames(String surnames) {
+        this.surnames = surnames;
+    }
 
-	@Pattern(regexp = "^((\\+[0-9]{1,3})?\\s*(\\([0-9]{3}\\))?\\s*([a-zA-Z0-9\\- ]{4,}))?$")
-	public String getPhone() {
-		return phone;
-	}
+    @Pattern(regexp = "^((\\+[0-9]{1,3})?\\s*(\\([0-9]{3}\\))?\\s*([a-zA-Z0-9\\- ]{4,}))?$")
+    public String getPhone() {
+        return phone;
+    }
 
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
 
-	@Valid
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+
+    @Valid
     @OneToMany(mappedBy = "sender", cascade = CascadeType.REMOVE, orphanRemoval = true)
-	public Collection<Message> getSendedMessages() {
-		return SendedMessages;
-	}
+    public Collection<Message> getSendedMessages() {
+        return SendedMessages;
+    }
 
-	public void setSendedMessages(Collection<Message> sendedMessages) {
-		SendedMessages = sendedMessages;
-	}
+    public void setSendedMessages(Collection<Message> sendedMessages) {
+        SendedMessages = sendedMessages;
+    }
 
-	@Valid
+    @Valid
     @ManyToMany(mappedBy = "recipients", cascade = CascadeType.REMOVE)
-	public Collection<Message> getReceivedMessages() {
-		return ReceivedMessages;
-	}
+    public Collection<Message> getReceivedMessages() {
+        return ReceivedMessages;
+    }
 
-	public void setReceivedMessages(Collection<Message> receivedMessages) {
-		ReceivedMessages = receivedMessages;
-	}
+    public void setReceivedMessages(Collection<Message> receivedMessages) {
+        ReceivedMessages = receivedMessages;
+    }
 
-	@Valid
-	@OneToMany(mappedBy = "actor", cascade = CascadeType.ALL)
-	public List<SocialIdentity> getSocialIdentities() {
-		return socialIdentities;
-	}
+    @Valid
+    @OneToMany(mappedBy = "actor", cascade = CascadeType.ALL)
+    public List<SocialIdentity> getSocialIdentities() {
+        return socialIdentities;
+    }
 
-	public void setSocialIdentities(List<SocialIdentity> socialIdentities) {
-		this.socialIdentities = socialIdentities;
-	}
+    public void setSocialIdentities(List<SocialIdentity> socialIdentities) {
+        this.socialIdentities = socialIdentities;
+    }
 
-	@OneToOne(cascade = CascadeType.ALL, optional = true)
-	public UserAccount getUserAccount()
-    {
+    @OneToOne(cascade = CascadeType.ALL, optional = true)
+    public UserAccount getUserAccount() {
         return userAccount;
     }
 
-    public void setUserAccount(UserAccount userAccount)
-    {
+    public void setUserAccount(UserAccount userAccount) {
         this.userAccount = userAccount;
     }
 
@@ -137,7 +133,7 @@ public abstract class Actor extends DomainEntity {
         this.starses = starses;
     }
 
-    @OneToMany(mappedBy = "actor",cascade = CascadeType.REMOVE,orphanRemoval = true)
+    @OneToMany(mappedBy = "actor", cascade = CascadeType.REMOVE, orphanRemoval = true)
     public Collection<Folder> getFolders() {
         return folders;
     }
@@ -146,12 +142,12 @@ public abstract class Actor extends DomainEntity {
         this.folders = folders;
     }
 
-	@ManyToMany
-	public Collection<MasterClass> getAttendingMasterClasses() {
-		return attendingMasterClasses;
-	}
+    @ManyToMany
+    public Collection<MasterClass> getAttendingMasterClasses() {
+        return attendingMasterClasses;
+    }
 
-	public void setAttendingMasterClasses(Collection<MasterClass> masterClasses) {
-		this.attendingMasterClasses = masterClasses;
-	}
+    public void setAttendingMasterClasses(Collection<MasterClass> masterClasses) {
+        this.attendingMasterClasses = masterClasses;
+    }
 }

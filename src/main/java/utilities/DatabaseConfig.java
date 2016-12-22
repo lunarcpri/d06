@@ -2,6 +2,6 @@ package utilities;
 
 public interface DatabaseConfig {
 
-	String PersistenceUnit = "Acme-Pad-Thai";
-	
+    String PersistenceUnit = "Acme-Pad-Thai";
+
 }

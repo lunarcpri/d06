@@ -1,6 +1,5 @@
 package services;
 
-import domain.Bill;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +21,14 @@ public class ActorServiceTest extends AbstractTest {
     ActorService actorService;
 
     @Test
-    public void testActorService(){
+    public void testActorService() {
 
         super.authenticate("user3");
         System.out.print(actorService.findActorByPrincipal());
     }
+
     @Test
-    public void testActorService2(){
+    public void testActorService2() {
 
         String t = "12";
         String p = "domain.Nutritionist";

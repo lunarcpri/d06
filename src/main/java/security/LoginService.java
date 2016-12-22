@@ -24,73 +24,73 @@ import org.springframework.util.Assert;
 @Service
 @Transactional
 public class LoginService implements UserDetailsService {
-	
-	// Managed repository -----------------------------------------------------
 
-	@Autowired
+    // Managed repository -----------------------------------------------------
+
+    @Autowired
     UserAccountRepository userRepository;
-	
-	// Business methods -------------------------------------------------------
 
-	public UserDetails loadUserByUsername(String username)
-			throws UsernameNotFoundException {
-		Assert.notNull(username);
+    // Business methods -------------------------------------------------------
 
-		UserDetails result;
+    public UserDetails loadUserByUsername(String username)
+            throws UsernameNotFoundException {
+        Assert.notNull(username);
 
-		result = userRepository.findByUsername(username);
-		Assert.notNull(result);		
-		// WARNING: The following sentences prevent lazy initialisation problems!
-		Assert.notNull(result.getAuthorities());
-		result.getAuthorities().size();
+        UserDetails result;
 
-		return result;
-	}
+        result = userRepository.findByUsername(username);
+        Assert.notNull(result);
+        // WARNING: The following sentences prevent lazy initialisation problems!
+        Assert.notNull(result.getAuthorities());
+        result.getAuthorities().size();
 
-	public static UserAccount getPrincipal() {
-		UserAccount result;
-		SecurityContext context;
-		Authentication authentication;
-		Object principal;
+        return result;
+    }
 
-		// If the asserts in this method fail, then you're
-		// likely to have your Tomcat's working directory
-		// corrupt. Please, clear your browser's cache, stop
-		// Tomcat, update your Maven's project configuration,
-		// clean your project, clean Tomcat's working directory,
-		// republish your project, and start it over.
+    public static UserAccount getPrincipal() {
+        UserAccount result;
+        SecurityContext context;
+        Authentication authentication;
+        Object principal;
 
-		context = SecurityContextHolder.getContext();
-		Assert.notNull(context);
-		authentication = context.getAuthentication();
-		Assert.notNull(authentication);
-		principal = authentication.getPrincipal();
-		Assert.isTrue(principal instanceof UserAccount);
-		result = (UserAccount) principal;
-		Assert.notNull(result);
-		Assert.isTrue(result.getId() != 0);
+        // If the asserts in this method fail, then you're
+        // likely to have your Tomcat's working directory
+        // corrupt. Please, clear your browser's cache, stop
+        // Tomcat, update your Maven's project configuration,
+        // clean your project, clean Tomcat's working directory,
+        // republish your project, and start it over.
 
-		return result;
-	}
+        context = SecurityContextHolder.getContext();
+        Assert.notNull(context);
+        authentication = context.getAuthentication();
+        Assert.notNull(authentication);
+        principal = authentication.getPrincipal();
+        Assert.isTrue(principal instanceof UserAccount);
+        result = (UserAccount) principal;
+        Assert.notNull(result);
+        Assert.isTrue(result.getId() != 0);
 
-	public static  Boolean isAuthorized() {
-		UserAccount result;
-		SecurityContext context;
-		Authentication authentication;
-		Object principal;
+        return result;
+    }
 
-		// If the asserts in this method fail, then you're
-		// likely to have your Tomcat's working directory
-		// corrupt. Please, clear your browser's cache, stop
-		// Tomcat, update your Maven's project configuration,
-		// clean your project, clean Tomcat's working directory,
-		// republish your project, and start it over.
+    public static Boolean isAuthorized() {
+        UserAccount result;
+        SecurityContext context;
+        Authentication authentication;
+        Object principal;
 
-		context = SecurityContextHolder.getContext();
-		Assert.notNull(context);
-		authentication = context.getAuthentication();
-		principal = authentication.getPrincipal();
-		return (principal!="anonymousUser")   ;
-	}
+        // If the asserts in this method fail, then you're
+        // likely to have your Tomcat's working directory
+        // corrupt. Please, clear your browser's cache, stop
+        // Tomcat, update your Maven's project configuration,
+        // clean your project, clean Tomcat's working directory,
+        // republish your project, and start it over.
+
+        context = SecurityContextHolder.getContext();
+        Assert.notNull(context);
+        authentication = context.getAuthentication();
+        principal = authentication.getPrincipal();
+        return (principal != "anonymousUser");
+    }
 
 }

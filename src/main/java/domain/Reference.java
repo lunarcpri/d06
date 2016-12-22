@@ -9,19 +9,16 @@ import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Reference extends domain.DomainEntity
-{
+public class Reference extends domain.DomainEntity {
 
     private String name;
     private String homepage;
     private Curriculum curriculum;
 
-    public Reference()
-    {
+    public Reference() {
         super();
     }
 

@@ -20,11 +20,11 @@ public class SocialIdentityService {
     private UserService userService;
 
 
-    public SocialIdentityService(){
+    public SocialIdentityService() {
         super();
     }
 
-    public SocialIdentity create(SocialIdentity socialIdentity){
+    public SocialIdentity create(SocialIdentity socialIdentity) {
         SocialIdentity result;
 
         result = new SocialIdentity();
@@ -32,7 +32,7 @@ public class SocialIdentityService {
         return result;
     }
 
-    public SocialIdentity findOne(int id){
+    public SocialIdentity findOne(int id) {
         SocialIdentity result;
 
         result = socialIdentityRepository.findOne(id);
@@ -40,7 +40,7 @@ public class SocialIdentityService {
         return result;
     }
 
-    public Collection<SocialIdentity> findAll(){
+    public Collection<SocialIdentity> findAll() {
         Collection<SocialIdentity> result;
 
         Assert.notNull(socialIdentityRepository);
@@ -51,12 +51,13 @@ public class SocialIdentityService {
     }
 
 
-    public void delete(SocialIdentity socialIdentity){
+    public void delete(SocialIdentity socialIdentity) {
         Assert.notNull(socialIdentity);
 
         socialIdentityRepository.delete(socialIdentity);
     }
-    public void save(SocialIdentity socialIdentity){
+
+    public void save(SocialIdentity socialIdentity) {
         Assert.notNull(socialIdentity);
 
         socialIdentityRepository.save(socialIdentity);

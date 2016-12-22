@@ -5,14 +5,11 @@ import org.hibernate.validator.constraints.SafeHtml;
 
 import javax.persistence.*;
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import java.util.Collection;
 import java.util.List;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Curriculum extends DomainEntity
-{
+public class Curriculum extends DomainEntity {
 
     private String educational;
     private String experience;
@@ -20,8 +17,7 @@ public class Curriculum extends DomainEntity
     private List<Reference> references;
     private Nutritionist nutritionist;
 
-    public Curriculum()
-    {
+    public Curriculum() {
         super();
     }
 

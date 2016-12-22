@@ -20,8 +20,7 @@ public class Comment extends domain.DomainEntity {
     private Date created_at;
 
 
-    public Comment()
-    {
+    public Comment() {
         super();
     }
 
