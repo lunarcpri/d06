@@ -20,28 +20,28 @@
         <form:hidden path="version"/>
 
         <form:label path="name">
-            <spring:message code="name"/>
+            <spring:message code="ingredient.name"/>
         </form:label>
         <form:input path="name"/>
         <form:errors cssClass="error" path="name"/>
 
         <form:label path="description">
-            <spring:message code="description"/>
+            <spring:message code="ingredient.description"/>
         </form:label>
         <form:input path="description"/>
         <form:errors cssClass="error" path="description"/>
 
         <form:label path="properties">
-            <spring:message code="properties"/>
+            <spring:message code="ingredient.properties"/>
         </form:label>
         <form:select path="properties" multiple="multiple">
             <form:options items="${properties}" itemLabel="name" itemValue="id"/>
         </form:select>
         <form:errors cssClass="error" path="properties"/>
         <div class="block">
-            <input type="submit" value="<spring:message code="send"/>" />
+            <input type="submit" value="<spring:message code="ingredient.edit"/>" />
 
-        <a class="button" href="${contextPath}/nutritionist/ingredient/list.do"><spring:message code="cancel"/> </a>
+        <a class="button" href="${contextPath}/nutritionist/ingredient/list.do"><spring:message code="ingredient.cancel"/> </a>
         </div>
     </form:form>
 </article>

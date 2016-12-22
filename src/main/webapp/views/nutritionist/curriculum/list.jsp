@@ -37,7 +37,7 @@
     </jstl:forEach>
     </jstl:if>
     <div class="block">
-    <a class="button" href="${contextPath}/nutritionist/curriculum/edit.do"><spring:message code="edit" /></a>
-    <a class="button" href="${contextPath}/nutritionist/curriculum/delete.do"><spring:message code="delete" /></a>
+    <a class="button" href="${contextPath}/nutritionist/curriculum/edit.do"><spring:message code="curriculum.edit" /></a>
+    <a class="button" href="${contextPath}/nutritionist/curriculum/delete.do"><spring:message code="curriculum.delete" /></a>
     </div>
 </article>

@@ -10,12 +10,12 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <section class="main">
-    <h1>Edit Folder ${folder.name}</h1>
+    <h1><spring:message code="folder.editheader"/> ${folder.name}</h1>
 
     <div class="form-group-1">
         <form:form action="folder/edit.do" modelAttribute="folder" method="POST">
             <form:label path="name">
-                <spring:message code="name" />:
+                <spring:message code="folder.name" />:
             </form:label>
             <form:input path="name"/>
             <form:hidden path="version" />
@@ -24,8 +24,8 @@
             <form:hidden path="actor"/>
             <form:hidden path="folderType"/>
             <div class="block">
-            <input type="submit" name="send" value="<spring:message code="send" /> " />
-                <a class="button" href="${contextPath}/folder/list.do"><spring:message code="cancel"/> </a>
+            <input type="submit" name="send" value="<spring:message code="folder.edit" /> " />
+                <a class="button" href="${contextPath}/folder/list.do"><spring:message code="folder.cancel"/> </a>
             </div>
         </form:form>
     </div>

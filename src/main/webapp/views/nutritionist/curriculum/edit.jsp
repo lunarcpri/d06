@@ -62,9 +62,9 @@
         <a href="${actionURI}?nReferences=${nReferences-1}" class="button"><spring:message code="removereference"/></a>
         </div>
         <div class="block">
-            <input type="submit" value="<spring:message code="send"/>" />
+            <input type="submit" value="<spring:message code="curriculum.edit"/>" />
 
-        <a class="button" href="${contextPath}/nutritionist/curriculum/list.do"><spring:message code="cancel"/> </a>
+        <a class="button" href="${contextPath}/nutritionist/curriculum/list.do"><spring:message code="curriculum.cancel"/> </a>
         </div>
     </form:form>
 </article>

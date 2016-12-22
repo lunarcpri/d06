@@ -13,23 +13,23 @@
 
 <%@ include file="/views/nutritionist/layout.jsp" %>
 <article class="col s7" style="margin-left:2%">
-    <h1><spring:message code="listofProperties"/> </h1>
+    <h1><spring:message code="properties.listofProperties"/> </h1>
     <ul class="horizontal-list message-list-options">
         <li><a href="${contextPath}/nutritionist/property/new.do"><i class="fa fa-plus"></i>
-        <spring:message code="newproperty"/> </a></li>
+        <spring:message code="properties.newproperty"/> </a></li>
     </ul>
     <display:table pagesize="5" class="displaytag" keepStatus="true"
                    name="propertys" requestURI="${requestURI}" id="row">
 
-        <spring:message code="name" var="nameHeader" />
+        <spring:message code="properties.name" var="nameHeader" />
         <display:column property="name" title="${nameHeader}" sortable="true" />
         
-        <spring:message code="edit" var="editHeader" />
+        <spring:message code="properties.edit" var="editHeader" />
         <display:column title="${editHeader}">
             <a href="${contextPath}/nutritionist/property/edit.do?propertyId=${row.id}">${editHeader}</a>
         </display:column>
 
-        <spring:message code="delete" var="deleteHeader" />
+        <spring:message code="properties.delete" var="deleteHeader" />
         <display:column title="${deleteHeader}">
             <jstl:if test="${fn:length(row.ingredients)==0}">
             <a href="${contextPath}/nutritionist/property/delete.do?propertyId=${row.id}">${deleteHeader}</a>

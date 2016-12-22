@@ -23,12 +23,12 @@
     </form:select>
     <form:errors cssClass="error" path="recipients"  />
     <form:label path="priority">
-        <spring:message code="priority" />:
+        <spring:message code="message.priority" />:
     </form:label>
     <form:select path="priority">
-        <form:option value="LOW" title="value"><spring:message code="low"/> </form:option>
-        <form:option value="NEUTRAL" title="value">Neutral</form:option>
-        <form:option value="HIGH" title="value"><spring:message code="high"/></form:option>
+        <form:option value="LOW" title="value"><spring:message code="message.low"/> </form:option>
+        <form:option value="NEUTRAL" title="value"><spring:message code="message.neutral"/></form:option>
+        <form:option value="HIGH" title="value"><spring:message code="message.high"/></form:option>
     </form:select>
     <form:errors cssClass="error" path="priority"  />
         <form:label path="subject">
@@ -41,7 +41,7 @@
     </form:label>
     <form:textarea class="s8" path="body" />
     <form:errors cssClass="error" path="body" />
-    <input type="submit" name="send" value="<spring:message code="send" /> " />
+    <input type="submit" name="send" value="<spring:message code="message.send" /> " />
 </form:form>
     </div>
 </section>

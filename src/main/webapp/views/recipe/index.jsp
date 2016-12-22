@@ -9,9 +9,9 @@
 
 <section class="main">
 
-    <h1>Recipe ${recipe.title}</h1>
+    <h1><spring:message code="recipe"/> ${recipe.title}</h1>
     <article class="col s7 ingredients">
-        <h2>Ingredients</h2>
+        <h2><spring:message code="ingredients"/> </h2>
         <ul>
         <jstl:forEach var="quantity" items="${recipe.quantities}">
             <li>${quantity.quantity} ${quantity.unit} <spring:message code="of"/> ${quantity.ingredient.name} </li>
@@ -19,7 +19,7 @@
         </ul>
     </article>
     <article class="col s4">
-        <h2> Recipe info</h2>
+        <h2><spring:message code="recipeinfo"/> </h2>
         <p>
 <c:if test="${not empty recipe.picture}">
             <img src="${recipe.picture}" width="100" height="100"/>

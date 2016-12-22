@@ -12,24 +12,24 @@
 <section class="main">
     <article class="col s12 message-list">
 
-    <h1>Folder list</h1>
+    <h1><spring:message code="folder.listheader"/> </h1>
         <ul class="horizontal-list message-list-options">
-            <li><a href="${contextPath}/folder/new.do"><i class="fa fa-plus"></i> New Folder</a></li>
+            <li><a href="${contextPath}/folder/new.do"><i class="fa fa-plus"></i><spring:message code="folder.newbutton"/> </a></li>
         </ul>
         <display:table pagesize="5" class="displaytag" keepStatus="true"
                        name="folderList" requestURI="${requestURI}" id="row">
 
 
-            <spring:message code="name" var="nameHeader" />
+            <spring:message code="folder.name" var="nameHeader" />
             <display:column property="name" title="${nameHeader}" sortable="true" />
 
 
-            <spring:message code="edit" var="editHeader" />
+            <spring:message code="folder.edit" var="editHeader" />
                 <display:column  title="${editHeader}">
                         <a href="${contextPath}/folder/edit.do?folderId=${row.id}">
                                 ${editHeader}
                 </display:column>
-            <spring:message code="delete" var="deleteHeader"/>
+            <spring:message code="folder.delete" var="deleteHeader"/>
             <display:column  title="${deleteHeader}">
                    <jstl:if test="${row.folderType=='CUSTOM'}">
                 <a href="${contextPath}/folder/delete.do?folderId=${row.id}">

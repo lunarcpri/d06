@@ -19,38 +19,38 @@
     </article>
     <article class="col s9 message-list">
         <ul class="horizontal-list message-list-options">
-            <li><a href="${contextPath}/message/new.do"><i class="fa fa-plus"></i> New Message</a></li>
-            <li><a href="${contextPath}/folder/list.do"><i class="fa fa-plus"></i> Manage Folders</a></li>
+            <li><a href="${contextPath}/message/new.do"><i class="fa fa-plus"></i><spring:message code="message.newbutton"/></a></li>
+            <li><a href="${contextPath}/folder/list.do"><i class="fa fa-plus"></i><spring:message code="message.managefolders"/></a></li>
         </ul>
     <h1>${folder.name}</h1>
         <display:table pagesize="5" class="displaytag" keepStatus="true"
                        name="messageList" requestURI="${requestURI}" id="row">
 
 
-            <spring:message code="subject" var="subjectHeader" />
+            <spring:message code="message.subject" var="subjectHeader" />
             <display:column property="subject" title="${subjectHeader}" sortable="true" />
 
-            <spring:message code="sender" var="senderHeader" />
+            <spring:message code="message.sender" var="senderHeader" />
             <display:column title="${senderHeader}">
                 <a href="http://localhost:8080/user/${row.sender.id}.do">${row.sender.userAccount.username}</a>
             </display:column>
-            <spring:message code="recipients" var="recipientsHeader" />
+            <spring:message code="message.recipients" var="recipientsHeader" />
             <display:column title="${recipientsHeader}">
                 <jstl:forEach items="${row.recipients}" var="recipient">
                   ${recipient.userAccount.username},
                 </jstl:forEach>
             </display:column>
-            <spring:message code="sendedat" var="sendedatHeader" />
+            <spring:message code="message.sendedat" var="sendedatHeader" />
             <display:column property="sended_at" title="${sendedatHeader}" sortable="true" format="{0,date,dd/MM/yyyy HH:mm}"/>
-            <spring:message code="browse" var="browseHeader" />
+            <spring:message code="message.browse" var="browseHeader" />
             <display:column title="${browseHeader}">
                 <a href="http://localhost:8080/message/${row.id}.do">${browseHeader}</a>
             </display:column>
-            <spring:message code="delete" var="deleteHeader" />
+            <spring:message code="message.delete" var="deleteHeader" />
             <display:column title="${deleteHeader}">
                 <a href="http://localhost:8080/message/delete.do?messageId=${row.id}">${deleteHeader}</a>
             </display:column>
-            <spring:message code="move" var="moveHeader" />
+            <spring:message code="message.move" var="moveHeader" />
             <display:column title="${moveHeader}">
                 <select title="move" name="move" onchange="location = this.value;">
                <jstl:forEach items="${folders}" var="current_folder">

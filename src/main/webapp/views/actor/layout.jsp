@@ -11,17 +11,17 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="input" uri="http://www.springframework.org/tags/form" %>
 
-<h1><spring:message code="edit" /> <spring:message code="profile" /> </h1>
+<h1><spring:message code="edit" /> <spring:message code="actor.profile" /> </h1>
 <article class="col s3 navbar">
     <ul>
         <li><a href="${contextPath}/actor/edit.do?edit=personal">
             <spring:message code="personaldata"/> </a> </li>
         <security:authorize access="hasAnyRole('NUTRITIONIST')">
-            <li><a href="${contextPath}/nutritionist/curriculum/list.do"><spring:message code="managecurriculum" /></a> </li>
+            <li><a href="${contextPath}/nutritionist/curriculum/list.do"><spring:message code="actor.managecurriculum" /></a> </li>
         </security:authorize>
         <security:authorize access="hasAnyRole('USER')">
-            <li><a href="${contextPath}/user/recipe/list.do"><spring:message code="managerecipes"/> </a> </li>
+            <li><a href="${contextPath}/user/recipe/list.do"><spring:message code="actor.managerecipes"/> </a> </li>
         </security:authorize>
-        <li><a href="${contextPath}/actor/socialIdentity/list.do"><spring:message code="managesocialidentities" /> </a> </li>
+        <li><a href="${contextPath}/actor/socialIdentity/list.do"><spring:message code="actor.managesocialidentities" /> </a> </li>
     </ul>
 </article>

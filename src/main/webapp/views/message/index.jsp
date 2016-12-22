@@ -11,22 +11,22 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <section class="main">
     <ul class="horizontal-list message-list-options">
-        <li><a href="${contextPath}/message/list.do"><spring:message code="backtomessagelist"/> </a></li>
+        <li><a href="${contextPath}/message/list.do"><spring:message code="message.backtomessagelist"/> </a></li>
         <li><a href="http://localhost:8080/message/delete.do?messageId=${message1.id}">
-            <spring:message code="delete" /> </a></li>
+            <spring:message code="message.delete" /> </a></li>
     </ul>
     <article class="col s12">
         <div class="messageView">
             <h1><spring:message code="message"/> </h1>
-        <h2><spring:message code="subject" /></h2>
+        <h2><spring:message code="message.subject" /></h2>
         <p>${message1.subject}</p>
-        <h2><spring:message code="recipients" /></h2>
+        <h2><spring:message code="message.recipients" /></h2>
         <p><jstl:forEach items="${message1.recipients}" var="recipient">
            ${recipient.userAccount.username},
         </jstl:forEach></p>
-        <h2><spring:message code="sendedat"/></h2>
+        <h2><spring:message code="message.sendedat"/></h2>
         <p>${message1.sended_at}</p>
-        <h2><spring:message code="body"/> </h2>
+        <h2><spring:message code="message.body"/> </h2>
         <p >${message1.body}</p>
         </div>
 

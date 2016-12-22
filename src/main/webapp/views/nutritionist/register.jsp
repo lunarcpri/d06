@@ -9,41 +9,41 @@
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<h1>Register as Nutritionist</h1>
+<h1><spring:message code="nutritionist.registerheader"/> </h1>
 <form:form action="nutritionist/register.do" modelAttribute="nutritionist" method="POST">
 
     <div class="form-group-1">
-        <h2>User Account data</h2>
+        <h2><spring:message code="nutritionist.userdata"/> </h2>
     <form:label path="userAccount.username">
-        <spring:message code="userAccount.username" />:
+        <spring:message code="userAccount.username" />
     </form:label>
     <form:input path="userAccount.username" />
     <form:errors cssClass="error" path="userAccount.username" />
 
     <form:label path="userAccount.password">
-        <spring:message code="userAccount.password" />:
+        <spring:message code="userAccount.password" />
     </form:label>
     <form:password path="userAccount.password" />
     <form:errors cssClass="error" path="userAccount.password" />
     <br>
     <form:errors cssClass="error" path="email" />
     </div>
-    <h2>Personal data</h2>
+    <h2><spring:message code="nutritionist.personaldata"/> </h2>
     <div class="form-group-2">
     <form:label path="email">
-        <spring:message code="email" />:
+        <spring:message code="nutritionist.email" />
     </form:label>
     <form:input path="email" type="email" required="required"/>
     <form:errors cssClass="error" path="email" />
     <br>
     <form:label path="name">
-        <spring:message code="name" />:
+        <spring:message code="nutritionist.name" />
     </form:label>
     <form:input path="name" required="required" />
     <form:errors cssClass="error" path="name" />
     <br>
     <form:label path="surnames">
-        <spring:message code="surnames" />:
+        <spring:message code="nutritionist.surnames" />
     </form:label>
     <form:input path="surnames" required="required" />
     <form:errors cssClass="error"  path="surnames" />
@@ -51,16 +51,16 @@
     </div>
     <div class="form-group-2">
     <form:label path="phone">
-        <spring:message code="phone" />:
+        <spring:message code="nutritionist.phone" />
     </form:label>
     <form:input path="phone" pattern="((\+[0-9]{1,3})?\s*(\([0-9]{3}\))?\s*([a-zA-Z0-9\- ]{4,}))$" />
     <form:errors cssClass="error" path="phone" />
     <br>
     <form:label path="address">
-        <spring:message code="address" />:
+        <spring:message code="nutritionist.address" />
     </form:label>
     <form:input path="address" />
     <form:errors cssClass="error" path="address" />
     </div>
-    <input name="register" type="submit" value="<spring:message code="submit" />" />
+    <input name="register" type="submit" value="<spring:message code="nutritionist.register" />" />
 </form:form>

@@ -22,7 +22,7 @@
 <!-- Listing grid -->
 <section class="main">
 
-	<h1>List of Users</h1>
+	<h1><spring:message code="user.listheader"/></h1>
 	<form method="GET" name="search_users_form">
 		<input type="search" name="query" placeholder="Search for a user..."/>
 		<input type="submit" value="Search"/>
@@ -49,7 +49,7 @@
 	<spring:message code="address" var="addressHeader" />
 	<display:column property="address" title="${addressHeader}"	sortable="false" />
 
-	<spring:message code="browse" var="browseHeader" />
+	<spring:message code="user.browse" var="browseHeader" />
 	<display:column title="${browseHeader}">
 		<a href="http://localhost:8080/user/${row.id}.do">${browseHeader}</a>
 	</display:column>

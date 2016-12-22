@@ -8,7 +8,7 @@
 
 <section class="main">
 
-    <h1>List of Contests</h1>
+    <h1><spring:message code="contest.listheader"/> </h1>
 
     <article>
         <display:table pagesize="5" class="displaytag" keepStatus="true"
@@ -28,7 +28,7 @@
             <display:column property="closed_at" title="${closedatHeader}" sortable="true" format="{0,date,dd/MM/yyyy HH:mm}"/>
 
 
-            <spring:message code="browse" var="browseHeader" />
+            <spring:message code="contest.browse" var="browseHeader" />
             <display:column title="${browseHeader}">
                 <a href="http://localhost:8080/contest/${row.id}.do">${browseHeader}</a>
             </display:column>

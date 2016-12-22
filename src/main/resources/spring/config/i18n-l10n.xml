@@ -24,6 +24,7 @@
 		<value>/views/security/messages</value>		
 		<value>/views/welcome/messages</value>
 		<value>/views/actor/messages</value>
+		<value>/views/actor/socialIdentity/messages</value>
 		<value>/views/nutritionist/messages</value>
 		<value>/views/nutritionist/ingredient/messages</value>
 		<value>/views/nutritionist/property/messages</value>

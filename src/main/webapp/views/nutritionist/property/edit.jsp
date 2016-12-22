@@ -20,15 +20,15 @@
         <form:hidden path="version"/>
 
         <form:label path="name">
-            <spring:message code="name"/>
+            <spring:message code="properties.name"/>
         </form:label>
         <form:input path="name"/>
         <form:errors cssClass="error" path="name"/>
 
         <div class="block">
-            <input type="submit" value="<spring:message code="send"/>" />
+            <input type="submit" value="<spring:message code="properties.edit"/>" />
 
-        <a class="button" href="${contextPath}/nutritionist/property/list.do"><spring:message code="cancel"/> </a>
+        <a class="button" href="${contextPath}/nutritionist/property/list.do"><spring:message code="properties.cancel"/> </a>
         </div>
     </form:form>
 </article>

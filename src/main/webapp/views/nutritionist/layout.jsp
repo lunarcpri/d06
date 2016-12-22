@@ -11,11 +11,11 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="input" uri="http://www.springframework.org/tags/form" %>
 
-<h1>Edit Personal Info</h1>
+<h1><spring:message code="nutritionist.header"/> </h1>
 <article class="col s3 navbar">
     <ul>
-        <li><a href="${contextPath}/nutritionist/property/list.do"><spring:message code="managecurriculum" /> </a> </li>
-        <li><a href="${contextPath}/nutritionist/ingredient/list.do"><spring:message code="manageingredients" /></a> </li>
-        <li><a href="${contextPath}/nutritionist/property/list.do"><spring:message code="manageproperties" /> </a> </li>
+        <li><a href="${contextPath}/nutritionist/property/list.do"><spring:message code="nutritionist.managecurriculum" /> </a> </li>
+        <li><a href="${contextPath}/nutritionist/ingredient/list.do"><spring:message code="nutritionist.manageingredients" /></a> </li>
+        <li><a href="${contextPath}/nutritionist/property/list.do"><spring:message code="nutritionist.manageproperties" /> </a> </li>
     </ul>
 </article>

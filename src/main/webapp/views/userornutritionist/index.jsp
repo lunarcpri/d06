@@ -44,7 +44,7 @@
 			<a href="http://localhost:8080/recipe/list.do?category=${row.category.id}">${row.category.name}</a>
 		</display:column>
 
-		<spring:message code="browse" var="browseHeader" />
+		<spring:message code="userornutritionist.browse" var="browseHeader" />
 		<display:column title="${browseHeader}">
 			<a href="http://localhost:8080/recipe/${row.id}.do">${browseHeader}</a>
 		</display:column>

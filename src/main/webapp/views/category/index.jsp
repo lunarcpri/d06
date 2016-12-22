@@ -20,7 +20,7 @@
         <div class="pagebanner">
             ${category.tags}
         </div>
-        <h2>Recipes</h2>
+        <h2><spring:message code="categories.recipesheader"/></h2>
         <display:table pagesize="5" class="displaytag" keepStatus="true"
                        name="recipes" requestURI="${requestURI}" id="row">
 
@@ -38,7 +38,7 @@
             <display:column title="${authorHeader}">
                 <a href="http://localhost:8080/actor/actor.do?id=${row.author.userAccount.id}">${row.author.userAccount.username}</a>
             </display:column>
-            <spring:message code="browse" var="browseHeader" />
+            <spring:message code="categories.browse" var="browseHeader" />
             <display:column title="${browseHeader}">
                 <a href="http://localhost:8080/recipe/${row.id}.do">${browseHeader}</a>
             </display:column>

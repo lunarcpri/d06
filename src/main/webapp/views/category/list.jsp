@@ -8,7 +8,7 @@
 
 <section class="main">
 
-    <h1><spring:message code="listofcategories" /> </h1>
+    <h1><spring:message code="categories.header" /> </h1>
     <article>
 <display:table pagesize="5" class="displaytag" keepStatus="true"
                name="categories" requestURI="${requestURI}" id="row">
@@ -27,7 +27,7 @@
     <spring:message code="categories.tags" var="tagsHeader" />
     <display:column property="tags" title="${tagsHeader}" sortable="false"/>
 
-    <spring:message code="browse" var="browseHeader" />
+    <spring:message code="categories.browse" var="browseHeader" />
     <display:column title="${browseHeader}">
         <a href="http://localhost:8080/category/${row.id}.do">${browseHeader}</a>
     </display:column>

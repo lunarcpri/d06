@@ -12,7 +12,7 @@
 <%@ taglib prefix="input" uri="http://www.springframework.org/tags/form" %>
 
 
-<h2>Social Identities</h2>
+<h2><spring:message code="actor.socialIdentity.newheader"/></h2>
 <form:form modelAttribute="socialIdentity" action="actor/socialIdentity/new.do">
 <div class="form-group-1 socialIdentity">
 
@@ -20,22 +20,22 @@
         <h2>${socialIdentity.name}</h2>
         <form:hidden path="id"/>
         <form:label path="name">
-            <spring:message code="name" />:
+            <spring:message code="actor.socialIdentity.name" />
         </form:label>
         <form:errors cssClass="error" path="name" />
         <form:input required="required" path="name" />
         <form:label path="nick">
-            Nickname
+            <spring:message code="actor.socialIdentity.nick" />
         </form:label>
         <form:input  required="required" path="nick" />
         <form:errors cssClass="error" path="nick" />
         <form:label path="link">
-            <spring:message code="link" />:
+            <spring:message code="actor.socialIdentity.link" />:
         </form:label>
         <form:input type="url" equired="required"  path="link" />
         <form:errors cssClass="error" path="link" />
         <form:label path="picture">
-            <spring:message code="picture" />:
+            <spring:message code="actor.socialIdentity.picture" />:
         </form:label>
         <form:input type="url" path="picture" />
         <form:errors cssClass="error" path="picture" />

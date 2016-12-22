@@ -12,9 +12,9 @@
 <%@ taglib prefix="input" uri="http://www.springframework.org/tags/form" %>
 
 
-<h2>Social Identities</h2>
+<h2><spring:message code="actor.socialIdentity.header"/></h2>
 <ul class="horizontal-list message-list-options">
-    <li><a href="${contextPath}/actor/socialIdentity/new.do"><i class="fa fa-plus"></i> New Social Identity</a></li>
+    <li><a href="${contextPath}/actor/socialIdentity/new.do"><i class="fa fa-plus"></i><spring:message code="actor.socialIdentity.newbutton"/> </a></li>
 </ul>
 <display:table pagesize="5" class="displaytag" keepStatus="true"
                name="socialIdentities" requestURI="${requestURI}" id="row">
@@ -25,14 +25,14 @@
 
     <display:column property="nick" title="nick" sortable="true" />
 
-    <spring:message code="name" var="nameHeader" />
+    <spring:message code="actor.socialIdentity.name" var="nameHeader" />
     <display:column property="name" title="${nameHeader}" />
 
 
     <display:column property="link" title="Url"/>
 
 
-    <spring:message code="edit" var="editHeader" />
+    <spring:message code="actor.socialIdentity.edit" var="editHeader" />
     <display:column title="${editHeader}">
         <a href="http://localhost:8080/actor/socialIdentity/edit.do?socialIdentityId=${row.id}">${editHeader}</a>
     </display:column>

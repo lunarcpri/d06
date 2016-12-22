@@ -10,17 +10,17 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <section class="main">
-    <h1><spring:message code="newfolder"/> </h1>
+    <h1><spring:message code="folder.newheader"/> </h1>
 
     <div class="form-group-1">
         <form:form action="folder/new.do" modelAttribute="folder" method="POST">
             <form:label path="name">
-                <spring:message code="name" />:
+                <spring:message code="folder.name" />:
             </form:label>
             <form:input path="name"/>
             <form:errors cssClass="error" path="name"  />
             <div class="block">
-            <input type="submit" name="send" value="<spring:message code="send" /> " />
+            <input type="submit" name="send" value="<spring:message code="folder.create" /> " />
             </div>
         </form:form>
     </div>

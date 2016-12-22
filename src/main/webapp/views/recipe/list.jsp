@@ -8,7 +8,7 @@
 
 <section class="main">
 
-    <h1>List of Recipes</h1>
+    <h1><spring:message code="recipelist"/> List of Recipes</h1>
     <form method="GET" name="searc_recipes_form">
         <input type="search" name="query" placeholder="Search a recipe..."/>
         <input type="submit" value="Search"/>
@@ -40,7 +40,7 @@
         <a href="http://localhost:8080/recipe/list.do?category=${row.category.id}">${row.category.name}</a>
     </display:column>
 
-    <spring:message code="browse" var="browseHeader" />
+    <spring:message code="recipe.browse" var="browseHeader" />
     <display:column title="${browseHeader}">
         <a href="http://localhost:8080/recipe/${row.id}.do">${browseHeader}</a>
     </display:column>

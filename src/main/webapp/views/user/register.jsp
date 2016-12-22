@@ -9,11 +9,11 @@
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<h1>Register as User</h1>
+<h1><spring:message code="user.registerheader"/></h1>
 <form:form action="user/register.do" modelAttribute="user" method="POST">
 
     <div class="form-group-1">
-        <h2>User Account data</h2>
+        <h2><spring:message code="user.info"/></h2>
     <form:label path="userAccount.username">
         <spring:message code="userAccount.username" />:
     </form:label>
@@ -28,7 +28,7 @@
     <br>
     <form:errors cssClass="error" path="email" />
     </div>
-    <h2>Personal data</h2>
+    <h2><spring:message code="user.personaldata"/></h2>
     <div class="form-group-2">
     <form:label path="email">
         <spring:message code="email" />:
@@ -62,5 +62,5 @@
     <form:input path="address" />
     <form:errors cssClass="error" path="address" />
     </div>
-    <input name="register" type="submit" value="<spring:message code="submit" />" />
+    <input name="register" type="submit" value="<spring:message code="user.register" />" />
 </form:form>

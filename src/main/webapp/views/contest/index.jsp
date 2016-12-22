@@ -8,13 +8,13 @@
 
 <section class="main">
 
-    <h1>Contest ${contest.title}</h1>
+    <h1><spring:message code="contest.header"/> ${contest.title}</h1>
     <article class="col s11">
         <p><b><spring:message code="contest.openedat" />:</b> ${contest.opened_at}</p>
         <p><b><spring:message code="contest.closedat" />:</b> ${contest.closed_at}</p>
     </article>
     <article class="col s5">
-        <h2>Qualified Recipes</h2>
+        <h2><spring:message code="contest.qualifiedheader"/></h2>
         <display:table pagesize="5" class="displaytag" keepStatus="true"
                        name="recipesQualified" requestURI="${requestURI}" id="row">
 
@@ -28,7 +28,7 @@
             <display:column title="${authorHeader}">
                 <a href="http://localhost:8080/actor/actor.do?id=${row.author.userAccount.id}">${row.author.userAccount.username}</a>
             </display:column>
-            <spring:message code="browse" var="browseHeader" />
+            <spring:message code="contest.browse" var="browseHeader" />
             <display:column title="${browseHeader}">
                 <a href="http://localhost:8080/recipe/${row.id}.do">${browseHeader}</a>
             </display:column>
@@ -50,7 +50,7 @@
             <display:column title="${authorHeader}">
                 <a href="http://localhost:8080/actor/actor.do?id=${row.author.userAccount.id}">${row.author.userAccount.username}</a>
             </display:column>
-            <spring:message code="browse" var="browseHeader" />
+            <spring:message code="contest.browse" var="browseHeader" />
             <display:column title="${browseHeader}">
                 <a href="http://localhost:8080/recipe/${row.id}.do">${browseHeader}</a>
             </display:column>

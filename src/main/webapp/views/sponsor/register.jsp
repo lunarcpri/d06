@@ -9,11 +9,11 @@
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<h1>Register as Sponsor</h1>
+<h1><spring:message code="sponsor.registerheader"/> </h1>
 <form:form action="sponsor/register.do" modelAttribute="sponsor" method="POST">
 
     <div class="form-group-1">
-        <h2>User Account data</h2>
+        <h2><spring:message code="sponsor.userinfo"/> </h2>
     <form:label path="userAccount.username">
         <spring:message code="userAccount.username" />:
     </form:label>
@@ -28,7 +28,7 @@
     <br>
     <form:errors cssClass="error" path="email" />
     </div>
-    <h2>Personal data</h2>
+    <h2><spring:message code="sponsor.personaldata"/> </h2>
     <div class="form-group-2">
     <form:label path="email">
         <spring:message code="email" />:
@@ -107,5 +107,5 @@
         <form:errors cssClass="error" path="creditCard.cvv" />
 
     </div>
-    <input name="register" type="submit" value="<spring:message code="submit" />" />
+    <input name="register" type="submit" value="<spring:message code="sponsor.register" />" />
 </form:form>
