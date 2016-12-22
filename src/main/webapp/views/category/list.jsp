@@ -8,7 +8,7 @@
 
 <section class="main">
 
-    <h1>List of Categories</h1>
+    <h1><spring:message code="listofcategories" /> </h1>
     <article>
 <display:table pagesize="5" class="displaytag" keepStatus="true"
                name="categories" requestURI="${requestURI}" id="row">

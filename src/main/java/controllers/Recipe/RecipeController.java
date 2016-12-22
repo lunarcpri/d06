@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import security.Authority;
 import security.LoginService;
 import services.*;
 
@@ -62,15 +63,23 @@ public class RecipeController extends AbstractController {
         result = new ModelAndView("recipe/index");
         result.addObject("canlike",false);
         if (LoginService.isAuthorized()){
-            UserOrNutritionist principal = (UserOrNutritionist) actorService.findActorByPrincipal();
-            Comment comment = new Comment();
-            comment.setAuthor(principal);
-            comment.setRecipe(recipe);
-            result.addObject("comment",comment);
-            if (principal.getId()!=recipe.getAuthor().getId()) {
-                result.addObject("canlike",true);
-                result.addObject("liked",likesService.doesUserLikedRecipe(recipe));
-                result.addObject("disliked",likesService.doesUserDisLikedRecipe(recipe));
+            Actor principal =  actorService.findActorByPrincipal();
+            Authority user = new Authority();
+            user.setAuthority("USER");
+            Authority nutritionist = new Authority();
+            nutritionist.setAuthority("NUTRITIONIST");
+            if (principal.getUserAccount().getAuthorities().contains(user) ||
+                    principal.getUserAccount().getAuthorities().contains(nutritionist)) {
+                Comment comment = new Comment();
+                UserOrNutritionist principal2 = (UserOrNutritionist) principal;
+                comment.setAuthor(principal2);
+                comment.setRecipe(recipe);
+                result.addObject("comment", comment);
+                if (principal.getId() != recipe.getAuthor().getId()) {
+                    result.addObject("canlike", true);
+                    result.addObject("liked", likesService.doesUserLikedRecipe(recipe));
+                    result.addObject("disliked", likesService.doesUserDisLikedRecipe(recipe));
+                }
             }
         }
         result.addObject("recipe", recipe);

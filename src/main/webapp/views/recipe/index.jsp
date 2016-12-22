@@ -26,7 +26,7 @@
 </c:if>
     </p>
         <p><b><spring:message code="ticker"/>:</b> ${recipe.ticker} </p>
-        <p><b><spring:message code="category"/>:</b> ${recipe.category.name} </p>
+        <p><b><spring:message code="category"/>:</b> <a href="/category/${recipe.category.id}.do}">${recipe.category.name}</a> </p>
         <p><b><spring:message code="author"/>:</b>
             <a href="http://localhost:8080/user/${recipe.author.id}.do">${recipe.author.userAccount.username} </a></p>
         <p><b><spring:message code="created_at"/>:</b> ${recipe.created_at} </p>

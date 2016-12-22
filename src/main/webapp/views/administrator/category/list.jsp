@@ -7,10 +7,9 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 <section class="main">
-
-    <h1>List of Categories</h1>
-    <article>
-
+    <%@ include file="/views/administrator/layout.jsp" %>
+    <article class="col s7" style="margin-left:2%">
+        <h1><spring:message code="listofcategories"/> </h1>
         <ul class="horizontal-list message-list-options">
 
             <li><a href="${contextPath}/administrator/category/new.do"><i class="fa fa-plus"></i> New category</a></li>
