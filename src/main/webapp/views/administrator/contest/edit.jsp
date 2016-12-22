@@ -10,22 +10,22 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <section class="main">
-    <h1><spring:message code="administrator.contest.editheader"/> ${contest.name}</h1>
+    <h1><spring:message code="administrator.contest.editheader"/> ${contest.title}</h1>
 
     <div class="form-group-1">
-        <form:form action="administrator/category/edit.do" modelAttribute="category" method="POST">
+        <form:form action="administrator/contest/edit.do" modelAttribute="contest" method="POST">
 
-            <form:label path="name">
-                <spring:message code="administrator.categories.name" />:
+            <form:label path="title">
+                <spring:message code="administrator.contest.title" />:
             </form:label>
-            <form:input path="name"/>
-            <form:errors cssClass="error" path="name"  />
+            <form:input path="title"/>
+            <form:errors cssClass="error" path="title"  />
 
-            <form:label path="description">
-                <spring:message code="administrator.categories.description"/>
+            <form:label path="closed_at">
+                <spring:message code="administrator.contest.closedat"/>
             </form:label>
-            <form:input path="description"/>
-            <form:errors cssClass="error" path="description"  />
+            <form:input path="closed_at"/>
+            <form:errors cssClass="error" path="closed_at"  />
 
 
 
@@ -33,7 +33,7 @@
             <form:hidden path="version"/>
 
             <div class="block">
-                <input type="submit" name="save" value="<spring:message code="administrator.categories.edit" /> " />
+                <input type="submit" name="edit" value="<spring:message code="administrator.contest.edit" /> " />
                 <a class="button" href="${contextPath}/administrator/category/list.do"><spring:message code="cancel"/> </a>
             </div>
         </form:form>

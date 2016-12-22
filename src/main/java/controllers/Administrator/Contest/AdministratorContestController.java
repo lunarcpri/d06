@@ -82,7 +82,7 @@ public class AdministratorContestController {
         return result;
     }
 
-    @RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+    @RequestMapping(value = "/edit", method = RequestMethod.POST, params = "edit")
     public ModelAndView save(@Valid Contest contest, BindingResult bindingResult) {
         ModelAndView result;
 
