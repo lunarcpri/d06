@@ -17,6 +17,7 @@ import services.RecipeService;
 
 import javax.validation.Valid;
 import java.util.Collection;
+import java.util.Date;
 
 @Controller
 @RequestMapping("administrator/contest")
@@ -89,15 +90,18 @@ public class AdministratorContestController {
     @RequestMapping(value = "/edit", method = RequestMethod.POST, params = "edit")
     public ModelAndView save(@Valid Contest contest, BindingResult bindingResult) {
         ModelAndView result;
-
         if(bindingResult.hasErrors()){
             result = createEditModelAndView(contest, "wrong");
+            System.out.println(bindingResult.getAllErrors());
         }else{
             try{
+
+
                 contestService.save(contest);
                 result = new ModelAndView("redirect:list.do");
             }catch (Throwable oops){
                 result = createEditModelAndView(contest, "wrong");
+                System.out.println(oops.getMessage());
             }
         }
         return result;

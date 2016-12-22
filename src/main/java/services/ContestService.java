@@ -64,7 +64,7 @@ public class ContestService {
 
     public void delete(Contest contest){
         Assert.notNull(contest);
-        Assert.isTrue(!contest.getRecipesQualified().isEmpty());
+        Assert.isTrue(contest.getRecipesQualified().isEmpty());
 
         contestRepository.delete(contest);
 

@@ -28,13 +28,13 @@
             <form:errors cssClass="error" path="closed_at"  />
 
 
-
+            <form:hidden path="opened_at"/>
             <form:hidden path="id"/>
             <form:hidden path="version"/>
 
             <div class="block">
                 <input type="submit" name="edit" value="<spring:message code="administrator.contest.edit" /> " />
-                <a class="button" href="${contextPath}/administrator/category/list.do"><spring:message code="cancel"/> </a>
+                <a class="button" href="${contextPath}/administrator/contest/list.do"><spring:message code="cancel"/> </a>
             </div>
         </form:form>
     </div>
