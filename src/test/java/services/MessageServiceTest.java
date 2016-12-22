@@ -22,7 +22,7 @@ import java.util.List;
 })
 
 @Transactional
-public class MessageServiceTest extends AbstractTest{
+public class MessageServiceTest extends AbstractTest {
 
 
     @Autowired
@@ -49,35 +49,22 @@ public class MessageServiceTest extends AbstractTest{
     }
 
     @Test
-    public void testMoveMessage(){
+    public void testMoveMessage() {
         super.authenticate("user1");
         User u = userService.findByPrincipal();
         Folder folder = folderService.findInbox(u.getId());
-        Folder folder1 = folderService.findFolderByMessageAndActor(u.getId(),154);
-        System.out.println("Carpeta donde estalmente el mensaje: "+folder1.getMessages());
-        System.out.println("Carpeta donde no estaba el mensaje: "+ folder.getMessages());
-        messageService.moveMessage(154,folder.getId());
-        System.out.println("Carpeta donde se mueve el mensaje: "+ folder.getMessages());
-        System.out.println("Carpeta donde estaba el mensaje: "+ folder1.getMessages());
+        Folder folder1 = folderService.findFolderByMessageAndActor(u.getId(), 154);
+        System.out.println("Carpeta donde estalmente el mensaje: " + folder1.getMessages());
+        System.out.println("Carpeta donde no estaba el mensaje: " + folder.getMessages());
+        messageService.moveMessage(154, folder.getId());
+        System.out.println("Carpeta donde se mueve el mensaje: " + folder.getMessages());
+        System.out.println("Carpeta donde estaba el mensaje: " + folder1.getMessages());
     }
 
-    @Test
-    public void testDeleteMessage(){
-        super.authenticate("user1");
-        User u = userService.findByPrincipal();
-        int id = 32771;
-        Folder folder1 = folderService.findFolderByMessageAndActor(u.getId(),id);
-        System.out.println("Carpeta donde estaba  el mensaje antes de borrar "+ folder1.getFolderType());
-        messageService.deleteMessage(messageService.findOne(id));
-        System.out.println("Carpeta donde está actualmente el mensaje: "
-                + folderService.findFolderByMessageAndActor(u.getId(),id).getFolderType());
-        messageService.deleteMessage(messageService.findOne(id));
-        System.out.println("Carpeta donde está actualmente el mensaje: "
-                + messageService.findOne(id));
-    }
+
 
     @Test
-    public void testIsMessageSpam(){
+    public void testIsMessageSpam() {
         super.authenticate("Kolter");
         int recipient = 14;
         User recipientUser = userService.findOne(recipient);
@@ -89,8 +76,8 @@ public class MessageServiceTest extends AbstractTest{
         m.setSender(userService.findByPrincipal());
         m.setPriority(Message.Priority.HIGH);
         m.setRecipients(recipients);
-        Message savedMessage = messageService.newMessage( m);
-        for(Folder f : savedMessage.getFolders()){
+        Message savedMessage = messageService.newMessage(m);
+        for (Folder f : savedMessage.getFolders()) {
             System.out.println(f.getFolderType());
         }
     }

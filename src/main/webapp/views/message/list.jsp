@@ -32,7 +32,7 @@
 
             <spring:message code="message.sender" var="senderHeader" />
             <display:column title="${senderHeader}">
-                <a href="http://localhost:8080/user/${row.sender.id}.do">${row.sender.userAccount.username}</a>
+               ${row.sender.userAccount.username}
             </display:column>
             <spring:message code="message.recipients" var="recipientsHeader" />
             <display:column title="${recipientsHeader}">
@@ -48,7 +48,7 @@
             </display:column>
             <spring:message code="message.delete" var="deleteHeader" />
             <display:column title="${deleteHeader}">
-                <a href="http://localhost:8080/message/delete.do?messageId=${row.id}">${deleteHeader}</a>
+                <a href="http://localhost:8080/message/delete.do?messageId=${row.id}&folderId=${folder.id}">${deleteHeader}</a>
             </display:column>
             <spring:message code="message.move" var="moveHeader" />
             <display:column title="${moveHeader}">

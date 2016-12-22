@@ -1,7 +1,10 @@
 package services;
 
 
-import domain.*;
+import domain.Actor;
+import domain.Folder;
+import domain.Message;
+import domain.SpamTags;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,14 +44,12 @@ public class MessageService {
     private UserAccountService userAccountService;
 
 
-
-    public MessageService(){
+    public MessageService() {
         super();
     }
 
 
-
-    public Message findOne(int messageId){
+    public Message findOne(int messageId) {
         Message result;
 
         result = messageRepository.findOne(messageId);
@@ -57,7 +58,7 @@ public class MessageService {
         return result;
     }
 
-    public Message create(){
+    public Message create() {
         Message result;
 
         result = new Message();
@@ -65,35 +66,27 @@ public class MessageService {
         return result;
     }
 
-    public void delete(Message message){
+    public void delete(Message message) {
         Assert.notNull(message);
 
         messageRepository.delete(message.getId());
     }
 
-    public void deleteMessage(Message message){
-        Actor actor = userService.findByPrincipal();
-        Folder folder = null;
-        System.out.println("ey1");
-        if (message.getSender() == actor || message.getRecipients().contains(actor)){
-            System.out.println("ey2"+actor.getId()+" "+message.getId());
-            folder = folderService.findFolderByMessageAndActor(actor.getId(),message.getId());
-            if (folder.getFolderType() != Folder.FolderType.THRASHBOX){
-                System.out.println("ey3");
+    public void deleteMessage(Message message,Folder folder) {
+        Actor actor = actorService.findActorByPrincipal();
+            if (folder.getFolderType() != Folder.FolderType.THRASHBOX) {
                 Folder folderTrash = folderService.findTrashbox(actor.getId());
-                moveMessage(message.getId(),folderTrash.getId());
-            }else{
+                moveMessage(message.getId(), folderTrash.getId());
+            } else {
                 folder.getMessages().remove(message);
                 save(message);
                 delete(message);
             }
-        }
 
     }
 
 
-
-    public Message newMessage(Message message){
+    public Message newMessage(Message message) {
 
         Date sendedAt = new Date();
         Actor senderActor = actorService.findActorByPrincipal();
@@ -101,57 +94,56 @@ public class MessageService {
         message.setSender(senderActor);
         message.setSended_at(sendedAt);
         message = save(message);
-        List<Folder> folders = setFolders(message,senderActor,message.getRecipients());
+        List<Folder> folders = setFolders(message, senderActor, message.getRecipients());
         message.setFolders(folders);
         return save(message);
     }
 
 
-
-    public Message save(Message message){
+    public Message save(Message message) {
         Assert.notNull(message);
 
         return messageRepository.save(message);
     }
 
-    public void saveMessage(Message message){
+    public void saveMessage(Message message) {
 
         save(message);
 
     }
 
-    public void moveMessage(int messageId,int folderId){
+    public void moveMessage(int messageId, int folderId) {
         Folder newFolder = folderService.findOne(folderId);
         Message message = findOne(messageId);
-        Actor actor = userService.findByPrincipal();
+        Actor actor = actorService.findActorByPrincipal();
         Assert.notNull(newFolder);
         Assert.notNull(message);
         Assert.notNull(actor);
-        Folder actualFolder = folderService.findFolderByMessageAndActor(actor.getId(),message.getId());
-        folderService.removeMessage(actualFolder.getId(),message);
-        folderService.addMessage(newFolder.getId(),message);
+        Folder actualFolder = folderService.findFolderByMessageAndActor(actor.getId(), message.getId());
+        folderService.removeMessage(actualFolder.getId(), message);
+        folderService.addMessage(newFolder.getId(), message);
     }
 
-    private List<Folder> setFolders(Message message, Actor senderActor, Collection<Actor> recipientsActor){
+    private List<Folder> setFolders(Message message, Actor senderActor, Collection<Actor> recipientsActor) {
         List<Folder> result = new ArrayList<Folder>();
         Folder folderSender = folderService.findOutbox(senderActor.getId());
         Assert.notNull(folderSender);
-        for(Actor e : recipientsActor){
+        for (Actor e : recipientsActor) {
             Folder folderRecipient = folderService.findInbox(e.getId());
             if (isMessageSpam(message)) {
                 folderRecipient = folderService.findSpambox(e.getId());
             }
             Assert.notNull(folderRecipient);
             result.add(folderRecipient);
-            folderService.addMessage(folderRecipient.getId(),message);
+            folderService.addMessage(folderRecipient.getId(), message);
         }
         result.add(folderSender);
-        folderService.addSenderMessage(folderSender.getId(),message);
+        folderService.addSenderMessage(folderSender.getId(), message);
         return result;
     }
 
 
-   public Collection<Message> findAll(){
+    public Collection<Message> findAll() {
         Collection<Message> result;
 
         result = messageRepository.findAll();
@@ -159,26 +151,17 @@ public class MessageService {
 
         return result;
     }
-    private boolean isMessageSpam(Message message){
+
+    private boolean isMessageSpam(Message message) {
         boolean result = false;
         Collection<SpamTags> spamTagses = spamTagsService.findAll();
 
-        for(SpamTags e: spamTagses){
+        for (SpamTags e : spamTagses) {
             if (message.getBody().toLowerCase().contains(e.getName()) ||
-                    message.getSubject().toLowerCase().contains(e.getName())){
+                    message.getSubject().toLowerCase().contains(e.getName())) {
                 result = true;
             }
         }
-        return result;
-    }
-
-    public Collection<Message> findAllPrincipal(){
-        Collection<Message> result;
-
-        Actor a = userService.findByPrincipal();
-        result = messageRepository.findAllByActor(a.getId());
-        Assert.notNull(result);
-
         return result;
     }
 

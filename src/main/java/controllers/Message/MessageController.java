@@ -15,7 +15,6 @@ import controllers.AbstractController;
 import domain.Actor;
 import domain.Folder;
 import domain.Message;
-import domain.SocialIdentity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
@@ -33,31 +32,31 @@ import java.util.Collection;
 @RequestMapping("/message")
 public class MessageController extends AbstractController {
 
-	// Constructors -----------------------------------------------------------
+    // Constructors -----------------------------------------------------------
 
-	public MessageController() {
-		super();
-	}
+    public MessageController() {
+        super();
+    }
 
-	@Autowired
-	private MessageService messageService;
+    @Autowired
+    private MessageService messageService;
 
-	@Autowired
-	private ActorService actorService;
+    @Autowired
+    private ActorService actorService;
 
-	@Autowired
+    @Autowired
     private FolderService folderService;
 
-	// Index ------------------------------------------------------------------		
+    // Index ------------------------------------------------------------------
 
-	@RequestMapping(value = "/new")
-	public ModelAndView index() {
+    @RequestMapping(value = "/new")
+    public ModelAndView index() {
 
-		return createNewModelAndView(new Message(),null);
-	}
+        return createNewModelAndView(new Message(), null);
+    }
 
     @RequestMapping(value = "/list")
-    public ModelAndView list(@RequestParam(required=false) Integer folderId) {
+    public ModelAndView list(@RequestParam(required = false) Integer folderId) {
         ModelAndView result;
         Collection<Folder> foldersCollection;
         Collection<Message> messageCollection;
@@ -66,57 +65,57 @@ public class MessageController extends AbstractController {
         principal = actorService.findActorByPrincipal();
         Folder folder;
 
-        if (folderId != null){
+        if (folderId != null) {
             folder = folderService.findOne(folderId);
-            Assert.isTrue(folder.getActor()== principal);
+            Assert.isTrue(folder.getActor() == principal);
             messageCollection = folder.getMessages();
-        }else{
+        } else {
             folder = folderService.findInbox(principal.getId());
             messageCollection = folder.getMessages();
         }
         foldersCollection = actorService.findActorByPrincipal().getFolders();
         result = new ModelAndView("message/list");
-        result.addObject("messageList",messageCollection);
-        result.addObject("folders",foldersCollection);
-        result.addObject("folder",folder);
-        result.addObject("requestURI","message/list.do");
+        result.addObject("messageList", messageCollection);
+        result.addObject("folders", foldersCollection);
+        result.addObject("folder", folder);
+        result.addObject("requestURI", "message/list.do");
 
         return result;
     }
 
-    @RequestMapping(value="/{message2}")
-    public ModelAndView index(@PathVariable Message message2){
-	    ModelAndView result;
-	    Actor principal = actorService.findActorByPrincipal();
-	    Assert.notNull(message2);
-	    Assert.isTrue(message2.getRecipients().contains(principal) || message2.getSender() == principal);
+    @RequestMapping(value = "/{message2}")
+    public ModelAndView index(@PathVariable Message message2) {
+        ModelAndView result;
+        Actor principal = actorService.findActorByPrincipal();
+        Assert.notNull(message2);
+        Assert.isTrue(message2.getRecipients().contains(principal) || message2.getSender() == principal);
 
-	    result = new ModelAndView("message/index");
-	    result.addObject("message1",message2);
+        result = new ModelAndView("message/index");
+        result.addObject("message1", message2);
 
-	    return result;
+        return result;
     }
 
-	@RequestMapping(value = "/new",method = RequestMethod.POST,params = "send")
-	public  ModelAndView newMessage(@Valid @ModelAttribute("newMessage") Message message, BindingResult binding) {
+    @RequestMapping(value = "/new", method = RequestMethod.POST, params = "send")
+    public ModelAndView newMessage(@Valid @ModelAttribute("newMessage") Message message, BindingResult binding) {
         ModelAndView result;
         Collection<Actor> actorCollection;
         result = new ModelAndView("message/new");
         actorCollection = actorService.findAll();
         result.addObject("actors", actorCollection);
-	    if (binding.hasErrors()){
-           return createNewModelAndView(message,"message.commit.error");
+        if (binding.hasErrors()) {
+            return createNewModelAndView(message, "message.commit.error");
         }
-        try{
+        try {
             messageService.newMessage(message);
 
-            return  new ModelAndView("redirect:/message/list.do");
-        }catch (Throwable oops){
-            result.addObject("newMessage",message);
-            result.addObject("message","message.commit.error");
+            return new ModelAndView("redirect:/message/list.do");
+        } catch (Throwable oops) {
+            result.addObject("newMessage", message);
+            result.addObject("message", "message.commit.error");
             return result;
         }
-	}
+    }
 
     protected ModelAndView createNewModelAndView(Message message2, String message) {
         ModelAndView result;
@@ -125,7 +124,7 @@ public class MessageController extends AbstractController {
         actorCollection = actorService.findAll();
         result = new ModelAndView("message/new");
         result.addObject("newMessage", message2);
-        result.addObject("actors",  actorCollection);
+        result.addObject("actors", actorCollection);
         result.addObject("message", message);
 
         return result;
@@ -133,32 +132,31 @@ public class MessageController extends AbstractController {
 
 
     @RequestMapping(value = "/delete")
-    public ModelAndView editPost(@RequestParam(required=true) Message messageId) {
+    public ModelAndView editPost(@RequestParam(required = true) Message messageId, @RequestParam Folder folderId) {
         ModelAndView result;
         Assert.notNull(messageId);
-        try{
-            messageService.deleteMessage(messageId);
-            return  new ModelAndView("redirect:/message/list.do");
-        }catch (Throwable oops){
+        try {
+            messageService.deleteMessage(messageId,folderId);
+            return new ModelAndView("redirect:/message/list.do");
+        } catch (Throwable oops) {
             System.out.println(oops.getMessage());
-            return  new ModelAndView("redirect:/message/list.do");
+            return new ModelAndView("redirect:/message/list.do");
         }
     }
 
     @RequestMapping(value = "/move")
-    public ModelAndView move(@RequestParam(required=true) Message messageId, @RequestParam(required=true) Folder folderId) {
+    public ModelAndView move(@RequestParam(required = true) Message messageId, @RequestParam(required = true) Folder folderId) {
         ModelAndView result;
         Assert.notNull(messageId);
         Assert.notNull(folderId);
         Actor principal = actorService.findActorByPrincipal();
-        Assert.isTrue(principal == messageId.getSender() || principal.getReceivedMessages().contains(messageId));
         Assert.isTrue(folderId.getActor() == principal);
-        try{
-            messageService.moveMessage(messageId.getId(),folderId.getId());
-            return  new ModelAndView("redirect:/message/list.do");
-        }catch (Throwable oops){
+        try {
+            messageService.moveMessage(messageId.getId(), folderId.getId());
+            return new ModelAndView("redirect:/message/list.do");
+        } catch (Throwable oops) {
             System.out.println(oops.getMessage());
-            return  new ModelAndView("redirect:/message/list.do");
+            return new ModelAndView("redirect:/message/list.do");
         }
     }
 

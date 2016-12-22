@@ -166,7 +166,7 @@ public class FolderService {
 
     public Folder findTrashbox(int id){
         Folder result;
-        System.out.print(id);
+        System.out.print("ey6");
         result = folderRepository.findTrashboxFolderByActorId(id);
         Assert.notNull(result);
 

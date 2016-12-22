@@ -6,9 +6,8 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Quantity extends domain.DomainEntity
-{
-    private enum Unit {
+public class Quantity extends domain.DomainEntity {
+    public enum Unit {
         gram, kilograms, ounces, pounds, militres, litres, spoons, cups, pieces
     }
 
@@ -17,19 +16,16 @@ public class Quantity extends domain.DomainEntity
     private Ingredient ingredient;
     private Recipe recipe;
 
-    public Quantity()
-    {
+    public Quantity() {
         super();
     }
 
     @Enumerated(EnumType.STRING)
-    public Unit getUnit()
-    {
+    public Unit getUnit() {
         return unit;
     }
 
-    public void setUnit(Unit unit)
-    {
+    public void setUnit(Unit unit) {
         this.unit = unit;
     }
 
@@ -42,23 +38,19 @@ public class Quantity extends domain.DomainEntity
     }
 
 
-
     //Relantionships
 
 
     @Valid
     @ManyToOne(optional = false)
     @NotNull
-    public Ingredient getIngredient()
-    {
+    public Ingredient getIngredient() {
         return this.ingredient;
     }
 
-    public void setIngredient(Ingredient ingredient)
-    {
+    public void setIngredient(Ingredient ingredient) {
         this.ingredient = ingredient;
     }
-
 
 
     @Valid
@@ -72,13 +64,4 @@ public class Quantity extends domain.DomainEntity
     }
 
 
-    @Override
-    public String toString() {
-        return "Quantity{" +
-                "unit=" + unit +
-                ", quantity=" + quantity +
-                ", ingredient=" + ingredient +
-                ", recipe=" + recipe +
-                '}';
-    }
 }
