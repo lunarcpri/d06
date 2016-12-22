@@ -62,7 +62,9 @@
             </security:authorize>
             </li>
             <li><a href="${contextPath}/category/list.do" class="icon"><i class="fa fa-tags"></i> <spring:message code="categories"/></a></li>
-            <li><a href="${contextPath}/masterclass/list.do" class="icon"><i class="fa fa-book"></i> <spring:message code="masterclasses"/></a></li>
+            <security:authorize access="hasAnyRole('ADMIN')">
+            <li><a href="${contextPath}/administrator/index.do" class="icon"><i class="fa fa-lock"></i> <spring:message code="administratorpanel"/></a></li>
+                </security:authorize>
         </ul>
     </article>
 </header>

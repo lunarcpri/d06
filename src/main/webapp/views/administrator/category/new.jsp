@@ -10,12 +10,14 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <section class="main">
-    <h1>New Category</h1>
 
-    <div class="form-group-2">
+    <h1>New Category</h1>
+    <%@ include file="/views/administrator/layout.jsp" %>
+    <article class="col s7" style="margin-left:2%">
+
 
         <form:form action="administrator/category/new.do" modelAttribute="category" method="POST">
-
+            <div class="form-group-2">
             <form:label path="name">
                 <spring:message code="administrator.categories.name" />:
             </form:label>
@@ -33,7 +35,8 @@
             </form:label>
                 <form:input path="picture" type="url"/>
                 <form:errors cssClass="error" path="picture"  />
-
+            </div>
+            <div class="form-group-2">
             <form:label path="tags">
                 <spring:message code="administrator.categories.tags"/>
             </form:label>
@@ -54,13 +57,7 @@
             <form:select path="childrens" style="width:50%" multiple="true">
                 <form:options items="${categories}" itemValue="id" itemLabel="name"/>
             </form:select>
-
-            <form:label path="recipes">
-                <spring:message code="administrator.categories.recipes"/>
-            </form:label>
-            <form:select path="recipes" style="width:50%" multiple="true">
-                <form:options items="${recipes}" itemValue="id" itemLabel="title"/>
-            </form:select>
+            </div>
 
                 <form:hidden path="id"/>
                 <form:hidden path="version"/>
@@ -71,5 +68,5 @@
             </div>
 
 
-
         </form:form>
+    </article>

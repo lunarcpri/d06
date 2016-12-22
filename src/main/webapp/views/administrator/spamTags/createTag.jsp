@@ -11,9 +11,11 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 <h1><spring:message code="administrator.header"/></h1>
-
+<%@ include file="/views/administrator/layout.jsp" %>
+<article class="col s7" style="margin-left:2%">
 <form:form method="POST" modelAttribute="spamTags" action="administrator/spamTags/new.do">
 	<form:label path="name"><spring:message code="administrator.spamTag"/></form:label>
 	<form:input path="name" type="text"/>
 	<input type="submit" name="save" value="<spring:message code="administrator.add"/>" />
 </form:form>
+</article>

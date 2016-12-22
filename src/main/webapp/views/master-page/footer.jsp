@@ -28,7 +28,6 @@
 			<li><a href="${contextPath}/recipe/list.do"><spring:message code="recipes"/> </a></li>
 			<li><a href="${contextPath}/contest/list.do"><spring:message code="contests"/></a></li>
             <li><a href="${contextPath}/category/list.do"><spring:message code="categories"/></a></li>
-			<li><a href="${contextPath}/masterclass/list.do"><spring:message code="masterclasses"/></a></li>
 		</ul>
 	</article>
 	<article>
@@ -40,6 +39,9 @@
 			<li><a href="${contextPath}/security/login.do"><spring:message code="login"/></a></li>
 			<li><a href="${contextPath}/register.do"><spring:message code="register"/> </a></li>
 			<li><a href="${contextPath}/security/j_spring_security_logout" > <spring:message code="logout"/></a></li>
+			<security:authorize access="hasAnyRole('ADMIN')">
+				<li><a href="${contextPath}/administrator/index.do"><spring:message code="administratorpanel"/></a></li>
+			</security:authorize>
 		</ul>
 	</article>
 	<article>

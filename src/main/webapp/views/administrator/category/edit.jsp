@@ -11,7 +11,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <section class="main">
     <h1>Edit Category ${category.name}</h1>
-
+    <%@ include file="/views/administrator/layout.jsp" %>
+    <article class="col s7" style="margin-left:2%">
     <div class="form-group-1">
         <form:form action="administrator/category/edit.do" modelAttribute="category" method="POST">
 
@@ -56,5 +57,6 @@
             </div>
         </form:form>
     </div>
+    </article>
 </section>
 

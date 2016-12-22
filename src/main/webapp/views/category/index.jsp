@@ -8,7 +8,7 @@
 
 <section class="main">
 
-    <h1>Category ${category.name}</h1>
+    <h1><spring:message code="category" /> ${category.name}</h1>
     <article class="col s5">
     <p>${category.description}</p>
     </article>
@@ -16,7 +16,7 @@
         <img width="150" height="150" src="${category.picture}"/>
     </article>
     <article class="col s12">
-        <h2>Tags</h2>
+        <h2><spring:message code="categories.tags"/> </h2>
         <div class="pagebanner">
             ${category.tags}
         </div>
