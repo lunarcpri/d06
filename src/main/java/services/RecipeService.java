@@ -205,6 +205,16 @@ public class RecipeService {
         return result;
     }
 
+    public List<Object[]> findStdevAvgIngredientsPerRecipe()
+    {
+        List<Object[]> result;
+
+        result = recipeRepository.findStdevAvgIngredientsPerRecipe();
+        Assert.notNull(result);
+
+        return  result;
+    }
+
     public Collection<Recipe> findAllByCategory(int id){
         Collection<Recipe> result;
 

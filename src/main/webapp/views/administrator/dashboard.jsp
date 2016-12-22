@@ -82,5 +82,88 @@
         </tr>
         </tbody>
     </table>
+    <h2><spring:message code="stdavgstepsperrecipe"/> </h2>
+    <table>
+        <thead>
+        <tr>
+            <th><spring:message code="avg"/> </th>
+            <th><spring:message code="std"/> </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>${stdstepsperrecipe}</td>
+            <td>${avgstepsperrecipe}</td>
+        </tr>
+        </tbody>
+    </table>
+    <h2><spring:message code="stdavgingredientsperrecipe"/> </h2>
+    <table>
+        <thead>
+        <tr>
+            <th><spring:message code="avg"/> </th>
+            <th><spring:message code="std"/> </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>${stdingredientsperrecipe}</td>
+            <td>${avgingredientsperrecipe}</td>
+        </tr>
+        </tbody>
+    </table>
+    <h2><spring:message code="listofuserbypopularity"/> </h2>
+    <display:table pagesize="5" class="displaytag" keepStatus="true"
+                   name="userspopularity" requestURI="administrator/dashboard.do" id="row">
 
+        <!-- Attributes -->
+
+        <spring:message code="name" var="nameHeader" />
+        <display:column property="name" title="${nameHeader}" sortable="true" />
+
+        <spring:message code="surnames" var="surnamesHeader" />
+        <display:column property="name" title="${surnamesHeader}" sortable="true" />
+
+        <spring:message code="email" var="emailHeader" />
+        <display:column property="email" title="${emailHeader}" sortable="true" />
+
+        <spring:message code="phone" var="phoneHeader" />
+        <display:column property="phone" title="${phoneHeader}" sortable="true" />
+
+        <spring:message code="address" var="addressHeader" />
+        <display:column property="address" title="${addressHeader}"	sortable="false" />
+
+        <spring:message code="browse" var="browseHeader" />
+        <display:column title="${browseHeader}">
+            <a href="${contextPath}/user/${row.id}.do">${browseHeader}</a>
+        </display:column>
+
+    </display:table>
+    <h2><spring:message code="listofuserbyavgrecipeslike"/> </h2>
+    <display:table pagesize="5" class="displaytag" keepStatus="true"
+                   name="usersrecipes" requestURI="administrator/dashboard.do" id="row2">
+
+        <!-- Attributes -->
+
+        <spring:message code="name" var="nameHeader" />
+        <display:column property="name" title="${nameHeader}" sortable="true" />
+
+        <spring:message code="surnames" var="surnamesHeader" />
+        <display:column property="name" title="${surnamesHeader}" sortable="true" />
+
+        <spring:message code="email" var="emailHeader" />
+        <display:column property="email" title="${emailHeader}" sortable="true" />
+
+        <spring:message code="phone" var="phoneHeader" />
+        <display:column property="phone" title="${phoneHeader}" sortable="true" />
+
+        <spring:message code="address" var="addressHeader" />
+        <display:column property="address" title="${addressHeader}"	sortable="false" />
+
+        <spring:message code="browse" var="browseHeader" />
+        <display:column title="${browseHeader}">
+            <a href="${contextPath}/user/${row2.id}.do">${browseHeader}</a>
+        </display:column>
+
+    </display:table>
 </article>

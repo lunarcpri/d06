@@ -5,12 +5,12 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <section class="main">
 
     <h1><spring:message code="administrator.contest.listheader"/></h1>
-
-    <article>
+    <%@ include file="/views/administrator/layout.jsp" %>
+    <article class="col s7" style="margin-left:2%">
 
         <ul class="horizontal-list message-list-options">
 
@@ -40,15 +40,20 @@
 
         <spring:message code="administrator.category.edit" var="editHeader" />
         <display:column  title="${editHeader}">
+        <jstl:if test="${fn:length(row.recipesQualified) == 0}">
+
         <a href="${contextPath}/administrator/contest/edit.do?contestId=${row.id}">
                 ${editHeader}
+                    </jstl:if>
             </display:column>
 
 
 
             <spring:message code="administrator.contest.delete" var="deleteHeader" />
             <display:column title="${deleteHeader}">
+                        <jstl:if test="${fn:length(row.recipesQualified) == 0}">
             <a href="http://localhost:8080/administrator/contest/delete.do?contestId=${row.id}">${deleteHeader}</a>
+                    </jstl:if>
             </display:column>
         </display:table>
     </article>

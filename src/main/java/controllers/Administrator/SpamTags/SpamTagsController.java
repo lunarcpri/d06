@@ -50,7 +50,6 @@ public class SpamTagsController {
 
         if(bindingResult.hasErrors()){
             result = createEditSpamTagView(spamTags, "wrong");
-            System.out.println(bindingResult.getAllErrors());
         }
         else{
             try{

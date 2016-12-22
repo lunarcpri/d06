@@ -11,7 +11,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <section class="main">
     <h1><spring:message code="administrator.contest.newheader"/></h1>
-
+    <%@ include file="/views/administrator/layout.jsp" %>
+    <article class="col s7" style="margin-left:2%">
     <div class="form-group-2">
 
         <form:form action="administrator/contest/new.do" modelAttribute="contest" method="POST">
@@ -44,6 +45,6 @@
             <a class="button" href="${contextPath}/administrator/contest/list.do"><spring:message code="administrator.contest.cancel"/> </a>
         </div>
 
-
-
         </form:form>
+    </div>
+    </article>

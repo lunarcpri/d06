@@ -62,9 +62,11 @@ public class AdministratorCategoryController {
    }
 
    @RequestMapping(value = "/new", method = RequestMethod.POST, params = "save")
-   public ModelAndView newCategory(@Valid Category category){
+   public ModelAndView newCategory(@Valid Category category, BindingResult bindingResult){
         ModelAndView result;
-
+        if (bindingResult.hasErrors()){
+            result = createNewModelAndView(category, "wrong");
+        }
         try{
             categoryService.save(category);
             result = new ModelAndView("redirect:list.do");
