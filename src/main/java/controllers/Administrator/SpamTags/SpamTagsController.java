@@ -13,7 +13,7 @@ import javax.validation.Valid;
 import java.util.Collection;
 
 @Controller
-@RequestMapping("/administrator/spamTags")
+@RequestMapping("administrator/spamTags")
 public class SpamTagsController {
 
 
@@ -55,7 +55,7 @@ public class SpamTagsController {
         else{
             try{
                 spamTagsService.save(spamTags);
-                result = new ModelAndView("redirect:administrator/spamTags/list.do");
+                result = new ModelAndView("redirect:list.do");
             }
             catch (Throwable oops){
                 result = createEditSpamTagView(spamTags, "spamTags.commit.error");

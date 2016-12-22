@@ -41,7 +41,7 @@ public class CategoryService {
         return result;
     }
 
-    private void save(Category category){
+    public void save(Category category){
         Assert.notNull(category);
 
         categoryRepository.save(category);
