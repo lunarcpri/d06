@@ -10,12 +10,12 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<h1><spring:message code="administrator.header"/></h1>
+<h1><spring:message code="administrator.spamtags.newheader"/></h1>
 <%@ include file="/views/administrator/layout.jsp" %>
 <article class="col s7" style="margin-left:2%">
 <form:form method="POST" modelAttribute="spamTags" action="administrator/spamTags/new.do">
-	<form:label path="name"><spring:message code="administrator.spamTag"/></form:label>
+	<form:label path="name"><spring:message code="administrator.spamtags.name"/></form:label>
 	<form:input path="name" type="text"/>
-	<input type="submit" name="save" value="<spring:message code="administrator.add"/>" />
+	<input type="submit" name="save" value="<spring:message code="administrator.spamtags.add"/>" />
 </form:form>
 </article>

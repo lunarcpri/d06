@@ -53,7 +53,7 @@
 
             <div class="block">
             <input type="submit" name="save" value="<spring:message code="administrator.categories.edit" /> " />
-                <a class="button" href="${contextPath}/administrator/category/list.do"><spring:message code="cancel"/> </a>
+                <a class="button" href="${contextPath}/administrator/category/list.do"><spring:message code="administrator.categories.cancel"/> </a>
             </div>
         </form:form>
     </div>

@@ -11,20 +11,16 @@
     <%@ include file="/views/administrator/layout.jsp" %>
     <article class="col s7" style="margin-left:2%">
 
-        <h1><spring:message code="spamTags.header"/></h1>
+        <h1><spring:message code="administrator.spamtags.header"/></h1>
         <ul class="horizontal-list message-list-options">
 
-            <li><a href="${contextPath}/administrator/spamTags/new.do"><i class="fa fa-plus"></i> New SpamTag</a></li>
+            <li><a href="${contextPath}/administrator/spamTags/new.do"><i class="fa fa-plus"></i><spring:message code="administrator.spamtags.newbutton"/></a></li>
         </ul>
         <display:table pagesize="5" class="displaytag" keepStatus="true"
                        name="spamTags" requestURI="${requestURI}" id="row">
 
-            <ul class="horizontal-list message-list-options">
 
-                <li><a href="${contextPath}/administrator/spamTags/new.do"><i class="fa fa-plus"></i> New SpamTag</a></li>
-            </ul>
-
-            <spring:message code="spamTags.name" var="nameHeader" />
+            <spring:message code="administrator.spamtags.name" var="nameHeader" />
             <display:column property="name" title="${nameHeader}" sortable="true" />
 
 

@@ -34,7 +34,7 @@
 
             <div class="block">
                 <input type="submit" name="edit" value="<spring:message code="administrator.contest.edit" /> " />
-                <a class="button" href="${contextPath}/administrator/contest/list.do"><spring:message code="cancel"/> </a>
+                <a class="button" href="${contextPath}/administrator/contest/list.do"><spring:message code="administrator.contest.cancel"/> </a>
             </div>
         </form:form>
     </div>

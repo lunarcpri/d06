@@ -9,7 +9,7 @@
 <section class="main">
     <%@ include file="/views/administrator/layout.jsp" %>
     <article class="col s7" style="margin-left:2%">
-        <h1><spring:message code="listofcategories"/> </h1>
+        <h1><spring:message code="administrator.categories.list"/> </h1>
         <ul class="horizontal-list message-list-options">
 
             <li><a href="${contextPath}/administrator/category/new.do"><i class="fa fa-plus"></i> New category</a></li>
@@ -22,17 +22,17 @@
 
     <!-- Attributes -->
 
-    <spring:message code="categories.name" var="nameHeader" />
+    <spring:message code="administrator.categories.name" var="nameHeader" />
     <display:column property="name" title="${nameHeader}" sortable="true" />
 
-    <spring:message code="categories.description" var="descriptionHeader" />
+    <spring:message code="administrator.categories.description" var="descriptionHeader" />
     <display:column property="description" title="${descriptionHeader}" sortable="false"/>
 
 
-    <spring:message code="categories.tags" var="tagsHeader" />
+    <spring:message code="administrator.categories.tags" var="tagsHeader" />
     <display:column property="tags" title="${tagsHeader}" sortable="false"/>
 
-    <spring:message code="administrator.category.edit" var="editHeader" />
+    <spring:message code="administrator.categories.edit" var="editHeader" />
     <display:column  title="${editHeader}">
 
         <a href="${contextPath}/administrator/category/edit.do?categoryId=${row.id}">
