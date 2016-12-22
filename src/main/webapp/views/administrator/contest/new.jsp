@@ -25,13 +25,13 @@
             <form:label path="opened_at">
                 <spring:message code="administrator.contest.openedat"/>
             </form:label>
-                <form:input path="opened_at" type="date"/>
+                <form:input path="opened_at"/>
                 <form:errors cssClass="error" path="opened_at"  />
 
         <form:label path="closed_at">
             <spring:message code="administrator.contest.closedat"/>
         </form:label>
-            <form:input path="closed_at" type="date"/>
+            <form:input path="closed_at"/>
             <form:errors cssClass="error" path="closed_at"  />
 
 
