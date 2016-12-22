@@ -111,11 +111,11 @@ public class UserService {
         return result;
     }
 
-    public List<User> findAllByPopularity(){
+    public List<User> findAllByPopularity() {
         return userRepository.findAllByPopularity();
     }
 
-    public List<User> findAllByLikes(){
+    public List<Object[]> findAllByLikes(){
         return userRepository.findAllByLikes();
     }
 

@@ -69,12 +69,21 @@ public class UserController extends AbstractController {
         result = new ModelAndView("user/index");
         result.addObject("canFollow",false);
         if (LoginService.isAuthorized()){
-            UserOrNutritionist principal = (UserOrNutritionist) actorService.findActorByPrincipal();
-            if (principal.getId()!=user.getId()) {
-                Boolean isFollowing = userOrNutritionistService.isFollowing(principal,user);
-                result.addObject("isFollowing",isFollowing);
-                result.addObject("canFollow",true);
+            Authority userAuthority = new Authority();
+            userAuthority.setAuthority("USER");
+            Authority nutritionistAuthority = new Authority();
+            nutritionistAuthority.setAuthority("NUTRITIONIST");
+            Actor principal = actorService.findActorByPrincipal();
+            if (principal.getUserAccount().getAuthorities().contains(userAuthority) ||
+                    principal.getUserAccount().getAuthorities().contains(nutritionistAuthority)) {
+               UserOrNutritionist principal2 = (UserOrNutritionist) actorService.findActorByPrincipal();
+                if (principal.getId()!=user.getId()) {
+                    Boolean isFollowing = userOrNutritionistService.isFollowing(principal2,user);
+                    result.addObject("isFollowing",isFollowing);
+                    result.addObject("canFollow",true);
+                }
             }
+
         }
         result.addObject("user", user);
         result.addObject("followersNumber",user.getFollower().size());

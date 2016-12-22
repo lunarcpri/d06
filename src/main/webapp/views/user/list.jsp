@@ -55,5 +55,6 @@
 	</display:column>
 
 </display:table>
+
 	</article>
 </section>

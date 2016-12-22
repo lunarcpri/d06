@@ -31,12 +31,6 @@
                 <li>Can manage ingredients</li>
             </ul>
         </li>
-        <li>
-            <h2><a href="/sponsor/register.do"><i class="fa fa-dollar"></i> Register as Sponsor</a></h2>
-            <ul>
-                <li>Manage a campaign</li>
-            </ul>
-        </li>
     </ul>
 
 </section>

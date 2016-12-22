@@ -24,7 +24,7 @@ public interface RecipeRepository extends JpaRepository<Recipe, Integer> {
     @Query("select r.likes from Recipe r join r.likes l where l.isLike=false and r.id= ?1")
     Collection<Likes> findRecipeDislikes(int id);
 
-    @Query("select stddev(r.steps.size) as pepe,avg(r.steps.size) from Recipe r")
+    @Query("select stddev(r.steps.size),avg(r.steps.size) from Recipe r")
     List<Object[]> findStdevAvgStepsPerRecipe();
 
     @Query("select stddev(r.quantities.size), avg(r.quantities.size) from Recipe r")
