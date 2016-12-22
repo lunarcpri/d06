@@ -55,13 +55,17 @@ public class AdministratorContestController {
     }
 
     @RequestMapping(value = "/new", method = RequestMethod.POST, params = "save")
-    public ModelAndView newContest(@Valid Contest contest){
+    public ModelAndView newContest(@Valid Contest contest, BindingResult binding){
         ModelAndView result;
-
+            if (binding.hasErrors()){
+                System.out.println(binding.getAllErrors().get(0));
+                result = createNewModelAndView(contest, "wrong");
+            }
         try{
             contestService.save(contest);
             result = new ModelAndView("redirect:list.do");
         }catch(Throwable oops){
+            System.out.print(oops.getMessage());
             result = createNewModelAndView(contest, "wrong");
         }
         return result;
