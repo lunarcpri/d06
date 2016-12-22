@@ -116,6 +116,7 @@ public class AdministratorCategoryController {
             result = new ModelAndView("redirect:list.do");
 
         } catch (Throwable oops) {
+            System.out.print(oops.getMessage());
             result = createEditModelAndView(category, "administrator.categories.delete.error");
         }
         return result;

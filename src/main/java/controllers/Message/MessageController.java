@@ -132,11 +132,11 @@ public class MessageController extends AbstractController {
 
 
     @RequestMapping(value = "/delete")
-    public ModelAndView editPost(@RequestParam(required = true) Message messageId) {
+    public ModelAndView editPost(@RequestParam(required = true) Message messageId, @RequestParam Folder folderId) {
         ModelAndView result;
         Assert.notNull(messageId);
         try {
-            messageService.deleteMessage(messageId);
+            messageService.deleteMessage(messageId,folderId);
             return new ModelAndView("redirect:/message/list.do");
         } catch (Throwable oops) {
             System.out.println(oops.getMessage());
@@ -150,7 +150,6 @@ public class MessageController extends AbstractController {
         Assert.notNull(messageId);
         Assert.notNull(folderId);
         Actor principal = actorService.findActorByPrincipal();
-        Assert.isTrue(principal == messageId.getSender() || principal.getReceivedMessages().contains(messageId));
         Assert.isTrue(folderId.getActor() == principal);
         try {
             messageService.moveMessage(messageId.getId(), folderId.getId());

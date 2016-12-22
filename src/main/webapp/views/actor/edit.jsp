@@ -15,6 +15,7 @@
 <article class="col s7" style="margin-left:2%">
     <form:form action="actor/edit.do" modelAttribute="actor" method="POST">
         <form:hidden path="id"/>
+        <form:hidden path="version"/>
         <h2>Personal data</h2>
         <input type="hidden" value="${role}" name="role"/>
         <div class="form-group-2">

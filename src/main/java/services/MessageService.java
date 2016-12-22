@@ -72,15 +72,9 @@ public class MessageService {
         messageRepository.delete(message.getId());
     }
 
-    public void deleteMessage(Message message) {
-        Actor actor = userService.findByPrincipal();
-        Folder folder = null;
-        System.out.println("ey1");
-        if (message.getSender() == actor || message.getRecipients().contains(actor)) {
-            System.out.println("ey2" + actor.getId() + " " + message.getId());
-            folder = folderService.findFolderByMessageAndActor(actor.getId(), message.getId());
+    public void deleteMessage(Message message,Folder folder) {
+        Actor actor = actorService.findActorByPrincipal();
             if (folder.getFolderType() != Folder.FolderType.THRASHBOX) {
-                System.out.println("ey3");
                 Folder folderTrash = folderService.findTrashbox(actor.getId());
                 moveMessage(message.getId(), folderTrash.getId());
             } else {
@@ -88,7 +82,6 @@ public class MessageService {
                 save(message);
                 delete(message);
             }
-        }
 
     }
 
@@ -122,7 +115,7 @@ public class MessageService {
     public void moveMessage(int messageId, int folderId) {
         Folder newFolder = folderService.findOne(folderId);
         Message message = findOne(messageId);
-        Actor actor = userService.findByPrincipal();
+        Actor actor = actorService.findActorByPrincipal();
         Assert.notNull(newFolder);
         Assert.notNull(message);
         Assert.notNull(actor);

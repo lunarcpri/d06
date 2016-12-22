@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Access(AccessType.PROPERTY)
 public class Quantity extends domain.DomainEntity {
-    private enum Unit {
+    public enum Unit {
         gram, kilograms, ounces, pounds, militres, litres, spoons, cups, pieces
     }
 

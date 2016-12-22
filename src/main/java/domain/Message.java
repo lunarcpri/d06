@@ -107,14 +107,5 @@ public class Message extends domain.DomainEntity implements Cloneable {
         return super.clone();
     }
 
-    @PreRemove
-    private void removeFolder() {
-        for (Folder f : folders) {
-            f.getMessages().remove(this);
-        }
-        for (Actor a : recipients) {
-            a.getReceivedMessages().remove(this);
-        }
-        sender.getSendedMessages().remove(this);
-    }
+
 }

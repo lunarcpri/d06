@@ -27,8 +27,6 @@ public abstract class Actor extends DomainEntity {
     private String surnames;
     private String phone;
     private String address;
-    private Collection<Message> SendedMessages;
-    private Collection<Message> ReceivedMessages;
     private List<SocialIdentity> socialIdentities;
     private UserAccount userAccount;
     private Collection<Star> starses;
@@ -82,26 +80,6 @@ public abstract class Actor extends DomainEntity {
         this.address = address;
     }
 
-
-    @Valid
-    @OneToMany(mappedBy = "sender", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    public Collection<Message> getSendedMessages() {
-        return SendedMessages;
-    }
-
-    public void setSendedMessages(Collection<Message> sendedMessages) {
-        SendedMessages = sendedMessages;
-    }
-
-    @Valid
-    @ManyToMany(mappedBy = "recipients", cascade = CascadeType.REMOVE)
-    public Collection<Message> getReceivedMessages() {
-        return ReceivedMessages;
-    }
-
-    public void setReceivedMessages(Collection<Message> receivedMessages) {
-        ReceivedMessages = receivedMessages;
-    }
 
     @Valid
     @OneToMany(mappedBy = "actor", cascade = CascadeType.ALL)

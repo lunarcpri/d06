@@ -21,6 +21,7 @@
             <h2>${socialIdentity.name}</h2>
             <form:hidden path="id"/>
             <form:hidden path="actor"/>
+            <form:hidden path="version"/>
             <form:label path="name">
                 <spring:message code="name"/>:
             </form:label>

@@ -5,6 +5,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@taglib prefix="display" uri="http://displaytag.sf.net" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <section class="main">
     <%@ include file="/views/administrator/layout.jsp" %>
@@ -42,7 +43,9 @@
 
                 <spring:message code="delete" var="deleteHeader"/>
             <display:column title="${deleteHeader}">
+                    <jstl:if test="${fn:length(row.recipes)==0}">
             <a href="http://localhost:8080/administrator/category/delete.do?categoryId=${row.id}">${deleteHeader}</a>
+                    </jstl:if>
             </display:column>
 
             </display:table>
