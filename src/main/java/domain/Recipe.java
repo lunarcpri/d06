@@ -101,7 +101,7 @@ public class Recipe  extends DomainEntity {
     //Relationship
 
     @Valid
-    @OneToMany (mappedBy = "recipe",orphanRemoval = true)
+    @OneToMany (mappedBy = "recipe",cascade = CascadeType.ALL)
     public List<Quantity> getQuantities() {
         return quantities;
     }
@@ -111,7 +111,7 @@ public class Recipe  extends DomainEntity {
     }
 
     @Valid
-    @OneToMany (mappedBy = "recipe",cascade = CascadeType.REMOVE,orphanRemoval = true)
+    @OneToMany (mappedBy = "recipe",cascade = CascadeType.ALL)
     public List<Step> getSteps() {
         return steps;
     }
@@ -130,7 +130,7 @@ public class Recipe  extends DomainEntity {
         this.author = user;
     }
 
-    @OneToMany(mappedBy = "recipe",orphanRemoval = true,cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "recipe",cascade = CascadeType.REMOVE)
     public Collection<Likes> getLikes() {
         return likes;
     }
@@ -168,7 +168,7 @@ public class Recipe  extends DomainEntity {
         this.read_only = read_only;
     }
 
-    @ManyToMany(cascade = CascadeType.REMOVE)
+    @ManyToMany(cascade = CascadeType.DETACH)
     public Collection<Contest> getWinnedContests() {
         return winnedContests;
     }
@@ -177,7 +177,7 @@ public class Recipe  extends DomainEntity {
         this.winnedContests = winnedContests;
     }
 
-    @ManyToMany(mappedBy = "recipesQualified",cascade = CascadeType.REMOVE)
+    @ManyToMany(mappedBy = "recipesQualified")
     public Collection<Contest> getQualifiedContests() {
         return qualifiedContests;
     }

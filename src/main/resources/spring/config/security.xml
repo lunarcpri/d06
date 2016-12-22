@@ -43,6 +43,9 @@
 		<security:intercept-url pattern="/recipe/*" access="permitAll" />
         <security:intercept-url pattern="/contest/*" access="permitAll" />
 		<security:intercept-url pattern="/category/*" access="permitAll" />
+		<security:intercept-url pattern="/nutritionist/ingredient/*" access="hasRole('NUTRITIONIST')" />
+        <security:intercept-url pattern="/nutritionist/property/*" access="hasRole('NUTRITIONIST')" />
+        <security:intercept-url pattern="/nutritionist/curriculum/*" access="hasRole('NUTRITIONIST')" />
 		<security:intercept-url pattern="/nutritionist/register.do" access="isAnonymous()" />
         <security:intercept-url pattern="/actor/edit.do?edit=curriculum" access="hasRole('NUTRITIONIST')" />
 		<security:intercept-url pattern="/sponsor/register.do" access="isAnonymous()" />

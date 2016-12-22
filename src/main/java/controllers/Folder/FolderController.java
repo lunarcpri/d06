@@ -44,7 +44,6 @@ public class FolderController extends AbstractController {
 
     @RequestMapping(value = "/edit")
     public ModelAndView edit(@RequestParam Folder folderId) {
-        System.out.print(folderId);
         return createEditModelAndView(folderId,null);
     }
 
@@ -88,8 +87,6 @@ public class FolderController extends AbstractController {
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public ModelAndView edit(@Valid @ModelAttribute("folder") Folder folder, BindingResult bindingResult) {
         Assert.notNull(folder);
-        Actor principal = actorService.findActorByPrincipal();
-        Assert.isTrue(principal == folder.getActor());
         if (bindingResult.hasErrors()){
             return createEditModelAndView(folder,"wrong");
         }

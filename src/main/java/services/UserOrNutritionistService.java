@@ -28,6 +28,9 @@ public class UserOrNutritionistService {
     @Autowired
     private UserAccountService userAccountService;
 
+    @Autowired
+    private ActorService actorService;
+
 
 
     public UserOrNutritionistService(){
@@ -73,58 +76,54 @@ public class UserOrNutritionistService {
         userOrNutritionistRepository.delete(userOrNutritionist);
     }
 
-    public Boolean isFollowing(int id){
-
-        Assert.isTrue(!userOrNutritionistRepository.following(userService.findByPrincipal().getId(), id).isEmpty());
-
-        return true;
+    public Boolean isFollowing(UserOrNutritionist follower, UserOrNutritionist following){
+        Assert.notNull(following);
+        return  follower.getFollowing().contains(following);
     }
 
 
-    public void follow(UserOrNutritionist userOrNutritionist){
+    public void follow(UserOrNutritionist follower, UserOrNutritionist followed){
+        Collection<UserOrNutritionist> followers;
+        Collection<UserOrNutritionist> following;
+        Assert.notNull(follower);
+        Assert.notNull(followed);
+        Assert.isTrue(follower.getId()!=followed.getId());
 
-        Assert.notNull(userOrNutritionist);
-        Assert.isTrue(!isFollowing(userOrNutritionist.getId()));
-        userAccountService.assertRole("USER,NUTRITIONIST");
+        Assert.isTrue(!isFollowing(follower,followed));
+        followers = followed.getFollower();
+        following = follower.getFollowing();
+        followers.add(follower);
+        following.add(followed);
 
-        UserOrNutritionist followingUser =  userService.findByPrincipal();
-
-        Collection<UserOrNutritionist> followers = followingUser.getFollower();
-        Collection<UserOrNutritionist> following =  userOrNutritionist.getFollowing();
-
-        followers.add(followingUser);
-        following.add(userOrNutritionist);
-
-        followingUser.setFollowing(following);
-        userOrNutritionist.setFollower(followers);
-
-        save(followingUser);
-        save(userOrNutritionist);
+        followed.setFollower(followers);
+        follower.setFollowing(following);
+        save(followed);
+        save(follower);
 
     }
 
 
-    public void unfollow(UserOrNutritionist userOrNutritionist){
+    public void unfollow(UserOrNutritionist unfollower, UserOrNutritionist unfollowed){
 
-        Assert.notNull(userOrNutritionist);
-        Assert.isTrue(isFollowing(userOrNutritionist.getId()));
-        userAccountService.assertRole("USER,NUTRITIONIST");
+        Collection<UserOrNutritionist> unfollowers;
+        Collection<UserOrNutritionist> unfollowing;
+        Assert.notNull(unfollower);
+        Assert.notNull(unfollowed);
+        Assert.isTrue(unfollower.getId()!=unfollowed.getId());
+        Assert.isTrue(isFollowing(unfollower,unfollowed));
 
-        UserOrNutritionist followingUser = (UserOrNutritionist) userService.findByPrincipal();
+        unfollowers = unfollowed.getFollower();
+        unfollowing = unfollower.getFollowing();
+        unfollowers.remove(unfollower);
+        unfollowing.remove(unfollowed);
 
-        Collection<UserOrNutritionist> followers = followingUser.getFollower();
-        Collection<UserOrNutritionist> following =  userOrNutritionist.getFollowing();
+        unfollowed.setFollower(unfollowers);
+        unfollower.setFollowing(unfollowing);
 
-        followers.remove(followingUser);
-        following.remove(userOrNutritionist);
+        save(unfollowed);
+        save(unfollower);
 
-        followingUser.setFollowing(following);
-        userOrNutritionist.setFollower(followers);
-
-        save(followingUser);
-        save(userOrNutritionist);
     }
-
     public Collection<Recipe> latestFollowingUserRecipes(){
        Collection<Recipe> result;
         User u = userService.findByPrincipal();

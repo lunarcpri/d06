@@ -242,58 +242,106 @@
     </bean>
 
     <!-- Ingredients -->
+    <bean id="property1" class="domain.Property">
+        <property name="name" value="Alto porcentaje protéico" />
+    </bean>
+    <bean id="property2" class="domain.Property">
+        <property name="name" value="Alto nivel en grasa" />
+    </bean>
+    <bean id="property3" class="domain.Property">
+        <property name="name" value="Muchos hidratos de carbono" />
+    </bean>
+    <bean id="property4" class="domain.Property">
+        <property name="name" value="Muchas vitaminas" />
+    </bean>
+    <bean id="property5" class="domain.Property">
+        <property name="name" value="Alto nivel de azucar" />
+    </bean>
 
+    <bean id="property6" class="domain.Property">
+        <property name="name" value="Sales minerales" />
+    </bean>
 
     <bean id="ingredient1" class="domain.Ingredient">
         <property name="description" value="description" />
-        <property name="name" value="Azucar" />
+        <property name="name" value="Patata" />
+        <property name="properties">
+            <list>
+                <ref bean="property3"/>
+            </list>
+        </property>
     </bean>
-
 
     <bean id="ingredient2" class="domain.Ingredient">
         <property name="description" value="description" />
         <property name="name" value="Sal" />
+        <property name="properties">
+            <list>
+                <ref bean="property5"/>
+            </list>
+        </property>
     </bean>
 
     <bean id="ingredient3" class="domain.Ingredient">
         <property name="description" value="description" />
         <property name="name" value="Agua" />
+        <property name="properties">
+            <list>
+                <ref bean="property5"/>
+            </list>
+        </property>
     </bean>
 
     <bean id="ingredient4" class="domain.Ingredient">
         <property name="description" value="description" />
         <property name="name" value="Aceite" />
+        <property name="properties">
+            <list>
+                <ref bean="property2"/>
+            </list>
+        </property>
     </bean>
 
     <bean id="ingredient5" class="domain.Ingredient">
         <property name="description" value="description" />
         <property name="name" value="Tomate" />
+        <property name="properties">
+            <list>
+                <ref bean="property4"/>
+            </list>
+        </property>
     </bean>
 
     <bean id="ingredient6" class="domain.Ingredient">
         <property name="description" value="description" />
         <property name="name" value="Cebolla" />
+        <property name="properties">
+            <list>
+                <ref bean="property5"/>
+            </list>
+        </property>
     </bean>
 
     <bean id="ingredient7" class="domain.Ingredient">
         <property name="description" value="description" />
         <property name="name" value="Pimiento" />
+        <property name="properties">
+            <list>
+                <ref bean="property4"/>
+            </list>
+        </property>
     </bean>
 
     <bean id="ingredient8" class="domain.Ingredient">
         <property name="description" value="description" />
         <property name="name" value="Zanahoria" />
+        <property name="properties">
+            <list>
+                <ref bean="property4"/>
+            </list>
+        </property>
     </bean>
 
-    <bean id="ingredient9" class="domain.Ingredient">
-        <property name="description" value="description" />
-        <property name="name" value="Pollo" />
-    </bean>
-
-    <bean id="ingredient10" class="domain.Ingredient">
-        <property name="description" value="description" />
-        <property name="name" value="Ternera" />
-    </bean>
 
 
     <!-- Recipes -->
@@ -917,7 +965,7 @@
     <bean id="contest1" class="domain.Contest">
         <property name="closed_at" value="01/02/2015 23:59"/>
         <property name="opened_at" value="01/02/2015 23:59" />
-        <property name="title" value="Contest 1" />
+        <property name="title" value="Concurso de almuerzos" />
         <property name="recipesQualified">
             <list>
                 <ref bean="recipe1"/>
@@ -935,9 +983,9 @@
     </bean>
 
     <bean id="contest2" class="domain.Contest">
-        <property name="closed_at" value="01/02/2015 23:59"/>
+        <property name="closed_at" value="01/02/2017 23:59"/>
         <property name="opened_at" value="01/02/2015 23:59" />
-        <property name="title" value="Contest 1" />
+        <property name="title" value="Concurso de Primavera" />
         <property name="recipesQualified">
             <list>
                 <ref bean="recipe5"/>
@@ -953,9 +1001,9 @@
     </bean>
 
     <bean id="contest3" class="domain.Contest">
-        <property name="closed_at" value="01/02/2015 23:59"/>
+        <property name="closed_at" value="01/02/2017 23:59"/>
         <property name="opened_at" value="01/02/2015 23:59" />
-        <property name="title" value="Contest 1" />
+        <property name="title" value="Concurso de Postres" />
         <property name="recipesQualified">
             <list>
                 <ref bean="recipe1"/>
@@ -971,15 +1019,15 @@
         </property>
     </bean>
     <bean id="contest4" class="domain.Contest">
-        <property name="closed_at" value="01/02/2015 23:59"/>
+        <property name="closed_at" value="01/02/2017 23:59"/>
         <property name="opened_at" value="01/02/2015 23:59" />
-        <property name="title" value="Contest 1" />
+        <property name="title" value="Concurso Provincial" />
 
     </bean>
     <bean id="contest5" class="domain.Contest">
         <property name="closed_at" value="01/02/2015 23:59"/>
         <property name="opened_at" value="01/02/2015 23:59" />
-        <property name="title" value="Contest 1" />
+        <property name="title" value="Concurso 'Receta de la abuela'" />
         <property name="recipesQualified">
             <list>
                 <ref bean="recipe2"/>

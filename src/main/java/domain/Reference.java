@@ -48,7 +48,6 @@ public class Reference extends domain.DomainEntity
     //Relationships
 
     @Valid
-    @NotNull
     @ManyToOne(optional = false)
     public Curriculum getCurriculum() {
         return curriculum;

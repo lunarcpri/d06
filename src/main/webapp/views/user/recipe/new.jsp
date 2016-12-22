@@ -37,6 +37,9 @@
     <div class="form-group-2">
     <h2><spring:message code="quantities"/> </h2>
         <article id="quantities-list">
+            <jstl:if test="${nIngredients gt 0}">
+
+
             <jstl:forEach begin="0" end="${nIngredients-1}" varStatus="index">
         <div id="ingredient-quantity0">
         <div class="col s3" id="quantities-selection">
@@ -70,8 +73,14 @@
 
         </div>
             </jstl:forEach>
+            </jstl:if>
         </article>
-        <a href="${contextPath}/user/recipe/new.do?nIngredients=${nIngredients+1}&nSteps=${nSteps}" class="button">Add Ingredient</a>
+        <div class="block">
+        <a href="${contextPath}/user/recipe/new.do?nIngredients=${nIngredients+1}&nSteps=${nSteps}" class="button">
+            <spring:message code="addingredient" /> </a>
+        <a href="${contextPath}/user/recipe/new.do?nIngredients=${nIngredients-1}&nSteps=${nSteps}" class="button">
+            <spring:message code="removeingredient" /> </a>
+        </div>
     </div>
     <div class="form-group-1">
         <label for="summary">
@@ -79,9 +88,10 @@
     </label>
         <form:textarea path="summary" />
         <form:errors cssClass="error" path="summary"/>
-       <h1>Steps</h1>
+       <h1><spring:message code="steps"/>  </h1>
+        <jstl:if test="${nSteps gt 0}">
         <jstl:forEach begin="0" end="${nSteps-1}" varStatus="index">
-            <h2>Step ${index.index}</h2>
+            <h2><spring:message code="step" /> ${index.index}</h2>
             <label for="steps[${index.index}].picture">
                <spring:message code="picture" />
             </label>
@@ -100,7 +110,13 @@
             <form:textarea path="steps[${index.index}].hints" />
             <form:errors cssClass="error" path="steps[${index.index}].hints"/>
         </jstl:forEach>
-        <a href="${contextPath}/user/recipe/new.do?nIngredients=${nIngredients}&nSteps=${nSteps+1}" class="button" id="add-quantity">Add Step</a>
+        </jstl:if>
+        <div class="block">
+        <a href="${contextPath}/user/recipe/new.do?nIngredients=${nIngredients}&nSteps=${nSteps+1}" class="button" id="add-quantity">
+            <spring:message code="addstep"/></a>
+        <a href="${contextPath}/user/recipe/new.do?nIngredients=${nIngredients}&nSteps=${nSteps-1}" class="button" id="add-quantity">
+            <spring:message code="removestep"/> </a>
+        </div>
     </div>
     <div class="block">
 

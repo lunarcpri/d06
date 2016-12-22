@@ -31,19 +31,22 @@
         <ul>
             <li><a href="${contextPath}/user/list.do" class="icon"><i class="fa fa-user"></i> <spring:message code="account"/> </a>
                 <ul>
+                    <li><a href="${contextPath}/user/list.do"><spring:message code="listofusers"/></a></li>
                     <security:authorize access="isAuthenticated()">
                         <li><a href="${contextPath}/actor/edit.do?edit=personal"> <spring:message code="profile"/> </a></li>
                         <li><a href="${contextPath}/message/list.do"><spring:message code="messages"/></a></li>
                         <security:authorize access="hasAnyRole('NUTRITIONIST')">
-                            <li><a href="${contextPath}/actor/edit.do?edit=curriculum"> Curriculum</a></li>
+                            <li><a href="${contextPath}/nutritionist/curriculum/list.do"> <spring:message code="managecurriculum" /></a></li>
+                            <li><a href="${contextPath}/nutritionist/ingredient/list.do"><spring:message code="manageingredients" /> </a></li>
+                            <li><a href="${contextPath}/nutritionist/property/list.do"><spring:message code="manageproperties" /> </a></li>
                         </security:authorize>
+
                         <li><a href="${contextPath}/security/j_spring_security_logout" > <spring:message code="logout"/></a></li>
                     </security:authorize>
                     <security:authorize access="!isAuthenticated()">
                         <li><a href="${contextPath}/security/login.do"><spring:message code="login"/></a></li>
                         <li><a href="${contextPath}/register.do"><spring:message code="register"/></a></li>
                     </security:authorize>
-                    <li><a href="${contextPath}/user/list.do"><spring:message code="list"/></a></li>
                 </ul></li>
             <li><a href="${contextPath}/contest/list.do" class="icon"><i class="fa fa-trophy"></i> <spring:message code="contests"/></a></li>
             <li><a href="${contextPath}/recipe/list.do" class="icon"><i class="fa fa-envira"></i> <spring:message code="recipes"/> </a>

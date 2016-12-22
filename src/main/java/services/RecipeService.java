@@ -25,6 +25,9 @@ public class RecipeService {
     private UserOrNutritionistService userOrNutritionistService;
 
     @Autowired
+    private ContestService contestService;
+
+    @Autowired
     private UserAccountService userAccountService;
 
     @Autowired
@@ -101,6 +104,26 @@ public class RecipeService {
          return recipe2;
     }
 
+
+    public Recipe editRecipe(Recipe recipe){
+
+        userAccountService.assertRole("USER");
+        Date createdAt = new Date();
+        recipe.setUpdated_at(createdAt);
+        recipe.setAuthor(userService.findByPrincipal());
+
+        Recipe recipe2 = save(recipe);
+        for(Step s: recipe.getSteps()){
+            s.setRecipe(recipe2);
+            stepService.save(s);
+        }
+        for(Quantity q : recipe.getQuantities()){
+            q.setRecipe(recipe2);
+            quantityService.save(q);
+        }
+        return recipe2;
+    }
+
     private String generateTicker(){
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
@@ -157,7 +180,17 @@ public class RecipeService {
     public void delete(Recipe recipe){
         Assert.notNull(recipe);
         userAccountService.assertRole("USER");
-        recipeRepository.delete(recipe.getId());
+        Collection<Contest> contests = recipe.getQualifiedContests();
+        for(Contest c: contests){
+            c.getRecipesQualified().remove(recipe);
+            contestService.save(c);
+        }
+        contests = recipe.getWinnedContests();
+        for(Contest c: contests){
+            c.getRecipesQualified().remove(recipe);
+            contestService.save(c);
+        }
+        recipeRepository.delete(recipe);
     }
 
 
@@ -211,9 +244,8 @@ public class RecipeService {
         Integer result;
 
         result = recipeRepository.getNumberOfDisLike(r.getId());
-        Assert.notNull(result);
 
-        return result;
+        return (result !=null) ? result : 0;
     }
 
 
@@ -221,9 +253,8 @@ public class RecipeService {
         Integer result;
 
         result = recipeRepository.getNumberOfLike(r.getId());
-        Assert.notNull(result);
 
-        return result;
+        return (result !=null) ? result : 0;
     }
 
 }

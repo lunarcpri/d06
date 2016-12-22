@@ -25,6 +25,9 @@
 		<value>/views/welcome/messages</value>
 		<value>/views/actor/messages</value>
 		<value>/views/nutritionist/messages</value>
+		<value>/views/nutritionist/ingredient/messages</value>
+		<value>/views/nutritionist/property/messages</value>
+		<value>/views/nutritionist/curriculum/messages</value>
 		<value>/views/sponsor/messages</value>
 		<value>/views/campaign/messages</value>
 		<value>/views/bill/messages</value>

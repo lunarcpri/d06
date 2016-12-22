@@ -30,7 +30,7 @@ public class Likes  extends DomainEntity{
         this.userOrNutritionist = userOrNutritionist;
     }
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
     public Recipe getRecipe() {
         return recipe;
     }

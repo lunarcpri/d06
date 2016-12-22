@@ -18,6 +18,7 @@
                 <spring:message code="name" />:
             </form:label>
             <form:input path="name"/>
+            <form:hidden path="version" />
             <form:errors cssClass="error" path="name"  />
             <form:hidden path="id"/>
             <form:hidden path="actor"/>

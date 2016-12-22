@@ -68,18 +68,8 @@ public class IngredientService {
         save(ingredient);
     }
 
-    public void modify(Ingredient ingredient){
-        userAccountService.assertRole("NUTRITIONIST");
-        Ingredient ingredientModified = findOne(ingredient.getId());
-        ingredientModified.setDescription(ingredient.getDescription());
-        ingredientModified.setName(ingredient.getName());
-        ingredientModified.setProperties(ingredient.getProperties());
-
-        save(ingredient);
-    }
 
      public void delete(Ingredient ingredient){
-         userAccountService.assertRole("NUTRITIONIST");
 
          Assert.isTrue(ingredient.getQuantities().size()==0);
 

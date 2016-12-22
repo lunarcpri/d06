@@ -30,7 +30,7 @@ public class Property extends domain.DomainEntity{
         this.name = name;
     }
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "properties")
     public Collection<Ingredient> getIngredients() {
         return ingredients;
     }

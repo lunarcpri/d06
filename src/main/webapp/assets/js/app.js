@@ -14,5 +14,5 @@ $(document).ready(function(){
         relativeRedir('../');
     });
 
-    $('select').chosen();
+    $('select').chosen({width:"60%"});
 });

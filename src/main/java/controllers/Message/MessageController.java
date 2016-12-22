@@ -52,8 +52,6 @@ public class MessageController extends AbstractController {
 
 	@RequestMapping(value = "/new")
 	public ModelAndView index() {
-		ModelAndView result;
-		Collection<Actor> actorCollection;
 
 		return createNewModelAndView(new Message(),null);
 	}
@@ -66,7 +64,6 @@ public class MessageController extends AbstractController {
         Actor principal;
 
         principal = actorService.findActorByPrincipal();
-        foldersCollection = principal.getFolders();
         Folder folder;
 
         if (folderId != null){
@@ -139,8 +136,6 @@ public class MessageController extends AbstractController {
     public ModelAndView editPost(@RequestParam(required=true) Message messageId) {
         ModelAndView result;
         Assert.notNull(messageId);
-        Actor principal = actorService.findActorByPrincipal();
-        Assert.isTrue(principal == messageId.getSender() || principal.getReceivedMessages().contains(messageId));
         try{
             messageService.deleteMessage(messageId);
             return  new ModelAndView("redirect:/message/list.do");

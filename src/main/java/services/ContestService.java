@@ -47,7 +47,7 @@ public class ContestService {
         return result;
     }
 
-    private void save(Contest contest){
+    public void save(Contest contest){
         Assert.notNull(contest);
 
         contestRepository.save(contest);
@@ -80,16 +80,18 @@ public class ContestService {
         save(contest);
     }
 
+    public Collection<Contest> findOpenContests(){
+        return contestRepository.findOpenContests();
+    }
+
     public void qualifyRecipe(Recipe r, Contest c){
         Assert.notNull(r);
         Assert.notNull(c);
         Assert.isTrue(recipeService.getNumberOfDisLike(r)==0 && recipeService.getNumberOfLike(r)>=5);
+        r.setRead_only(true);
         Collection<Recipe> recipeCollection = c.getRecipesQualified();
         recipeCollection.add(r);
         c.setRecipesQualified(recipeCollection);
-        Recipe r2 = recipeService.findOne(r.getId());
-        r2.setRead_only(true);
-        recipeService.save(r2);
         save(c);
     }
 

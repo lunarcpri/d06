@@ -1,9 +1,7 @@
 package controllers.User;
 
 import controllers.AbstractController;
-import domain.Category;
-import domain.Nutritionist;
-import domain.User;
+import domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,7 +18,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import repositories.UserRepository;
 import security.Authority;
+import security.LoginService;
+import services.ActorService;
+import services.UserOrNutritionistService;
 import services.UserService;
+import sun.rmi.runtime.Log;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -37,6 +39,11 @@ public class UserController extends AbstractController {
     @Autowired
     private UserDetailsService userDetailsService;
 
+    @Autowired
+    private UserOrNutritionistService userOrNutritionistService;
+
+    @Autowired
+    private ActorService actorService;
 
     @RequestMapping(value = "/list")
     public ModelAndView list(@RequestParam(required=false) String query) {
@@ -60,8 +67,18 @@ public class UserController extends AbstractController {
         ModelAndView result;
         Assert.notNull(user);
         result = new ModelAndView("user/index");
-
+        result.addObject("canFollow",false);
+        if (LoginService.isAuthorized()){
+            UserOrNutritionist principal = (UserOrNutritionist) actorService.findActorByPrincipal();
+            if (principal.getId()!=user.getId()) {
+                Boolean isFollowing = userOrNutritionistService.isFollowing(principal,user);
+                result.addObject("isFollowing",isFollowing);
+                result.addObject("canFollow",true);
+            }
+        }
         result.addObject("user", user);
+        result.addObject("followersNumber",user.getFollower().size());
+        result.addObject("followingNumber",user.getFollowing().size());
         result.addObject("recipes",user.getRecipes());
         result.addObject("requestURI","user/"+user.getId()+".do");
         return result;
@@ -113,5 +130,22 @@ public class UserController extends AbstractController {
         result.addObject("message",message);
 
         return result;
+    }
+
+    @RequestMapping(value = "/follow")
+    public ModelAndView follow(@RequestParam User userId) {
+        Assert.notNull(userId);
+        UserOrNutritionist principal = (UserOrNutritionist) actorService.findActorByPrincipal();
+        userOrNutritionistService.follow(principal,userId);
+        return new ModelAndView("redirect:"+userId.getId()+".do");
+    }
+
+    @RequestMapping(value = "/unfollow")
+    public ModelAndView unfollow(@RequestParam User userId) {
+        Assert.notNull(userId);
+        UserOrNutritionist principal = (UserOrNutritionist) actorService.findActorByPrincipal();
+
+        userOrNutritionistService.unfollow(principal,userId);
+        return new ModelAndView("redirect:"+userId.getId()+".do");
     }
 }

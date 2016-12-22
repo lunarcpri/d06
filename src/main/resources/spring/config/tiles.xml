@@ -16,6 +16,9 @@
         <value>/views/user/recipe/tiles.xml</value>
 		<value>/views/sponsor/tiles.xml</value>
 		<value>/views/nutritionist/tiles.xml</value>
+		<value>/views/nutritionist/ingredient/tiles.xml</value>
+		<value>/views/nutritionist/property/tiles.xml</value>
+		<value>/views/nutritionist/curriculum/tiles.xml</value>
 		<value>/views/master-page/tiles.xml</value>		
 		<value>/views/misc/tiles.xml</value>
 		<value>/views/security/tiles.xml</value>

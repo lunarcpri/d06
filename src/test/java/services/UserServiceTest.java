@@ -1,6 +1,8 @@
 package services;
 
+import domain.Actor;
 import domain.User;
+import domain.UserOrNutritionist;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +25,10 @@ public class UserServiceTest extends AbstractTest {
 
 
     @Autowired
-    private UserService userService;
+    private ActorService actorService;
+
+    @Autowired
+    private  UserOrNutritionistService userOrNutritionistService;
 
 
     @Test
@@ -37,5 +42,18 @@ public class UserServiceTest extends AbstractTest {
             }
         }
         Assert.isTrue(aux==result);
+    }
+    @Test
+    public void testFollows()
+    {
+        super.authenticate("nutritionist1");
+        UserOrNutritionist follower = (UserOrNutritionist) actorService.findActorByPrincipal();
+        UserOrNutritionist followed = (UserOrNutritionist) actorService.findOne(13);
+        System.out.print(userOrNutritionistService.isFollowing(follower,followed));
+        userOrNutritionistService.follow(follower,followed);
+        System.out.print(userOrNutritionistService.isFollowing(follower,followed));
+        userOrNutritionistService.unfollow(follower,followed);
+        System.out.print(userOrNutritionistService.isFollowing(follower,followed));
+
     }
 }

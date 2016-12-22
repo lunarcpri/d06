@@ -2327,6 +2327,10 @@
   background-color: white !important;
   color: rgba(0, 0, 0, 0.87) !important; }
 
+.indigo {
+  background-color: #3F51B5;
+  color: white; }
+
 @font-face {
   font-family: Roboto-Regular;
   src: url(kmodern/fonts/Roboto-Regular.ttf); }
@@ -2674,6 +2678,10 @@ button {
 .hidden {
   display: none; }
 
+.block {
+  display: block;
+  margin: 7px; }
+
 .dropdown {
   font-size: 12pt !important;
   min-width: 200px;
@@ -2750,6 +2758,10 @@ button {
   background-color: white !important;
   color: rgba(0, 0, 0, 0.87) !important; }
 
+.indigo {
+  background-color: #3F51B5;
+  color: white; }
+
 label {
   display: block;
   font-size: 1.5em;
@@ -2793,7 +2805,7 @@ textarea {
   width: 45% !important; }
 
 textarea {
-  min-height: 300px;
+  min-height: 180px;
   min-width: 70%;
   outline: none;
   border: 2px solid #B0BEC5;
@@ -3046,5 +3058,12 @@ table {
   .messageView p {
     background: white;
     padding: 15px; }
+
+.login-form {
+  margin-left: 20%;
+  margin-right: 20%;
+  width: 59%; }
+  .login-form input[type=text], .login-form input[type=password] {
+    width: 70%; }
 
 /*# sourceMappingURL=style.css.map */

@@ -48,7 +48,7 @@ public class NutritionistController extends AbstractController {
         ModelAndView result;
 
         if (binding.hasErrors()){
-            result = createEditModelAndView(nutritionist,"wrong00");
+            result = createEditModelAndView(nutritionist,"wrong");
         }else{
             try{
                 Md5PasswordEncoder md5PasswordEncoder = new Md5PasswordEncoder();

@@ -50,7 +50,7 @@ public class PropertyService {
     }
 
     public void create(Property property){
-        userAccountService.assertRole("NUTRITIONIST");
+
         Assert.notNull(property);
 
         save(property);
@@ -58,15 +58,14 @@ public class PropertyService {
 
 
     public void delete(Property property){
-        userAccountService.assertRole("NUTRITIONIST");
         Assert.notNull(property);
         Assert.isTrue(property.getIngredients().size()==0);
 
-        delete(property);
+        propertyRepository.delete(property);
     }
 
     public void modify(Property property){
-        userAccountService.assertRole("NUTRITIONIST");
+
         Assert.notNull(property);
 
         save(property);

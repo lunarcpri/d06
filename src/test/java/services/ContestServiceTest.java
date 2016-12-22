@@ -1,6 +1,7 @@
 package services;
 
 import domain.Contest;
+import domain.Recipe;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,8 @@ public class ContestServiceTest extends AbstractTest {
     @Autowired
     private ContestService contestService;
 
-
+    @Autowired
+    private RecipeService recipeService;
 
 
     @Test
@@ -46,5 +48,11 @@ public class ContestServiceTest extends AbstractTest {
     public void testProcessWinner(){
         super.authenticate("admin");
         contestService.processWinner();
+    }
+    @Test
+    public void testQualifyRecipe(){
+        Recipe r = recipeService.findOne(63);
+        Contest c = contestService.findOne(115);
+        contestService.qualifyRecipe(r,c);
     }
 }

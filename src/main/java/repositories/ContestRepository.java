@@ -12,8 +12,11 @@ import java.util.List;
 @Repository
 public interface ContestRepository extends JpaRepository<Contest, Integer> {
 
-    @Query("select c from Contest c where c.closed_at < CURRENT_DATE and c.ended=false")
+    @Query("select c from Contest c where c.closed_at < CURRENT_DATE and c.ended=true")
     Collection<Contest> findClosedContests();
+
+    @Query("select c from Contest c where c.closed_at > CURRENT_DATE and c.ended=false")
+    Collection<Contest> findOpenContests();
 
     @Query("select min(c.recipesQualified.size)as s1 ,max(c.recipesQualified.size)as s2, avg(c.recipesQualified.size) as s3 from Contest c")
     List<Object[]> findMinMaxAvgRecipesPerContest();

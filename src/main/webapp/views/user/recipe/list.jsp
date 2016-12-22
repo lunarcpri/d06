@@ -15,9 +15,8 @@
 <article class="col s7" style="margin-left:2%">
 	<ul class="horizontal-list message-list-options">
 		<li><a href="${contextPath}/user/recipe/new.do"><i class="fa fa-plus"></i> <spring:message code="newrecipe"/> </a></li>
-		<li><a href="${contextPath}/user/qualify.do"><i class="fa fa-plus"></i> <spring:message code="qualifyrecipe"/> </a></li>
 	</ul>
-<<h2>Recipes Authored</h2>
+<h2><spring:message code="recipesauthored" /> </h2>
 	<display:table pagesize="5" class="displaytag" keepStatus="true"
 				   name="recipes" requestURI="${requestURI}" id="row">
 
@@ -42,6 +41,11 @@
 		<spring:message code="delete" var="deleteHeader" />
 		<display:column title="${deleteHeader}">
 			<a href="http://localhost:8080/user/recipe/delete.do?recipeId=${row.id}">${deleteHeader}</a>
+		</display:column>
+
+		<spring:message code="qualifyrecipe" var="qualifyrecipeHeader" />
+		<display:column title="${qualifyrecipeHeader}">
+			<a href="http://localhost:8080/user/recipe/qualifyRecipe.do?recipeId=${row.id}">${qualifyrecipeHeader}</a>
 		</display:column>
 
 	</display:table>
