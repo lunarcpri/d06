@@ -1,5 +1,6 @@
 package repositories;
 
+import domain.Category;
 import domain.Contest;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -31,4 +32,7 @@ public interface ContestRepository extends JpaRepository<Contest, Integer> {
 
     @Query("select c from Contest c join c.recipesQualified r where c.ended=false and r.id=?1")
     Collection<Contest> findOpenContestsByRecipe(int recipeid);
+
+    @Query("select c from Contest c where c.id=?1")
+    Contest findContestById(int id);
 }

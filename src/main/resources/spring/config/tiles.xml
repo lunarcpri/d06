@@ -30,6 +30,7 @@
 		<value>/views/folder/tiles.xml</value>
 		<value>/views/administrator/spamTags/tiles.xml</value>
 		<value>/views/administrator/category/tiles.xml</value>
+		<value>/views/administrator/contest/tiles.xml</value>
 	</util:list>
 
 </beans>
