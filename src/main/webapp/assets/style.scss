@@ -321,3 +321,58 @@ table{
     width:70%;
   }
 }
+
+.liked{
+  color: rgba(100, 211, 61, 0.93)!important;
+}
+
+.disliked{
+  color: #ff2e2b!important;
+}
+.likes{
+  font-size:1.4em;
+  a{
+    color:$grey3;
+    margin-right:5px;
+  }
+}
+
+.like{
+  &:hover{
+    color: rgba(100, 211, 61, 0.93);
+  }
+}
+
+.dislike{
+  &:hover{
+    color: #ff2e2b;
+  }
+}
+.writecomment{
+  input[type=text]{
+    width: 80%!important;
+  }
+  textarea{
+    width:80%!important;
+    min-height: 120px!important;
+  }
+}
+.comments{
+  .comment{
+    margin:15px;
+    padding: 10px;
+    .dateauthor{
+      font-size:0.9em;
+      color:$grey4;
+    }
+    border-bottom:1px solid $blue-grey3;
+  }
+}
+
+.comment-section{
+  padding:10px;
+  width:78%!important;
+  margin-left:10%;
+  background-color: $blue-grey5;
+  margin-right:10%;
+}

@@ -31,7 +31,7 @@ public abstract class UserOrNutritionist extends Actor {
     }
 
     @Valid
-    @OneToMany(mappedBy = "autor")
+    @OneToMany(mappedBy = "author")
     public Collection<Comment> getComments() {
         return comments;
     }

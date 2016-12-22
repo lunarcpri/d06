@@ -138,14 +138,6 @@ public class RecipeService {
 
     }
 
-    public Collection<Recipe> findUserRecipes(){
-        Collection<Recipe> recipe;
-
-        recipe = findAllRecipesByUser(userService.findByPrincipal().getId());
-
-        return recipe;
-
-    }
 
     public Collection<Recipe> findByKeyword(String key){
         Collection<Recipe> result;
@@ -194,25 +186,7 @@ public class RecipeService {
     }
 
 
-    // like parameter indicates if is a like or dislike: If it is true is like and if it is false is dislike
 
-
-    public void addLike(int id, boolean like){
-        Recipe recipe = findOne(id);
-        UserOrNutritionist userOrNutritionist = userService.findByPrincipal();
-        List<Likes> likes = new ArrayList<Likes>(likesService.findRecipeLikeByActor(userOrNutritionist.getId(),id));
-        if (likes.size()>0){
-            Likes likeRecipe = likes.get(0);
-            if (likeRecipe.getIsLike() == like){
-                likesService.delete(likeRecipe);
-            }else{
-                likeRecipe.setIsLike(like);
-                likesService.save(likeRecipe);
-            }
-        }else{
-            likesService.like(recipe,like);
-        }
-    }
 
 
 

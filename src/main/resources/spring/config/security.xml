@@ -40,7 +40,11 @@
 		<security:intercept-url pattern="/actor/socialIdentity/*" access="hasAnyRole('USER','SPONSOR','COOK','NUTRITIONIST','ADMIN')" />
         <security:intercept-url pattern="/message/**" access="hasAnyRole('USER','SPONSOR','COOK','NUTRITIONIST','ADMIN')" />
 		<security:intercept-url pattern="/folder/**" access="hasAnyRole('USER','SPONSOR','COOK','NUTRITIONIST','ADMIN')" />
+		<security:intercept-url pattern="/userornutritionist/list.do" access="hasAnyRole('USER','NUTRITIONIST')" />
 		<security:intercept-url pattern="/recipe/*" access="permitAll" />
+        <security:intercept-url pattern="/recipe/like" access="hasAnyRole('USER','NUTRITIONIST')" />
+        <security:intercept-url pattern="/recipe/comment" access="hasAnyRole('USER','SPONSOR','COOK','NUTRITIONIST','ADMIN')" />
+        <security:intercept-url pattern="/recipe/dislike" access="hasAnyRole('USER','NUTRITIONIST')" />
         <security:intercept-url pattern="/contest/*" access="permitAll" />
 		<security:intercept-url pattern="/category/*" access="permitAll" />
 		<security:intercept-url pattern="/nutritionist/ingredient/*" access="hasRole('NUTRITIONIST')" />

@@ -28,6 +28,9 @@
     <spring:message code="recipes.summary" var="summaryHeader" />
     <display:column property="summary" title="${summaryHeader}" sortable="false"/>
 
+    <spring:message code="createdat" var="createdatHeader" />
+    <display:column property="created_at" title="${createdatHeader}" sortable="true" format="{0,date,dd/MM/yyyy HH:mm}" />
+
     <spring:message code="recipes.author" var="authorHeader" />
     <display:column title="${authorHeader}">
         <a href="http://localhost:8080/user/${row.author.id}.do">${row.author.userAccount.username}</a>

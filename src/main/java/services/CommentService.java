@@ -1,7 +1,7 @@
 package services;
 
 import domain.Comment;
-import domain.User;
+import domain.UserOrNutritionist;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +27,9 @@ public class CommentService {
     @Autowired
     private UserOrNutritionistService userOrNutritionistService;
 
+    @Autowired
+    private ActorService actorService;
+
 
     public CommentService(){
         super();
@@ -45,10 +48,12 @@ public class CommentService {
         return result;
     }
 
-    private void save(Comment comment){
+    public Comment save(Comment comment){
         Assert.notNull(comment);
-
-        commentRepository.save(comment);
+        UserOrNutritionist principal = (UserOrNutritionist) actorService.findActorByPrincipal();
+        Assert.isTrue(comment.getAuthor().getId()==principal.getId());
+        comment.setCreated_at(new Date());
+        return commentRepository.save(comment);
     }
 
     public Collection<Comment> findAll(){
@@ -58,24 +63,6 @@ public class CommentService {
         Assert.notNull(result);
 
         return result;
-    }
-
-    public Collection<Comment> findAllCommentsByRecipe(int id){
-        Collection<Comment> result;
-
-        result = commentRepository.findAllCommentsByRecipe(id);
-        Assert.notNull(result);
-
-        return  result;
-    }
-
-    public void newComment(Comment comment){
-        userAccountService.assertRole("USER,NUTRITIONIST");
-        User u = userService.findByPrincipal();
-        comment.setAutor(u);
-        comment.setCreated_at(new Date());
-
-        save(comment);
     }
 
 

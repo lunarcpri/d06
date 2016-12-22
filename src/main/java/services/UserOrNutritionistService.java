@@ -143,13 +143,8 @@ public class UserOrNutritionistService {
     }
 
     public Collection<Recipe> findAllRecipesByFollowingActors(){
-        UserOrNutritionist userOrNutritionist = findUserOrNutritionistByActor(userService.findByPrincipal());
-        Collection<UserOrNutritionist> followers= userOrNutritionist.getFollowing();
-        List<Recipe> list = new ArrayList<Recipe>();
-        for(UserOrNutritionist e: followers){
-            User userAux = (User) e;
-            list.addAll(userAux.getRecipes());
-        }
+        UserOrNutritionist userOrNutritionist = (UserOrNutritionist) actorService.findActorByPrincipal();
+        Collection<Recipe> list = userOrNutritionistRepository.streamRecipesFollowingUsers(userOrNutritionist.getId());
         Assert.notNull(list);
         return list;
     }
