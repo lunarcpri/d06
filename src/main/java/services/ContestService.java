@@ -62,6 +62,15 @@ public class ContestService {
         return result;
     }
 
+    public void delete(Contest contest){
+        Assert.notNull(contest);
+        Assert.isTrue(!contest.getRecipesQualified().isEmpty());
+
+        contestRepository.delete(contest);
+
+
+    }
+
     public Collection<Contest> findAll(){
         Collection<Contest> result;
 

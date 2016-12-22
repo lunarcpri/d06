@@ -44,6 +44,7 @@
 		<value>/views/administrator/messages</value>
 		<value>/views/administrator/spamTags/messages</value>
 		<value>/views/administrator/category/messages</value>
+		<value>/views/administrator/contest/messages</value>
 
 
 	</util:list>
