@@ -34,10 +34,12 @@
 
 
 <link rel="stylesheet" href="assets/style.css" type="text/css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.2.0/jquery.rateyo.min.css">
     <link rel="stylesheet" href="assets/chosen.css" type="text/css">
 	<script src="assets/js/jquery.js" type="text/javascript"></script>
     <script src="assets/js/chosen.js"type="text/javascript" ></script>
     <script src="assets/js/app.js" type="text/javascript"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.2.0/jquery.rateyo.min.js" type="text/javascript"></script>
 <title><tiles:insertAttribute name="title" />${title}</title>
 	<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <script type="text/javascript">

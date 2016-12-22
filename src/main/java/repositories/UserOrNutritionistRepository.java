@@ -14,6 +14,6 @@ public interface UserOrNutritionistRepository extends JpaRepository<UserOrNutrit
     @Query("select u.following from UserOrNutritionist u join u.following f where u.id= ?1 and f.id=?2 ")
     Collection<UserOrNutritionist> following(int idPrincipal, int idFollower);
 
-    @Query("select f.recipes from User u join u.following f where u.id=?1")
+    @Query("select f.recipes from UserOrNutritionist u join u.following f where u.id=?1 order by created_at desc")
     Collection<Recipe> streamRecipesFollowingUsers(int id);
 }

@@ -32,6 +32,9 @@
             <li><a href="${contextPath}/user/list.do" class="icon"><i class="fa fa-user"></i> <spring:message code="account"/> </a>
                 <ul>
                     <li><a href="${contextPath}/user/list.do"><spring:message code="listofusers"/></a></li>
+                    <security:authorize access="hasAnyRole('NUTRITIONIST','USER')">
+                        <li><a href="${contextPath}/userornutritionist/list.do"><spring:message code="followedrecipes"/></a></li>
+                    </security:authorize>
                     <security:authorize access="isAuthenticated()">
                         <li><a href="${contextPath}/actor/edit.do?edit=personal"> <spring:message code="profile"/> </a></li>
                         <li><a href="${contextPath}/message/list.do"><spring:message code="messages"/></a></li>

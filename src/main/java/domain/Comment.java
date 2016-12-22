@@ -5,7 +5,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.Date;
 
@@ -16,7 +15,7 @@ public class Comment extends domain.DomainEntity {
     private String title;
     private String text;
     private Collection<Star> stars;
-    private UserOrNutritionist autor;
+    private UserOrNutritionist author;
     private Recipe recipe;
     private Date created_at;
 
@@ -57,12 +56,12 @@ public class Comment extends domain.DomainEntity {
     }
 
     @ManyToOne(optional = false)
-    public UserOrNutritionist getAutor() {
-        return autor;
+    public UserOrNutritionist getAuthor() {
+        return author;
     }
 
-    public void setAutor(UserOrNutritionist userOrNutritionist) {
-        this.autor = userOrNutritionist;
+    public void setAuthor(UserOrNutritionist userOrNutritionist) {
+        this.author = userOrNutritionist;
     }
 
     @ManyToOne
@@ -74,7 +73,6 @@ public class Comment extends domain.DomainEntity {
         this.recipe = recipe;
     }
 
-    @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
     public Date getCreated_at() {
